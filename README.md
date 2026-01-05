@@ -10,6 +10,15 @@ A pixel-perfect replica of the Landio AI Agency landing page template, built wit
 - **Modern Typography** with Playfair Display serif and Inter sans-serif fonts
 - **Interactive Components** including pricing toggles, FAQ accordions, and animated cards
 
+## Agent Y Adaptation Guide
+
+This template includes comprehensive instructions for adapting it to Agent Y's product page:
+
+- **[extraction-instructions.md](extraction-instructions.md)** - Complete guide for extracting content from Agent Y's product page (~1000 lines)
+- **[adaptation-instructions.md](adaptation-instructions.md)** - Detailed instructions for adapting this template with Agent Y content while preserving design integrity (~1700 lines)
+
+These guides are designed for AI agents but can be used by human developers as well. They ensure seamless integration of Agent Y's content, features, and messaging while maintaining the Landio template's beautiful design system.
+
 ## Tech Stack
 
 - **React 18** - UI library
