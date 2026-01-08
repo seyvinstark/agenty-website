@@ -1,0 +1,985 @@
+{
+    "metadata": {
+      "extraction_date": "2026-01-05",
+      "source_url": "http://localhost:3000/wireframe-homepage",
+      "extractor_version": "1.0",
+      "page_title": "AgentY: AI-Powered Data Hub",
+      "page_description": "Your AI Analytics Team — Ready in Minutes. Stop spending 5-10 hours per week on manual reporting. Three specialized AI assistants analyze your data, create dashboards automatically, and generate board-ready reports."
+    },
+    "messaging_framework": {
+      "primary_value_proposition": "Your AI Analytics Team — Ready in Minutes",
+      "extended_value_prop": "Stop spending 5-10 hours per week on manual reporting. Three specialized AI assistants analyze your data, create dashboards automatically, and generate board-ready reports — no setup, no SQL, no data team required",
+      "target_audience": "Growing businesses (10-500 employees) struggling with data fragmentation, technical complexity, and slow insights. Primary personas: Operations Leader/COO, Founder/CEO, Finance/Accounting Manager",
+      "tone_of_voice": "Professional, direct, empathetic. Balances technical credibility with accessibility. Uses concrete examples and quantifiable outcomes.",
+      "key_differentiators": [
+        "Three specialized AI assistants working together (Dolores, Data Analyst, Report Writer)",
+        "Auto-created KPI dashboards from connected data (no manual dashboard building)",
+        "Board-ready investor reports generated automatically",
+        "Every insight traceable to source data—no hallucinations",
+        "Complete solution combining integration, analysis, and reporting in one platform",
+        "Setup in days, not months",
+        "Accessible pricing for growing businesses (not enterprise-only)",
+        "Operations AND investor reporting in same platform"
+      ],
+      "brand_personality": "Intelligent, trustworthy, accessible, solution-focused. Positions as the smart alternative to expensive enterprise tools and complex data platforms.",
+      "customer_pain_points": [
+        "Data fragmentation across 10-20+ SaaS applications",
+        "Technical expertise required (SQL, dashboard design)",
+        "Slow time-to-insight (5-10+ hours per week on manual reporting)",
+        "Prohibitive costs ($50K-$300K+ per year for enterprise tools)",
+        "AI that can't be trusted (hallucinations, no data connection)",
+        "Agent integration lag (months to build integrations)",
+        "Hours wasted on manual reporting"
+      ],
+      "solutions_provided": [
+        "Unified data integration across all sources",
+        "Natural language querying (no SQL required)",
+        "Auto-generated dashboards and visualizations",
+        "Automated report generation for board and investors",
+        "Three AI assistants working together seamlessly",
+        "Traceable insights backed by actual data",
+        "Accessible pricing for growing businesses",
+        "Rapid integration with new tools"
+      ],
+      "key_benefits": [
+        "Save 5-10 hours per week on manual reporting",
+        "Board meeting prep: 8 hours → 15 minutes",
+        "Month-end close: 10 days → 5 days",
+        "Reduced reporting time by 90%",
+        "Setup in days, not months",
+        "No technical expertise required",
+        "Enterprise-grade intelligence at accessible pricing"
+      ],
+      "proof_points": [
+        "Beta customers have reduced reporting time by 90%",
+        "Closed month-end processes 5 days faster",
+        "Trusted by 20+ beta customers across e-commerce, SaaS, and professional services",
+        "95% of GenAI pilots are failing (MIT NANDA Initiative, 2025)",
+        "88% of AI pilots fail to reach production (IDC Research)"
+      ],
+      "call_to_actions": {
+        "primary": "Book a demo",
+        "secondary": "Apply for closed beta",
+        "urgency": "Limited beta spots • No credit card required"
+      }
+    },
+    "sections": {
+      "hero": {
+        "badge_text": null,
+        "headline": "Your AI Analytics Team — Ready in Minutes",
+        "headline_emphasis": null,
+        "subheadline": "Stop spending 5-10 hours per week on manual reporting. Three specialized AI assistants analyze your data, create dashboards automatically, and generate board-ready reports — no setup, no SQL, no data team required",
+        "description": null,
+        "primary_cta": {
+          "text": "Book a demo",
+          "url": "#demo",
+          "type": "primary"
+        },
+        "secondary_cta": {
+          "text": "Apply for closed beta",
+          "url": "/beta",
+          "type": "secondary"
+        },
+        "social_links": [],
+        "supporting_text": "🔒 Secure OAuth • Limited beta spots • No credit card",
+        "visual_description": "Animation showing: User question → 3 AI assistants (Dolores, Analyst, Writer) → Dashboard + Report output"
+      },
+      "problem_statement": {
+        "section_badge": null,
+        "section_title": "Sound Familiar?",
+        "section_title_emphasis": null,
+        "section_description": "If you're struggling with data fragmentation, technical complexity, or slow insights, you're not alone.",
+        "enterprise_ai_crisis_stats": [
+          {
+            "stat": "95%",
+            "description": "of GenAI pilots are failing",
+            "source": "MIT NANDA Initiative, 2025"
+          },
+          {
+            "stat": "88%",
+            "description": "of AI pilots fail to reach production",
+            "source": "IDC Research"
+          },
+          {
+            "stat": "47%",
+            "description": "cite integration complexity as #1 barrier",
+            "source": "Industry Research"
+          },
+          {
+            "stat": "83%",
+            "description": "identify data silos as major AI barrier",
+            "source": "Industry Research"
+          },
+          {
+            "stat": "22%",
+            "description": "advance AI beyond proof-of-concept",
+            "source": "BCG"
+          },
+          {
+            "stat": "79%",
+            "description": "of enterprises implementing AI agents by 2025",
+            "source": "Industry Research"
+          }
+        ],
+        "problems_list": [
+          {
+            "title": "Data Fragmentation",
+            "emoji": "🧩",
+            "quote": "We have data everywhere but no insights — and no way to build agents that can use it all.",
+            "pain_points": [
+              "Data scattered across 10-20+ SaaS applications",
+              "No unified view of business performance",
+              "Hours spent copying data between spreadsheets",
+              "Conflicting numbers from different sources make it hard to trust any metric",
+              "Don't fully trust the numbers — which source is correct?",
+              "Building AI agents that work across multiple SaaS apps is nearly impossible",
+              "Each new tool requires weeks of custom integration work",
+              "By the time you connect one tool, three new ones have launched"
+            ]
+          },
+          {
+            "title": "Technical Expertise Required",
+            "emoji": "🔧",
+            "quote": "We can't afford a data analyst, and our team doesn't know SQL.",
+            "pain_points": [
+              "Traditional BI tools require weeks of setup",
+              "SQL queries needed for basic questions",
+              "Dashboard design requires specialized skills",
+              "Every question requires IT involvement"
+            ]
+          },
+          {
+            "title": "Slow Time-to-Insight",
+            "emoji": "⏰",
+            "quote": "By the time we get the data, the decision has already been made.",
+            "pain_points": [
+              "5-10+ hours per week spent on manual report preparation",
+              "Days or weeks to get answers from IT",
+              "Manual report generation every month",
+              "Outdated dashboards that don't reflect reality",
+              "Decisions made on gut feeling, not data",
+              "Delayed data affecting fundraising, hiring, and cash runway decisions",
+              "By the time you get cash runway data, hiring decisions are already made"
+            ]
+          },
+          {
+            "title": "Prohibitive Costs",
+            "emoji": "💰",
+            "quote": "Enterprise analytics is priced for enterprises, not growing businesses.",
+            "pain_points": [
+              "Enterprise BI tools cost $50K-$300K+ per year",
+              "Need to hire data engineers ($120K+ salary)",
+              "Additional costs for integration tools, data warehouses",
+              "Hidden implementation and consulting fees"
+            ]
+          },
+          {
+            "title": "AI That Can't Be Trusted",
+            "emoji": "🤖",
+            "quote": "ChatGPT is helpful, but I can't trust it for business decisions.",
+            "pain_points": [
+              "Generic AI chatbots hallucinate and make things up",
+              "No connection to your actual business data",
+              "Can't trace how answers were derived",
+              "No accountability for AI-generated insights"
+            ]
+          },
+          {
+            "title": "Agent Integration Lag",
+            "emoji": "🚀",
+            "quote": "By the time we build integrations, the tools we need have already changed.",
+            "pain_points": [
+              "New SaaS tools launch constantly, but integrations take months",
+              "Building agents that work across tools requires custom development",
+              "Each integration is a one-off project with no reusable patterns",
+              "Your workflows become outdated before they're even finished",
+              "Can't adapt quickly when business needs change"
+            ]
+          },
+          {
+            "title": "Hours Wasted on Manual Reporting",
+            "emoji": "⏱️",
+            "quote": "I spend 5-10 hours every week just preparing reports",
+            "pain_points": [
+              "5-10+ hours per week on manual data exports and formatting",
+              "Copy-pasting data between Google Sheets, Excel, and QuickBooks",
+              "Formatting reports for different audiences (board, investors, team)",
+              "Fixing broken formulas and data inconsistencies",
+              "Only updating metrics when fundraising or board meetings",
+              "By the time the report is ready, the decision has already been made"
+            ]
+          }
+        ]
+      },
+      "solution_overview": {
+        "section_badge": null,
+        "section_title": "Three AI Experts. One Conversation. Every Insight Traceable.",
+        "section_title_emphasis": null,
+        "section_description": "AgentY isn't just another chatbot — it's a team of specialized AI assistants that work together to understand your data and deliver insights. Every answer backed by your actual data—no hallucinations.",
+        "key_points": [
+          "Every answer backed by your actual data—no hallucinations",
+          "Every insight traceable to source data—verify any number"
+        ],
+        "assistants": [
+          {
+            "name": "Dolores",
+            "role": "Head Assistant",
+            "description": "Understands your intent, routes to the right specialist, orchestrates multi-step workflows"
+          },
+          {
+            "name": "Data Analyst",
+            "role": "Analysis Specialist",
+            "description": "Selects data sources, generates queries, analyzes results, creates charts, identifies trends"
+          },
+          {
+            "name": "Report Writer",
+            "role": "Documentation Specialist",
+            "description": "Plans report structure, writes professional narratives, supports claims with data"
+          }
+        ],
+        "visual_description": "Flow diagram showing user question → Dolores → Analyst/Writer → Answer",
+        "cta": {
+          "text": "See how it works",
+          "url": "#how-it-works",
+          "type": "secondary"
+        }
+      },
+      "process": {
+        "section_badge": null,
+        "section_title": "How It Works: 3 Simple Steps",
+        "section_title_emphasis": null,
+        "section_description": "From data chaos to actionable insights — in minutes, not months",
+        "steps": [
+          {
+            "number": "1",
+            "title": "Connect Your Data",
+            "description": "One-click integrations with the tools you already use. No APIs to configure. No data engineering required.",
+            "features": [
+              "QuickBooks Online (Financial data)",
+              "Notion (Documents & wikis)",
+              "Google Drive (Files & spreadsheets)",
+              "CSV/Excel uploads (Any data)"
+            ],
+            "visual_type": "integration",
+            "duration": null,
+            "deliverable": "Connected data sources"
+          },
+          {
+            "number": "2",
+            "title": "Ask Anything",
+            "description": "Talk to your data like you'd talk to a colleague. No SQL. No dashboards to build. No learning curve.",
+            "examples": [
+              "What's our current cash runway?",
+              "Show me MRR growth vs. last quarter",
+              "Calculate our CAC and LTV",
+              "Create an investor update with MRR, ARR, and unit economics",
+              "Which marketing campaigns are most effective?",
+              "What's our burn rate and how long until we need funding?"
+            ],
+            "visual_type": "conversation",
+            "duration": null,
+            "deliverable": "Natural language queries answered"
+          },
+          {
+            "number": "3",
+            "title": "Get Actionable Insights",
+            "description": "Our AI assistants analyze your data and deliver:",
+            "deliverables": [
+              "Auto-generated visualizations",
+              "Trend analysis and anomaly detection",
+              "Professional reports ready to share",
+              "Recommendations for next steps"
+            ],
+            "visual_type": "analytics",
+            "duration": null,
+            "deliverable": "Dashboards, reports, and insights"
+          }
+        ],
+        "process_type": "linear"
+      },
+      "features": {
+        "section_badge": null,
+        "section_title": "Everything You Need. Nothing You Don't.",
+        "section_title_emphasis": null,
+        "section_description": "Built for how you work—complete AI intelligence without the complexity",
+        "features_list": [
+          {
+            "title": "Instant Dashboards from Your Data",
+            "description": "Connect your data sources once. AgentY automatically generates relevant KPIs, trend visualizations, and performance metrics—no dragging widgets, no design skills needed. What used to take weeks of setup happens in minutes.",
+            "icon_category": "analytics",
+            "proof": "Save 5-10 hours per week on manual dashboard creation",
+            "emphasis": "primary",
+            "link": "/features#dashboards"
+          },
+          {
+            "title": "Three AI Experts. One Conversation.",
+            "description": "Ask questions in plain English. Dolores routes to the right specialist. The Data Analyst generates queries and visualizations. The Report Writer creates professional narratives. Every insight is traceable to your source data—no hallucinations, no guesswork.",
+            "icon_category": "ai",
+            "proof": "Every answer backed by your actual data",
+            "emphasis": "primary",
+            "link": "/features#multi-assistant"
+          },
+          {
+            "title": "Board-Ready Reports in One Command",
+            "description": "'Create a Q4 performance report for my investors.' AgentY generates professional reports with executive summaries, trend analysis, key metrics, and data-backed recommendations—ready to share in minutes, not hours.",
+            "icon_category": "workflow",
+            "proof": "Board meeting prep: 8 hours → 15 minutes",
+            "emphasis": "primary",
+            "link": "/features#report-generation"
+          },
+          {
+            "title": "Natural Language Querying",
+            "description": "Ask in English, get instant answers",
+            "icon_category": "communication",
+            "emphasis": "secondary",
+            "link": "/features#natural-language"
+          },
+          {
+            "title": "Multi-Source Integration",
+            "description": "QuickBooks, Notion, Google Drive, and more",
+            "icon_category": "integration",
+            "emphasis": "secondary",
+            "link": "/features#data-integration"
+          },
+          {
+            "title": "Conversational Chart Editing",
+            "description": "Customize any visualization by describing what you want",
+            "icon_category": "workflow",
+            "emphasis": "secondary",
+            "link": "/features#kpi-editing"
+          },
+          {
+            "title": "Centralized Knowledge Base",
+            "description": "Unified, searchable data across your entire business",
+            "icon_category": "analytics",
+            "emphasis": "secondary",
+            "link": "/features#knowledge-base"
+          },
+          {
+            "title": "AI Agent Teams & Workflows",
+            "description": "Build custom workflows without code",
+            "icon_category": "workflow",
+            "emphasis": "secondary",
+            "link": "/features#agent-teams"
+          }
+        ],
+        "layout_notes": "Tier 1: 3 large feature cards. Tier 2: 5 smaller feature cards in grid",
+        "cta": {
+          "text": "Book demo to explore features",
+          "url": "#demo",
+          "type": "secondary"
+        }
+      },
+      "stakeholder_visibility": {
+        "section_badge": null,
+        "section_title": "Built for Operators and investors alike",
+        "section_title_emphasis": null,
+        "section_description": null,
+        "for_operations": {
+          "title": "For Your Operations",
+          "benefits": [
+            {
+              "title": "Real-time KPI dashboards",
+              "description": "Track MRR, ARR, CAC, LTV, cash runway, and sales funnel metrics in real-time"
+            },
+            {
+              "title": "Drill-down analysis",
+              "description": "Deep dive into any metric to understand the details"
+            },
+            {
+              "title": "Anomaly detection",
+              "description": "Automatically identify unusual patterns and issues"
+            },
+            {
+              "title": "Operational insights",
+              "description": "Actionable recommendations for daily operations"
+            }
+          ]
+        },
+        "for_board": {
+          "title": "For Your Board",
+          "benefits": [
+            {
+              "title": "Executive summaries",
+              "description": "High-level overviews with MRR, ARR, unit economics, and key metrics for leadership meetings"
+            },
+            {
+              "title": "Trend analysis and forecasts",
+              "description": "Understand where your business is heading"
+            },
+            {
+              "title": "Performance narratives",
+              "description": "Professional explanations of business performance"
+            },
+            {
+              "title": "One-command investor updates",
+              "description": "Generate comprehensive investor reports with MRR, ARR, cash runway analysis, and burn rate forecasts instantly"
+            }
+          ]
+        },
+        "unique_value": "Most BI tools focus on operations only. AgentY delivers visibility for both your daily operations AND your quarterly board meetings—in the same platform.",
+        "sample_query": {
+          "query": "Create a Q4 investor report with revenue growth, unit economics, runway analysis, and key risks",
+          "result": "Professional report generated in 30 seconds"
+        },
+        "cta": {
+          "text": "See a sample investor report",
+          "url": "#sample-report",
+          "type": "secondary"
+        }
+      },
+      "use_cases": {
+        "section_badge": null,
+        "section_title": "Built for How You Work",
+        "section_title_emphasis": null,
+        "section_description": "See how teams like yours use AgentY to transform their operations",
+        "personas": [
+          {
+            "id": "operations",
+            "title": "Operations Leader / COO",
+            "name": "Sarah, Director of Operations",
+            "company": "75-person e-commerce brand",
+            "goals": [
+              "Get real-time visibility into business performance",
+              "Make data-driven decisions quickly",
+              "Report to leadership with confidence"
+            ],
+            "frustrations": [
+              "Spreadsheets break and take hours to update",
+              "IT can't prioritize her analytics requests",
+              "Different tools show different numbers"
+            ],
+            "quote": "I spend half my week pulling reports instead of acting on them.",
+            "how_helps": [
+              "Unified view across Shopify, QuickBooks, Google Analytics",
+              "Ask questions and get answers immediately",
+              "Auto-generated reports for leadership meetings"
+            ],
+            "outcome": "Reduced reporting time from 20 hours/week to 2 hours",
+            "sample_queries": [
+              "What's causing our fulfillment delays this month?",
+              "Show me operational bottlenecks affecting delivery times",
+              "Which products have the best margin this quarter?"
+            ],
+            "decision_impact": [
+              "Sales & growth strategy",
+              "Team alignment",
+              "Operational efficiency"
+            ]
+          },
+          {
+            "id": "founder",
+            "title": "Founder / CEO",
+            "name": "Michael, Founder & CEO",
+            "company": "25-person SaaS startup",
+            "goals": [
+              "Understand where the business really stands",
+              "Make confident decisions on growth investments",
+              "Present clear metrics to board and investors"
+            ],
+            "frustrations": [
+              "Can't afford a data team yet",
+              "Tried Tableau but too complex to set up",
+              "Board asks questions he can't answer immediately"
+            ],
+            "quote": "I know the data exists, I just can't get to it fast enough.",
+            "how_helps": [
+              "Self-service analytics without technical skills",
+              "Board-ready reports generated automatically",
+              "Costs fraction of hiring an analyst"
+            ],
+            "outcome": "Board meeting prep from 8 hours → 15 minutes",
+            "sample_queries": [
+              "What's our current cash runway?",
+              "Show me MRR growth vs. last quarter",
+              "Create an investor update on Q4 performance with growth metrics and runway analysis"
+            ],
+            "decision_impact": [
+              "Fundraising / investor updates",
+              "Cash runway planning",
+              "Hiring decisions",
+              "Board reporting"
+            ]
+          },
+          {
+            "id": "finance",
+            "title": "Finance / Accounting Manager",
+            "name": "Jessica, Finance Manager",
+            "company": "100-person professional services firm",
+            "goals": [
+              "Accurate financial reporting and forecasting",
+              "Cash flow visibility across projects",
+              "Time savings on monthly close processes"
+            ],
+            "frustrations": [
+              "QuickBooks data hard to analyze",
+              "Manual reconciliation takes days",
+              "Can't easily compare actual vs. budget"
+            ],
+            "quote": "I export to Excel and spend days building the same reports every month.",
+            "how_helps": [
+              "Deep QuickBooks integration",
+              "Automated P&L, Balance Sheet, Cash Flow analysis",
+              "Natural language queries on financial data"
+            ],
+            "outcome": "Month-end close 5 days faster",
+            "sample_queries": [
+              "Compare actual vs. budget by department for Q4",
+              "What's our burn rate and how long until we need funding?",
+              "Show me cash flow trends over the last 6 months"
+            ],
+            "decision_impact": [
+              "Cash runway planning",
+              "Board reporting",
+              "Sales & growth strategy"
+            ]
+          }
+        ]
+      },
+      "comparison": {
+        "section_badge": null,
+        "section_title": "The Complete Solution vs. Assembly Required",
+        "section_title_emphasis": null,
+        "section_description": "AgentY combines integration, analysis, and reporting in one platform — emphasizing simplicity + capability combination",
+        "comparison_table": {
+          "capabilities": [
+            {
+              "capability": "Data Integration",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": true,
+              "tableau": false
+            },
+            {
+              "capability": "Natural Language",
+              "agenty": true,
+              "thoughtspot": true,
+              "databricks": false,
+              "zapier": false,
+              "tableau": false
+            },
+            {
+              "capability": "Auto Dashboards",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": false,
+              "tableau": false
+            },
+            {
+              "capability": "Multi-Agent AI",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": false,
+              "tableau": false
+            },
+            {
+              "capability": "Report Generation",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": false,
+              "tableau": false
+            },
+            {
+              "capability": "Accessible Pricing",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": true,
+              "tableau": false
+            },
+            {
+              "capability": "Setup Time",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": true,
+              "tableau": false
+            },
+            {
+              "capability": "Technical Skills",
+              "agenty": true,
+              "thoughtspot": false,
+              "databricks": false,
+              "zapier": true,
+              "tableau": false
+            }
+          ],
+          "competitors": [
+            {
+              "name": "ThoughtSpot",
+              "pricing": "$50K+ per year"
+            },
+            {
+              "name": "Databricks",
+              "pricing": "$250K+ per year"
+            },
+            {
+              "name": "Zapier",
+              "pricing": "Integration only"
+            },
+            {
+              "name": "Tableau/Power BI",
+              "pricing": "$1K+ per year"
+            }
+          ]
+        },
+        "differentiators": [
+          {
+            "title": "vs. Traditional BI: Next-Generation AI Intelligence",
+            "their_limitations": [
+              "Manual dashboard design taking weeks",
+              "SQL knowledge required for custom queries",
+              "Static views that don't adapt",
+              "Expensive implementations and consultants"
+            ],
+            "our_advantages": [
+              "AI creates dashboards automatically",
+              "Ask questions in plain English",
+              "Dynamic insights that evolve",
+              "Up and running in days",
+              "Board-ready reporting built-in (not just operational dashboards)"
+            ]
+          },
+          {
+            "title": "vs. Data Platforms: Business Intelligence, Not Infrastructure",
+            "their_limitations": [
+              "Data engineers to set them up ($120K+ salary)",
+              "Months for implementation",
+              "$250K+ annual budget",
+              "Technical expertise across your team"
+            ],
+            "our_advantages": [
+              "No data warehouse required",
+              "Days to first insights",
+              "Accessible pricing (founding member rates for beta)",
+              "Zero technical skills needed",
+              "Operations AND investor reporting in one platform"
+            ]
+          },
+          {
+            "title": "vs. Integration Platforms: Intelligence, Not Just Integration",
+            "their_limitations": [
+              "Zapier is great for moving data around. But it can't analyze that data, visualize it, or tell you what it means."
+            ],
+            "our_advantages": [
+              "Unified analytics across all your sources",
+              "AI-generated insights and recommendations",
+              "Professional reports from your data",
+              "Answers to questions you didn't know to ask"
+            ]
+          },
+          {
+            "title": "vs. Chatbots: Your Data. Your Business. Not Hallucinations.",
+            "their_limitations": [
+              "No connection to your actual data",
+              "Hallucinate 'facts' that sound convincing",
+              "Can't verify or trace their answers",
+              "No context about your specific business"
+            ],
+            "our_advantages": [
+              "Connected directly to your business data",
+              "Multi-assistant architecture reduces hallucination",
+              "Every insight traceable to source data",
+              "Built specifically for business analytics",
+              "Professional board-ready reports (not just chat responses)"
+            ]
+          },
+          {
+            "title": "vs. Static Integration Platforms: Built for Speed",
+            "their_limitations": [
+              "Most platforms treat integrations as one-off projects. Each new SaaS app means weeks of custom development, testing, and deployment. By the time you build one integration, three new tools have launched."
+            ],
+            "our_advantages": [
+              "Standardized integration patterns for rapid development",
+              "Reusable connection frameworks across similar tools",
+              "Visual workflow builder adapts to new capabilities instantly",
+              "Community-driven integration requests prioritized by user needs",
+              "We're committed to being first to market with new tool connections"
+            ]
+          }
+        ],
+        "comparison_type": "feature_table_with_differentiators",
+        "tone": "educational"
+      },
+      "social_proof": {
+        "section_badge": null,
+        "section_title": "See the Impact",
+        "section_title_emphasis": null,
+        "section_description": "Beta customers have reduced reporting time by 90% and closed their month-end processes 5 days faster",
+        "volume_metric": "Trusted by 20+ beta customers across e-commerce, SaaS, and professional services",
+        "testimonials": [
+          {
+            "quote": "We went from spending 8 hours preparing for board meetings to 15 minutes. AgentY's automated investor reports are a game-changer.",
+            "author": "Michael Chen",
+            "title": "CEO",
+            "company": "GrowthTech (45-person SaaS startup)",
+            "outcome": "8 hours → 15 minutes",
+            "rating": null,
+            "emphasis_type": "outcome"
+          },
+          {
+            "quote": "Our month-end close process used to take 10 days. With AgentY's QuickBooks integration and automated financial analysis, we close in 5 days.",
+            "author": "Jessica Martinez",
+            "title": "Finance Manager",
+            "company": "ServiceCo (100-person professional services)",
+            "outcome": "10 days → 5 days",
+            "rating": null,
+            "emphasis_type": "outcome"
+          },
+          {
+            "quote": "I used to spend 20 hours a week pulling reports. Now I spend 2 hours, and the reports are better quality.",
+            "author": "Sarah Thompson",
+            "title": "Director of Operations",
+            "company": "EcomBrand (75-person e-commerce)",
+            "outcome": "20 hours/week → 2 hours",
+            "rating": null,
+            "emphasis_type": "outcome"
+          }
+        ],
+        "client_logos": [
+          {
+            "company_name": "Customer Logos Section",
+            "industry": null,
+            "logo_description": "Placeholder for customer logos"
+          }
+        ],
+        "success_metrics": [
+          {
+            "metric": "90% reduction in reporting time",
+            "description": "Beta customers have reduced reporting time by 90%"
+          },
+          {
+            "metric": "5 days faster month-end close",
+            "description": "Closed month-end processes 5 days faster"
+          }
+        ],
+        "trust_badges": []
+      },
+      "security_trust": {
+        "section_badge": null,
+        "section_title": "Your Data. Your Security. Your Control.",
+        "section_title_emphasis": null,
+        "section_description": "Enterprise-grade security without the enterprise complexity",
+        "security_features": [
+          {
+            "title": "Enterprise-Grade Encryption",
+            "description": "Your data is encrypted at rest and in transit using industry-standard protocols. We never store your passwords—OAuth 2.0 means you stay in control."
+          },
+          {
+            "title": "Compliant & Audited",
+            "description": "SOC 2 Type II compliance in progress. GDPR-ready data handling. Regular security audits and penetration testing."
+          },
+          {
+            "title": "You Own Your Data",
+            "description": "Your data belongs to you. We don't train AI models on your business data. Disconnect or delete anytime."
+          },
+          {
+            "title": "Transparent & Traceable",
+            "description": "Every insight AgentY generates is traceable to your source data. No black boxes. No mystery calculations."
+          }
+        ],
+        "cta": {
+          "text": "Book demo to discuss security",
+          "url": "#demo",
+          "type": "secondary"
+        }
+      },
+      "pricing": {
+        "section_badge": null,
+        "section_title": "The Math Doesn't Work",
+        "section_title_emphasis": null,
+        "section_description": null,
+        "billing_toggle": null,
+        "cost_comparison": {
+          "traditional_bi": [
+            "Tableau: $50,000+/year",
+            "ThoughtSpot: $50,000+/year",
+            "Databricks: $250,000+/year",
+            "Implementation: 3-6 months + consultant fees"
+          ],
+          "hiring_in_house": [
+            "Data Analyst: $80,000+/year salary",
+            "Data Engineer: $120,000+/year salary",
+            "Time-to-hire: 2-4 months",
+            "Onboarding: 3+ months to productivity"
+          ],
+          "agenty_delivers": [
+            "Enterprise-grade intelligence",
+            "Setup in days, not months",
+            "Founding member pricing for beta participants",
+            "Zero technical expertise required"
+          ]
+        },
+        "beta_pricing_policy": "Pricing will be finalized based on beta participant feedback.",
+        "beta_benefits": [
+          "Early access to all features",
+          "Preferential founding member rates (locked in before public launch)",
+          "Direct influence on pricing model",
+          "No commitment—evaluate during beta"
+        ],
+        "plans": [],
+        "pricing_notes": [],
+        "additional_info": null,
+        "cta": {
+          "text": "Book a demo to discuss beta access",
+          "url": "#demo",
+          "type": "primary"
+        }
+      },
+      "final_cta": {
+        "section_badge": null,
+        "headline": "See AgentY Analyze Your Data — Book a Demo",
+        "headline_emphasis": null,
+        "description": "In 15 minutes, we'll connect to your QuickBooks (or any data source) and show you how AgentY generates dashboards and reports from your actual business data. No credit card. No commitment.",
+        "primary_cta": {
+          "text": "Book a demo",
+          "url": "#demo",
+          "style": "primary"
+        },
+        "secondary_cta": {
+          "text": "Apply for closed beta",
+          "url": "/beta",
+          "style": "secondary"
+        },
+        "urgency_message": "Limited beta spots—apply early",
+        "trust_reinforcement": [
+          "15-minute personalized demo",
+          "See your data analyzed live",
+          "No credit card required",
+          "Limited beta spots—apply early"
+        ]
+      }
+    },
+    "cta_inventory": [
+      {
+        "text": "Book a demo",
+        "url": "#demo",
+        "type": "primary",
+        "location": "hero"
+      },
+      {
+        "text": "Apply for closed beta",
+        "url": "/beta",
+        "type": "secondary",
+        "location": "hero"
+      },
+      {
+        "text": "See how it works",
+        "url": "#how-it-works",
+        "type": "link",
+        "location": "solution_overview"
+      },
+      {
+        "text": "Book demo to explore features",
+        "url": "#demo",
+        "type": "secondary",
+        "location": "features"
+      },
+      {
+        "text": "See a sample investor report",
+        "url": "#sample-report",
+        "type": "secondary",
+        "location": "stakeholder_visibility"
+      },
+      {
+        "text": "Book demo to discuss security",
+        "url": "#demo",
+        "type": "secondary",
+        "location": "security_trust"
+      },
+      {
+        "text": "Book a demo to discuss beta access",
+        "url": "#demo",
+        "type": "primary",
+        "location": "pricing"
+      },
+      {
+        "text": "Book a demo",
+        "url": "#demo",
+        "type": "primary",
+        "location": "final_cta"
+      },
+      {
+        "text": "Apply for closed beta",
+        "url": "/beta",
+        "type": "secondary",
+        "location": "final_cta"
+      }
+    ],
+    "navigation": {
+      "logo_text": "AgentY",
+      "nav_links": [
+        {
+          "label": "Features",
+          "url": "#features",
+          "type": "internal"
+        },
+        {
+          "label": "Use Cases",
+          "url": "/use-cases",
+          "type": "internal"
+        },
+        {
+          "label": "How It Works",
+          "url": "#how-it-works",
+          "type": "internal"
+        }
+      ],
+      "header_cta": [
+        {
+          "text": "Login",
+          "url": null,
+          "type": "button"
+        },
+        {
+          "text": "Get Started",
+          "url": null,
+          "type": "button"
+        }
+      ]
+    },
+    "footer": {
+      "tagline": "Transforming data infrastructure with AI",
+      "link_sections": [
+        {
+          "heading": "Quick Links",
+          "links": [
+            {
+              "label": "Privacy Policy",
+              "url": "/privacy"
+            },
+            {
+              "label": "How it works",
+              "url": "#how-it-works"
+            },
+            {
+              "label": "Benefits",
+              "url": "#benefits"
+            }
+          ]
+        },
+        {
+          "heading": "Contact",
+          "links": [
+            {
+              "label": "theagentytest@gmail.com",
+              "url": "mailto:theagentytest@gmail.com"
+            }
+          ]
+        }
+      ],
+      "social_links": [],
+      "legal_links": [
+        {
+          "label": "Privacy Policy",
+          "url": "/privacy"
+        }
+      ],
+      "copyright": null
+    }
+  }
+  
