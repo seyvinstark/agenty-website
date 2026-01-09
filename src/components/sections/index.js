@@ -1,5 +1,6 @@
 export { default as Hero } from './Hero';
 export { default as DataAnalysis } from './DataAnalysis';
+export { default as ProblemStatement } from './ProblemStatement';
 export { default as Benefits } from './Benefits';
 export { default as Services } from './Services';
 export { default as Features } from './Features';

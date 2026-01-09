@@ -2,6 +2,7 @@ import { Header, Footer } from './components/layout';
 import {
   Hero,
   DataAnalysis,
+  ProblemStatement,
   Benefits,
   Services,
   Features,
@@ -23,6 +24,7 @@ function App() {
       <main>
         <Hero />
         <DataAnalysis />
+        <ProblemStatement />
         <Benefits />
         <Services />
         <Features />

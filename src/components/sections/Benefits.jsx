@@ -5,18 +5,18 @@ import Card from '../ui/Card';
 
 const benefits = [
   {
-    title: 'Real-Time Intelligence',
-    description: 'Access accurate, real-time data to drive smarter decisions',
+    title: 'Save 5-10 Hours Weekly',
+    description: 'Stop manual reporting. Our AI assistants analyze your data automatically.',
     illustration: 'gauge',
   },
   {
-    title: 'Measurable Impact',
-    description: 'Track performance, uncover insights, and achieve data-backed growth',
+    title: 'Board Prep: 8hrs → 15min',
+    description: 'Generate investor reports and executive summaries in one command.',
     illustration: 'chart',
   },
   {
-    title: 'Seamless Integration',
-    description: 'Connect tools, teams, and workflows with intelligent automation',
+    title: 'Zero Technical Skills',
+    description: 'No SQL, no dashboard design. Ask questions in plain English.',
     illustration: 'connect',
   },
 ];
@@ -137,8 +137,8 @@ export default function Benefits() {
           badge="BENEFITS"
           badgeIcon={Sparkles}
           title="Why Choose"
-          titleAccent="Us?"
-          description="Everything you need to automate, optimize, and scale"
+          titleAccent="Seyvin?"
+          description="Enterprise-grade analytics at a fraction of the cost—without the complexity"
         />
 
         <div className="grid md:grid-cols-3 gap-6">

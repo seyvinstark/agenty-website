@@ -4,11 +4,9 @@ import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
+  { label: 'Features', href: '#features' },
+  { label: 'How It Works', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
 ];
 
 export default function Header() {
@@ -44,7 +42,7 @@ export default function Header() {
                 />
               </svg>
             </div>
-            <span className="text-xl font-serif italic text-white">Landio</span>
+            <span className="text-xl font-serif italic text-white">Seyvin</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -62,9 +60,11 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button variant="secondary" size="sm">
-              Get Template
-            </Button>
+            <a href="#demo">
+              <Button variant="secondary" size="sm">
+                Book a demo
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,9 +97,11 @@ export default function Header() {
                   {link.label}
                 </a>
               ))}
-              <Button variant="secondary" size="sm" className="w-full mt-4">
-                Get Template
-              </Button>
+              <a href="#demo" className="block mt-4">
+                <Button variant="secondary" size="sm" className="w-full">
+                  Book a demo
+                </Button>
+              </a>
             </div>
           </motion.div>
         )}
