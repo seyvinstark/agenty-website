@@ -1,116 +1,441 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Users } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Users, Quote, ArrowRight, TrendingUp, 
+  Building2, Briefcase, Calculator,
+  Heart, GraduationCap, Landmark,
+  Building, Globe
+} from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
 
-const clients = [
-  {
-    name: "Max's SaaS Revolution",
-    story: 'Max, the founder of CloudFlow, implemented AI automation in their processes. This move slashed operational costs by 50% and boosted team productivity by 75%, empowering the company to accelerate growth and expand faster.',
-    stats: [
-      { value: 50, label: 'increase in ROI', suffix: '%' },
-      { value: 75, label: 'boost in revenue', suffix: '%' },
+const sectors = {
+  private: {
+    label: 'Private Sector',
+    icon: Building,
+    personas: [
+      {
+        id: 'operations',
+        role: 'Operations Leader / COO',
+        name: 'Sarah',
+        title: 'Director of Operations',
+        company: '75-person e-commerce brand',
+        icon: Building2,
+        accentColor: 'cyan',
+        quote: "I spend half my week pulling reports instead of acting on them.",
+        frustrations: [
+          'Spreadsheets break and take hours to update',
+          "IT can't prioritize analytics requests",
+          'Different tools show different numbers',
+        ],
+        howHelps: [
+          'Unified view across Shopify, QuickBooks, Google Analytics',
+          'Ask questions and get answers immediately',
+          'Auto-generated reports for leadership meetings',
+        ],
+        outcome: {
+          before: '20 hours/week',
+          after: '2 hours',
+          metric: 'reporting time',
+          improvement: '90%',
+        },
+        sampleQuery: "What's causing our fulfillment delays this month?",
+      },
+      {
+        id: 'founder',
+        role: 'Founder / CEO',
+        name: 'Michael',
+        title: 'Founder & CEO',
+        company: '25-person SaaS startup',
+        icon: Briefcase,
+        accentColor: 'emerald',
+        quote: "I know the data exists, I just can't get to it fast enough.",
+        frustrations: [
+          "Can't afford a data team yet",
+          'Tried Tableau but too complex to set up',
+          "Board asks questions I can't answer immediately",
+        ],
+        howHelps: [
+          'Self-service analytics without technical skills',
+          'Board-ready reports generated automatically',
+          'Costs a fraction of hiring an analyst',
+        ],
+        outcome: {
+          before: '8 hours',
+          after: '15 min',
+          metric: 'board prep',
+          improvement: '97%',
+        },
+        sampleQuery: "Create an investor update with MRR, ARR, and runway analysis",
+      },
+      {
+        id: 'finance',
+        role: 'Finance / Accounting Manager',
+        name: 'Jessica',
+        title: 'Finance Manager',
+        company: '100-person professional services firm',
+        icon: Calculator,
+        accentColor: 'violet',
+        quote: "I export to Excel and spend days building the same reports every month.",
+        frustrations: [
+          'QuickBooks data hard to analyze',
+          'Manual reconciliation takes days',
+          "Can't easily compare actual vs. budget",
+        ],
+        howHelps: [
+          'Deep QuickBooks integration',
+          'Automated P&L, Balance Sheet, Cash Flow analysis',
+          'Natural language queries on financial data',
+        ],
+        outcome: {
+          before: '10 days',
+          after: '5 days',
+          metric: 'month-end close',
+          improvement: '50%',
+        },
+        sampleQuery: "Compare actual vs. budget by department for Q4",
+      },
     ],
   },
-  {
-    name: "Emily's E-commerce Success",
-    story: "Emily, the CEO of BloomTech, transformed their marketing efforts using AI-powered tools. This shift resulted in a 60% increase in ROI and a 45% improvement in customer personalization, leading to a surge in brand loyalty",
-    stats: [
-      { value: 60, label: 'growth in sales', suffix: '%' },
-      { value: 45, label: 'rise in engagement', suffix: '%' },
+  public: {
+    label: 'Public Sector',
+    icon: Globe,
+    personas: [
+      {
+        id: 'nonprofit',
+        role: 'Non-Profit Executive Director',
+        name: 'Amanda',
+        title: 'Executive Director',
+        company: '40-person community health organization',
+        icon: Heart,
+        accentColor: 'rose',
+        quote: "Grant reporting takes our team away from the work that actually matters.",
+        frustrations: [
+          'Donor reporting requires data from 6+ systems',
+          'Impact metrics scattered across programs',
+          'Board wants dashboards but no budget for analysts',
+        ],
+        howHelps: [
+          'Unified view of programs, grants, and financials',
+          'Auto-generated impact reports for funders',
+          'Track outcomes across all initiatives instantly',
+        ],
+        outcome: {
+          before: '15 hours',
+          after: '2 hours',
+          metric: 'grant reporting',
+          improvement: '87%',
+        },
+        sampleQuery: "Show program outcomes by funding source for our annual report",
+      },
+      {
+        id: 'academic',
+        role: 'Research Administrator',
+        name: 'Dr. Chen',
+        title: 'Associate Dean of Research',
+        company: 'Mid-size university research office',
+        icon: GraduationCap,
+        accentColor: 'amber',
+        quote: "Faculty need data for grants, but our systems don't talk to each other.",
+        frustrations: [
+          'Research data siloed across departments',
+          'Compliance reporting is manual and error-prone',
+          'Grant applications need metrics we can\'t easily pull',
+        ],
+        howHelps: [
+          'Connect research databases, HR, and finance systems',
+          'Compliance dashboards updated automatically',
+          'Natural language queries for grant proposals',
+        ],
+        outcome: {
+          before: '3 weeks',
+          after: '3 days',
+          metric: 'compliance audits',
+          improvement: '85%',
+        },
+        sampleQuery: "What's our research output by department and funding agency this year?",
+      },
+      {
+        id: 'government',
+        role: 'Government Program Manager',
+        name: 'Marcus',
+        title: 'Program Director',
+        company: 'State economic development agency',
+        icon: Landmark,
+        accentColor: 'blue',
+        quote: "We have the data to show impact, but no way to analyze it quickly.",
+        frustrations: [
+          'Legislative reporting deadlines are stressful',
+          'Data lives in legacy systems and spreadsheets',
+          'Public transparency requests take weeks',
+        ],
+        howHelps: [
+          'Connect legacy systems without IT overhaul',
+          'Auto-generate legislative and public reports',
+          'Track program KPIs across all initiatives',
+        ],
+        outcome: {
+          before: '2 weeks',
+          after: '2 days',
+          metric: 'legislative reports',
+          improvement: '86%',
+        },
+        sampleQuery: "Create a report on job creation by county for the budget committee",
+      },
     ],
   },
-  {
-    name: "Sophia's Retail Breakthrough",
-    story: 'Sophia, the marketing lead at Trendify, used AI-driven analytics to dive deep into customer behavior. The insights led to a 40% increase in engagement and a 30% rise in repeat purchases, creating long-term customer relationships.',
-    stats: [
-      { value: 40, label: 'gain in retention', suffix: '%' },
-      { value: 30, label: 'surge in profits', suffix: '%' },
-    ],
-  },
-];
+};
 
-function AnimatedCounter({ value, suffix = '' }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  useEffect(() => {
-    if (isInView) {
-      const duration = 2000;
-      const steps = 60;
-      const increment = value / steps;
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setCount(value);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-
-      return () => clearInterval(timer);
-    }
-  }, [isInView, value]);
+function PersonaCard({ persona, isActive, onClick }) {
+  const Icon = persona.icon;
+  const colorClasses = {
+    cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+    emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400' },
+    violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-400' },
+    rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-400' },
+    amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
+    blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  };
+  const colors = colorClasses[persona.accentColor];
 
   return (
-    <div ref={ref} className="flex items-baseline">
-      <span className="text-5xl md:text-6xl font-bold text-white">{count}</span>
-      <span className="text-3xl md:text-4xl font-bold text-white">{suffix}</span>
-    </div>
+    <motion.button
+      onClick={onClick}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className={`
+        w-full text-left p-5 rounded-2xl transition-all duration-300 border
+        ${isActive 
+          ? `${colors.bg} ${colors.border}` 
+          : 'bg-[#0f0f0f] border-[#262626] hover:border-[#3a3a3a]'
+        }
+      `}
+    >
+      <div className="flex items-center gap-4">
+        <div className={`
+          w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0
+          ${isActive ? colors.bg : 'bg-[#1a1a1a]'}
+        `}>
+          <Icon className={`w-5 h-5 ${isActive ? colors.text : 'text-gray-500'}`} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className={`font-semibold text-sm truncate ${isActive ? 'text-white' : 'text-gray-300'}`}>
+            {persona.role}
+          </h4>
+          <p className="text-xs text-gray-500 truncate">{persona.company}</p>
+        </div>
+        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? `${colors.text} translate-x-1` : 'text-gray-600'}`} />
+      </div>
+    </motion.button>
+  );
+}
+
+function PersonaDetail({ persona }) {
+  const colorClasses = {
+    cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400', ring: 'ring-cyan-500/20' },
+    emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400', ring: 'ring-emerald-500/20' },
+    violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-400', ring: 'ring-violet-500/20' },
+    rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-400', ring: 'ring-rose-500/20' },
+    amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400', ring: 'ring-amber-500/20' },
+    blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400', ring: 'ring-blue-500/20' },
+  };
+  const colors = colorClasses[persona.accentColor];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+      className="h-full"
+    >
+      <Card padding="p-8" className="h-full">
+        {/* Header with avatar and quote */}
+        <div className="mb-8">
+          <div className="flex items-start gap-4 mb-6">
+            <div className={`w-14 h-14 rounded-2xl ${colors.bg} ${colors.border} border-2 flex items-center justify-center ring-4 ${colors.ring}`}>
+              <span className="text-xl font-bold text-white">{persona.name[0]}</span>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white">{persona.name}</h3>
+              <p className="text-gray-400">{persona.title}</p>
+              <p className="text-sm text-gray-500">{persona.company}</p>
+            </div>
+          </div>
+          
+          {/* Quote */}
+          <div className={`relative p-5 rounded-xl ${colors.bg} border ${colors.border}`}>
+            <Quote className={`absolute -top-3 -left-2 w-7 h-7 ${colors.text} opacity-50`} />
+            <p className="text-base text-white italic leading-relaxed pl-4">
+              "{persona.quote}"
+            </p>
+          </div>
+        </div>
+
+        {/* Two columns: Pain vs Solution */}
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {/* Pain Points */}
+          <div>
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+              Before Seyvin
+            </h4>
+            <ul className="space-y-2">
+              {persona.frustrations.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                  <span className="text-red-400 mt-0.5 flex-shrink-0">✕</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solutions */}
+          <div>
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+              With Seyvin
+            </h4>
+            <ul className="space-y-2">
+              {persona.howHelps.map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                  <span className={`${colors.text} flex-shrink-0`}>✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Sample Query */}
+        <div className="mb-6 p-4 rounded-xl bg-[#0a0a0a] border border-[#262626]">
+          <p className="text-xs text-gray-500 mb-2">Sample query:</p>
+          <p className={`text-sm ${colors.text} font-mono`}>
+            "{persona.sampleQuery}"
+          </p>
+        </div>
+
+        {/* Outcome */}
+        <div className={`p-5 rounded-xl ${colors.bg} border ${colors.border}`}>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-400 mb-1">Result</p>
+              <p className="text-white font-medium">{persona.outcome.metric}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-gray-500 line-through">{persona.outcome.before}</p>
+                <p className="text-xs text-gray-600">before</p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-gray-600" />
+              <div className="text-right">
+                <p className={`text-2xl font-bold ${colors.text}`}>{persona.outcome.after}</p>
+                <p className="text-xs text-gray-500">now</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 pt-4 border-t border-[#262626]">
+            <div className="flex items-center gap-2">
+              <TrendingUp className={`w-4 h-4 ${colors.text}`} />
+              <span className="text-sm text-gray-400">
+                <span className={`font-semibold ${colors.text}`}>{persona.outcome.improvement}</span> time saved
+              </span>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </motion.div>
   );
 }
 
 export default function Clients() {
+  const [activeSector, setActiveSector] = useState('private');
+  const [activePersona, setActivePersona] = useState(sectors.private.personas[0]);
+
+  const handleSectorChange = (sector) => {
+    setActiveSector(sector);
+    setActivePersona(sectors[sector].personas[0]);
+  };
+
+  const currentSector = sectors[activeSector];
+
   return (
     <section id="clients" className="py-24 bg-[#0a0a0a]">
       <div className="section-container">
         <SectionHeader
-          badge="OUR CLIENTS"
+          badge="USE CASES"
           badgeIcon={Users}
-          title="Success Stories to"
-          titleAccent="Inspire"
-          description="Discover how businesses and creators achieve results"
+          title="Built for How"
+          titleAccent="You Work"
+          description="See how organizations like yours use Seyvin to transform their operations"
         />
 
-        <div className="space-y-6">
-          {clients.map((client, index) => (
-            <motion.div
-              key={client.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card padding="p-8 md:p-10">
-                <div className="grid lg:grid-cols-[1fr,auto] gap-8 items-center">
-                  {/* Story */}
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">
-                      {client.name}
-                    </h3>
-                    <p className="text-gray-400 leading-relaxed">
-                      {client.story}
-                    </p>
-                  </div>
+        {/* Sector Toggle */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex rounded-full bg-[#1a1a1a] border border-[#262626] p-1.5">
+            {Object.entries(sectors).map(([key, sector]) => {
+              const Icon = sector.icon;
+              return (
+                <button
+                  key={key}
+                  onClick={() => handleSectorChange(key)}
+                  className={`
+                    flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200
+                    ${activeSector === key 
+                      ? 'bg-white text-black' 
+                      : 'text-gray-400 hover:text-white'
+                    }
+                  `}
+                >
+                  <Icon className="w-4 h-4" />
+                  {sector.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-                  {/* Stats */}
-                  <div className="flex flex-row gap-8 lg:gap-12 lg:border-l lg:border-[#262626] lg:pl-12">
-                    {client.stats.map((stat, i) => (
-                      <div key={i} className="text-center lg:text-left">
-                        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                        <p className="text-gray-500 text-sm mt-2">{stat.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+        <div className="grid lg:grid-cols-[360px,1fr] gap-6">
+          {/* Persona Selector */}
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500 mb-4 px-2">Select your role:</p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSector}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-2"
+              >
+                {currentSector.personas.map((persona) => (
+                  <PersonaCard
+                    key={persona.id}
+                    persona={persona}
+                    isActive={activePersona.id === persona.id}
+                    onClick={() => setActivePersona(persona)}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+            
+            {/* CTA */}
+            <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-[#262626]">
+              <p className="text-gray-400 text-sm mb-3">
+                See yourself in one of these roles?
+              </p>
+              <a 
+                href="#demo" 
+                className="inline-flex items-center gap-2 text-cyan-400 text-sm font-medium hover:text-cyan-300 transition-colors"
+              >
+                Book a personalized demo
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Persona Detail */}
+          <AnimatePresence mode="wait">
+            <PersonaDetail key={activePersona.id} persona={activePersona} />
+          </AnimatePresence>
         </div>
       </div>
     </section>

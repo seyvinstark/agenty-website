@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { HelpCircle, ArrowUpRight } from 'lucide-react';
+import { HelpCircle, ArrowUpRight, Shield, Lock } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Accordion from '../ui/Accordion';
 import Card from '../ui/Card';
@@ -7,24 +7,36 @@ import Button from '../ui/Button';
 
 const faqItems = [
   {
-    question: 'What types of processes can you automate?',
-    answer: 'We specialize in automating repetitive workflows across operations, marketing, sales, and customer support using AI and custom logic.',
+    question: 'How does Seyvin connect to my data sources?',
+    answer: "Seyvin uses secure OAuth 2.0 connections for services like QuickBooks and Google Drive, and direct file uploads for CSV/Excel. We never store your passwords—you authorize access through each platform's secure login, and you can revoke access anytime.",
   },
   {
-    question: 'Do I need technical knowledge to use your service?',
-    answer: "Not at all. Our team handles the setup, integration, and optimization. You just focus on your goals — we'll automate the rest.",
+    question: 'Can I trust the AI answers? How do you prevent hallucinations?',
+    answer: "Unlike generic chatbots, Seyvin's multi-agent architecture (Dolores, Data Analyst, Report Writer) cross-validates every insight. Every answer is traceable to your actual source data—you can verify any number. We never make up data; if the answer isn't in your data, we tell you.",
   },
   {
-    question: 'Can you integrate with our existing tools?',
-    answer: 'Yes! We support integrations with CRMs, project management tools, communication apps, and more — tailored to your stack.',
+    question: 'How long does setup take?',
+    answer: "Most customers connect their first data source within 5 minutes using our one-click integrations. You can start asking questions immediately. Full onboarding with all your data sources typically takes 1-2 days, not the months required by traditional BI tools.",
   },
   {
-    question: 'How long does implementation take?',
-    answer: 'Most clients see their first automation live within 1–2 weeks, depending on complexity and the number of workflows.',
+    question: 'Do I need technical skills or SQL knowledge?',
+    answer: "Not at all. Seyvin is designed for business users. Ask questions in plain English like \"What's our cash runway?\" or \"Show me MRR by customer segment.\" Our AI handles all the technical complexity—no SQL, no dashboard design skills required.",
   },
   {
-    question: 'Is your AI secure and compliant?',
-    answer: 'Absolutely. We use enterprise-grade security practices and ensure compliance with major data privacy standards like GDPR.',
+    question: 'Is my data secure?',
+    answer: "Absolutely. Your data is encrypted at rest and in transit using industry-standard protocols. We're SOC 2 Type II compliant (in progress) and GDPR-ready. We never train AI models on your business data. You own your data—disconnect or delete anytime.",
+  },
+  {
+    question: 'What does beta pricing look like?',
+    answer: "Pricing will be finalized based on beta participant feedback. Beta users get preferential founding member rates that will be locked in before public launch. There's no commitment during the beta period—you can evaluate the full platform risk-free.",
+  },
+  {
+    question: 'What integrations do you support?',
+    answer: "Currently: QuickBooks Online, Notion, Google Drive, and CSV/Excel uploads. Coming soon: Shopify, Google Analytics, HubSpot, Stripe, Salesforce, Xero, and more. We're adding new integrations every week based on user requests.",
+  },
+  {
+    question: 'Can Seyvin generate reports for my board/investors?',
+    answer: "Yes! This is one of our core features. Simply ask something like \"Create a Q4 investor report with MRR, ARR, runway analysis, and key metrics.\" Seyvin generates professional, board-ready reports with executive summaries, trend analysis, and data-backed recommendations.",
   },
 ];
 
@@ -33,44 +45,83 @@ export default function FAQ() {
     <section id="faq" className="py-24 bg-[#0a0a0a]">
       <div className="section-container">
         <SectionHeader
-          badge="FAQ'S"
+          badge="FAQ"
           badgeIcon={HelpCircle}
           title="Frequently Asked"
           titleAccent="Questions"
-          description="Find quick answers to the most common support questions"
+          description="Everything you need to know about Seyvin"
         />
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Contact card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card padding="p-8" className="h-full flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 rounded-full bg-[#0f0f0f] border border-[#262626] flex items-center justify-center mb-6">
-                <HelpCircle className="w-8 h-8 text-gray-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                Still Have Questions?
-              </h3>
-              <p className="text-gray-400 mb-6">
-                Still have questions? Feel free to get in touch with us today!
-              </p>
-              <Button variant="secondary" size="sm">
-                <ArrowUpRight className="w-4 h-4" />
-                Ask A Question
-              </Button>
-            </Card>
-          </motion.div>
+          {/* Contact & Security cards */}
+          <div className="space-y-6">
+            {/* Contact card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card padding="p-6" className="h-auto">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-white">Still Have Questions?</h3>
+                    <p className="text-gray-400 text-sm mt-2">
+                      Book a demo and we'll walk you through everything—with your actual data.
+                    </p>
+                  </div>
+                  <a href="#demo">
+                    <Button variant="secondary" size="sm" className="w-full justify-center">
+                      Book a Demo
+                      <ArrowUpRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </a>
+                </div>
+              </Card>
+            </motion.div>
 
-          {/* FAQ accordion */}
+            {/* Security card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Card padding="p-6" className="border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <h3 className="font-semibold text-white">Security First</h3>
+                </div>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-gray-400">
+                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    Enterprise-grade encryption
+                  </li>
+                  <li className="flex items-center gap-2 text-gray-400">
+                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    SOC 2 Type II (in progress)
+                  </li>
+                  <li className="flex items-center gap-2 text-gray-400">
+                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    GDPR-ready data handling
+                  </li>
+                  <li className="flex items-center gap-2 text-gray-400">
+                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                    You own your data—always
+                  </li>
+                </ul>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* FAQ Accordion */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-2"
           >
             <Accordion items={faqItems} />
@@ -80,4 +131,3 @@ export default function FAQ() {
     </section>
   );
 }
-

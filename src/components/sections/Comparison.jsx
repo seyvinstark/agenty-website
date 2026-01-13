@@ -1,23 +1,92 @@
 import { motion } from 'framer-motion';
-import { GitCompare, Check, X, Layers } from 'lucide-react';
+import { GitCompare, Check, X, Minus } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
 
-const ourFeatures = [
-  'Fast setup with ready AI workflows',
-  'Built to grow and adapt with you',
-  'Real-time, AI-powered analytics',
-  'Automates tasks, reducing overhead',
-  'Expert support + AI guidance',
+const capabilities = [
+  { name: 'Data Integration', seyvin: true, thoughtspot: false, databricks: false, zapier: true, tableau: false },
+  { name: 'Natural Language Queries', seyvin: true, thoughtspot: true, databricks: false, zapier: false, tableau: false },
+  { name: 'Auto-Generated Dashboards', seyvin: true, thoughtspot: false, databricks: false, zapier: false, tableau: false },
+  { name: 'Multi-Agent AI', seyvin: true, thoughtspot: false, databricks: false, zapier: false, tableau: false },
+  { name: 'Board-Ready Reports', seyvin: true, thoughtspot: false, databricks: false, zapier: false, tableau: false },
+  { name: 'Accessible Pricing', seyvin: true, thoughtspot: false, databricks: false, zapier: true, tableau: false },
+  { name: 'Days to Setup', seyvin: true, thoughtspot: false, databricks: false, zapier: true, tableau: false },
+  { name: 'No Technical Skills', seyvin: true, thoughtspot: false, databricks: false, zapier: true, tableau: false },
 ];
 
-const otherFeatures = [
-  'Slower execution and manual setup',
-  'Requires manual updates as you scale',
-  'Limited or delayed reporting',
-  'Higher labor costs, less automation',
-  'Generic support or none at all',
+const competitors = [
+  { key: 'seyvin', name: 'Seyvin', pricing: 'Beta pricing', highlight: true },
+  { key: 'thoughtspot', name: 'ThoughtSpot', pricing: '$50K+/year', highlight: false },
+  { key: 'databricks', name: 'Databricks', pricing: '$250K+/year', highlight: false },
+  { key: 'zapier', name: 'Zapier', pricing: 'Integration only', highlight: false },
+  { key: 'tableau', name: 'Tableau', pricing: '$1K+/year', highlight: false },
 ];
+
+const differentiators = [
+  {
+    title: 'vs. Traditional BI',
+    subtitle: 'Next-Generation AI Intelligence',
+    theirLimitations: [
+      'Manual dashboard design taking weeks',
+      'SQL knowledge required for queries',
+      'Static views that don\'t adapt',
+      'Expensive implementations',
+    ],
+    ourAdvantages: [
+      'AI creates dashboards automatically',
+      'Ask questions in plain English',
+      'Dynamic insights that evolve',
+      'Up and running in days',
+    ],
+  },
+  {
+    title: 'vs. Data Platforms',
+    subtitle: 'Business Intelligence, Not Infrastructure',
+    theirLimitations: [
+      'Need data engineers ($120K+ salary)',
+      'Months of implementation',
+      '$250K+ annual budget',
+      'Technical expertise required',
+    ],
+    ourAdvantages: [
+      'No data warehouse required',
+      'Days to first insights',
+      'Accessible pricing',
+      'Zero technical skills needed',
+    ],
+  },
+  {
+    title: 'vs. Chatbots',
+    subtitle: 'Your Data. Not Hallucinations.',
+    theirLimitations: [
+      'No connection to your data',
+      'Hallucinate convincing "facts"',
+      'Can\'t verify their answers',
+      'No business context',
+    ],
+    ourAdvantages: [
+      'Connected to your business data',
+      'Multi-agent reduces hallucination',
+      'Every insight traceable to source',
+      'Built for business analytics',
+    ],
+  },
+];
+
+function FeatureIcon({ supported, highlight }) {
+  if (supported) {
+    return (
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${highlight ? 'bg-cyan-500/20' : 'bg-green-500/20'}`}>
+        <Check className={`w-3.5 h-3.5 ${highlight ? 'text-cyan-400' : 'text-green-400'}`} />
+      </div>
+    );
+  }
+  return (
+    <div className="w-6 h-6 rounded-full bg-[#1a1a1a] flex items-center justify-center">
+      <Minus className="w-3.5 h-3.5 text-gray-600" />
+    </div>
+  );
+}
 
 export default function Comparison() {
   return (
@@ -26,86 +95,106 @@ export default function Comparison() {
         <SectionHeader
           badge="COMPARISON"
           badgeIcon={GitCompare}
-          title="Why Choose Us"
-          titleAccent="Over Others"
-          description="See how we compare against others in performance, growth"
+          title="The Complete Solution"
+          titleAccent="vs. Assembly Required"
+          description="Seyvin combines integration, analysis, and reporting in one platform"
         />
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Us */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Logo */}
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-[#1a1a1a] border border-[#262626] flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="white">
-                  <circle cx="12" cy="12" r="8" fill="white"/>
-                  <path 
-                    d="M12 4C7.582 4 4 7.582 4 12s3.582 8 8 8 8-3.582 8-8S16.418 4 12 4zm0 14c-3.314 0-6-2.686-6-6s2.686-6 6-6c1.386 0 2.663.477 3.681 1.265l-4.656 3.835c-.415.342-.525.902-.277 1.379.247.477.78.736 1.309.637l6.019-1.14C21.603 10.068 18.784 18 12 18z" 
-                    fill="#1a1a1a"
-                  />
-                </svg>
-              </div>
-              <span className="text-xl font-serif italic text-white">Landio</span>
+        {/* Feature Comparison Table */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <Card padding="p-0" className="overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[700px]">
+                <thead>
+                  <tr className="border-b border-[#262626]">
+                    <th className="text-left p-4 text-gray-400 font-medium text-sm">Capability</th>
+                    {competitors.map((comp) => (
+                      <th 
+                        key={comp.key} 
+                        className={`p-4 text-center ${comp.highlight ? 'bg-cyan-500/5' : ''}`}
+                      >
+                        <div className={`font-semibold ${comp.highlight ? 'text-cyan-400' : 'text-white'}`}>
+                          {comp.name}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">{comp.pricing}</div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {capabilities.map((cap, i) => (
+                    <tr key={cap.name} className={`border-b border-[#1a1a1a] ${i % 2 === 0 ? 'bg-[#0a0a0a]' : ''}`}>
+                      <td className="p-4 text-gray-300 text-sm">{cap.name}</td>
+                      {competitors.map((comp) => (
+                        <td 
+                          key={comp.key} 
+                          className={`p-4 text-center ${comp.highlight ? 'bg-cyan-500/5' : ''}`}
+                        >
+                          <div className="flex justify-center">
+                            <FeatureIcon supported={cap[comp.key]} highlight={comp.highlight} />
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+          </Card>
+        </motion.div>
 
-            <Card padding="p-6">
-              <ul className="space-y-4">
-                {ourFeatures.map((feature, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <Check className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </Card>
-          </motion.div>
+        {/* Differentiators */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {differentiators.map((diff, index) => (
+            <motion.div
+              key={diff.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card padding="p-6" className="h-full">
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold text-white">{diff.title}</h3>
+                  <p className="text-sm text-cyan-400">{diff.subtitle}</p>
+                </div>
 
-          {/* Others */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Title */}
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <Layers className="w-5 h-5 text-gray-500" />
-              <span className="text-xl font-serif italic text-gray-500">Others</span>
-            </div>
+                {/* Their Limitations */}
+                <div className="mb-4">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Their limitations</p>
+                  <ul className="space-y-2">
+                    {diff.theirLimitations.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
+                        <X className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-            <Card padding="p-6" className="bg-[#0f0f0f]">
-              <ul className="space-y-4">
-                {otherFeatures.map((feature, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: 10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <X className="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-500">{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </Card>
-          </motion.div>
+                {/* Our Advantages */}
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Seyvin advantage</p>
+                  <ul className="space-y-2">
+                    {diff.ourAdvantages.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-

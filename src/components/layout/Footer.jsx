@@ -1,18 +1,20 @@
-import { Twitter, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 const footerLinks = [
-  { label: 'Services', href: '#services' },
+  { label: 'Features', href: '#features' },
+  { label: 'How It Works', href: '#process' },
+  { label: 'Use Cases', href: '#clients' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Contact', href: '#contact' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Privacy', href: '#privacy' },
-  { label: 'Terms', href: '#terms' },
+  { label: 'FAQ', href: '#faq' },
+];
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
 ];
 
 const socialLinks = [
   { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
 ];
 
@@ -34,21 +36,13 @@ export default function Footer() {
                   />
                 </svg>
               </div>
-              <span className="text-xl font-serif italic text-white">Landio</span>
+              <span className="text-xl font-serif italic text-white">Seyvin</span>
             </a>
 
-            {/* Nav Links */}
-            <nav className="flex flex-wrap gap-6">
-              {footerLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
+            {/* Tagline */}
+            <p className="text-sm text-gray-500 lg:border-l lg:border-[#262626] lg:pl-8">
+              Your AI Analytics Team — Ready in Minutes
+            </p>
           </div>
 
           {/* Social Links */}
@@ -66,27 +60,47 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Nav Links Row */}
+        <div className="flex flex-wrap gap-6 mb-8">
+          {footerLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
         {/* Divider */}
         <div className="h-px bg-[#1f1f1f] mb-8" />
 
         {/* Bottom Row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2025 Landio Template</p>
-          <p>
-            Made by{' '}
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Framebase
-            </a>
-          </p>
+          <p>© 2026 Seyvin. All rights reserved.</p>
+          
+          <div className="flex items-center gap-6">
+            {legalLinks.map((link) => (
+              <a 
+                key={link.label}
+                href={link.href} 
+                className="text-gray-500 hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
           <a 
-            href="mailto:landio@support.com" 
-            className="text-gray-400 hover:text-white transition-colors"
+            href="mailto:hello@seyvin.com" 
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
           >
-            landio@support.com
+            <Mail className="w-4 h-4" />
+            hello@seyvin.com
           </a>
         </div>
       </div>
     </footer>
   );
 }
-
