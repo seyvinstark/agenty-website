@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, Check, BarChart3, MessageSquare, FileDown, Database } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const steps = [
   {
@@ -76,6 +77,8 @@ const steps = [
 
 // Integration Visual for Step 1 - Shows connected data sources
 function IntegrationVisual() {
+  const { theme } = useTheme();
+  
   const integrations = [
     { name: 'QuickBooks', color: 'bg-green-500/20', border: 'border-green-500/40' },
     { name: 'Notion', color: 'bg-white/10', border: 'border-white/30' },
@@ -84,13 +87,23 @@ function IntegrationVisual() {
   ];
 
   return (
-    <div className="bg-[#0f0f0f] rounded-2xl border border-[#262626] p-6 overflow-hidden">
+    <div className={`rounded-2xl border p-6 overflow-hidden ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs text-gray-500">Data Sources</span>
+        <span className={`text-xs ${
+          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+        }`}>Data Sources</span>
         <div className="flex gap-1">
           <div className="w-2 h-2 rounded-full bg-green-500" />
-          <div className="w-2 h-2 rounded-full bg-gray-600" />
-          <div className="w-2 h-2 rounded-full bg-gray-600" />
+          <div className={`w-2 h-2 rounded-full ${
+            theme === 'dark' ? 'bg-gray-600' : 'bg-slate-300'
+          }`} />
+          <div className={`w-2 h-2 rounded-full ${
+            theme === 'dark' ? 'bg-gray-600' : 'bg-slate-300'
+          }`} />
         </div>
       </div>
       
@@ -101,14 +114,24 @@ function IntegrationVisual() {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: i * 0.1 }}
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#1a1a1a] border border-[#262626]"
+            className={`flex items-center gap-3 p-3 rounded-lg border ${
+              theme === 'dark' 
+                ? 'bg-[#1a1a1a] border-[#262626]' 
+                : 'bg-white border-slate-200'
+            }`}
           >
             <div className={`w-8 h-8 rounded ${integration.color} ${integration.border} border flex items-center justify-center`}>
-              <Check className="w-4 h-4 text-white/60" />
+              <Check className={`w-4 h-4 ${
+                theme === 'dark' ? 'text-white/60' : 'text-slate-700/60'
+              }`} />
             </div>
             <div className="flex-1">
-              <div className="text-sm text-gray-300">{integration.name}</div>
-              <div className="text-xs text-gray-600">Connected</div>
+              <div className={`text-sm ${
+                theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+              }`}>{integration.name}</div>
+              <div className={`text-xs ${
+                theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+              }`}>Connected</div>
             </div>
             <div className="w-4 h-4 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
@@ -122,6 +145,8 @@ function IntegrationVisual() {
 
 // Dashboard Visual for Step 2 - Shows KPI selection and resulting dashboard
 function DashboardVisual() {
+  const { theme } = useTheme();
+  
   const kpis = [
     { name: 'Monthly Revenue', value: '$142,500', change: '+12%', selected: true },
     { name: 'Cash Runway', value: '14.2 mo', change: 'Stable', selected: true },
@@ -130,10 +155,18 @@ function DashboardVisual() {
   ];
 
   return (
-    <div className="bg-[#0f0f0f] rounded-2xl border border-[#262626] p-6 overflow-hidden">
+    <div className={`rounded-2xl border p-6 overflow-hidden ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs text-gray-500">Your Dashboard</span>
-        <span className="text-xs text-cyan-400">Live Data</span>
+        <span className={`text-xs ${
+          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+        }`}>Your Dashboard</span>
+        <span className={`text-xs ${
+          theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+        }`}>Live Data</span>
       </div>
 
       {/* Mini chart */}
@@ -173,12 +206,24 @@ function DashboardVisual() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 + i * 0.1 }}
-            className="p-3 rounded-lg bg-[#1a1a1a] border border-[#262626]"
+            className={`p-3 rounded-lg border ${
+              theme === 'dark' 
+                ? 'bg-[#1a1a1a] border-[#262626]' 
+                : 'bg-white border-slate-200'
+            }`}
           >
-            <div className="text-xs text-gray-500 mb-1">{kpi.name}</div>
+            <div className={`text-xs mb-1 ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+            }`}>{kpi.name}</div>
             <div className="flex items-end gap-2">
-              <span className="text-lg font-semibold text-white">{kpi.value}</span>
-              <span className={`text-xs ${kpi.change.includes('+') ? 'text-green-400' : kpi.change.includes('-') ? 'text-red-400' : 'text-gray-500'}`}>
+              <span className={`text-lg font-semibold ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              }`}>{kpi.value}</span>
+              <span className={`text-xs ${
+                kpi.change.includes('+') ? 'text-green-400' : 
+                kpi.change.includes('-') ? 'text-red-400' : 
+                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+              }`}>
                 {kpi.change}
               </span>
             </div>
@@ -191,9 +236,17 @@ function DashboardVisual() {
 
 // Conversation Visual for Step 3 - Shows natural language queries with chart results
 function ConversationVisual() {
+  const { theme } = useTheme();
+  
   return (
-    <div className="bg-[#0f0f0f] rounded-2xl border border-[#262626] p-4 overflow-hidden">
-      <div className="flex items-center gap-2 mb-4 text-gray-500 text-xs">
+    <div className={`rounded-2xl border p-4 overflow-hidden ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
+      <div className={`flex items-center gap-2 mb-4 text-xs ${
+        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+      }`}>
         <MessageSquare className="w-4 h-4" />
         <span>Chat with Seyvin</span>
       </div>
@@ -205,7 +258,11 @@ function ConversationVisual() {
           animate={{ opacity: 1, y: 0 }}
           className="flex justify-end"
         >
-          <div className="max-w-[85%] px-4 py-2.5 rounded-2xl text-sm bg-cyan-500/20 border border-cyan-500/30 text-cyan-100">
+          <div className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm border ${
+            theme === 'dark' 
+              ? 'bg-cyan-500/20 border-cyan-500/30 text-cyan-100' 
+              : 'bg-cyan-50 border-cyan-200 text-cyan-900'
+          }`}>
             Show me revenue trends this quarter
           </div>
         </motion.div>
@@ -217,8 +274,14 @@ function ConversationVisual() {
           transition={{ delay: 0.2 }}
           className="flex justify-start"
         >
-          <div className="max-w-[90%] px-4 py-3 rounded-2xl text-sm bg-[#1a1a1a] border border-[#262626]">
-            <p className="text-gray-300 mb-3">Revenue is up 24% this quarter. Here's the breakdown:</p>
+          <div className={`max-w-[90%] px-4 py-3 rounded-2xl text-sm border ${
+            theme === 'dark' 
+              ? 'bg-[#1a1a1a] border-[#262626]' 
+              : 'bg-white border-slate-200'
+          }`}>
+            <p className={`mb-3 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+            }`}>Revenue is up 24% this quarter. Here's the breakdown:</p>
             {/* Mini bar chart */}
             <div className="flex items-end gap-2 h-12 mb-2">
               {[60, 72, 68, 85, 78, 92].map((height, i) => (
@@ -227,11 +290,15 @@ function ConversationVisual() {
                   initial={{ height: 0 }}
                   animate={{ height: `${height}%` }}
                   transition={{ delay: 0.4 + i * 0.1 }}
-                  className="flex-1 bg-cyan-500/40 rounded-t"
+                  className={`flex-1 rounded-t ${
+                    theme === 'dark' ? 'bg-cyan-500/40' : 'bg-cyan-500/60'
+                  }`}
                 />
               ))}
             </div>
-            <div className="flex justify-between text-xs text-gray-600">
+            <div className={`flex justify-between text-xs ${
+              theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+            }`}>
               <span>Jan</span>
               <span>Jun</span>
             </div>
@@ -243,7 +310,9 @@ function ConversationVisual() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="flex items-center gap-1 text-gray-500 text-xs pl-2"
+          className={`flex items-center gap-1 text-xs pl-2 ${
+            theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+          }`}
         >
           <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
           <span>Ask a follow-up question...</span>
@@ -255,10 +324,18 @@ function ConversationVisual() {
 
 // Report Visual for Step 4 - Shows report generation and download
 function ReportVisual() {
+  const { theme } = useTheme();
+  
   return (
-    <div className="bg-[#0f0f0f] rounded-2xl border border-[#262626] p-6 overflow-hidden">
+    <div className={`rounded-2xl border p-6 overflow-hidden ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs text-gray-500">Report Generator</span>
+        <span className={`text-xs ${
+          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+        }`}>Report Generator</span>
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -274,30 +351,50 @@ function ReportVisual() {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-[#1a1a1a] rounded-lg border border-[#262626] p-4 mb-4"
+        className={`rounded-lg border p-4 mb-4 ${
+          theme === 'dark' 
+            ? 'bg-[#1a1a1a] border-[#262626]' 
+            : 'bg-white border-slate-200'
+        }`}
       >
         <div className="flex items-center gap-2 mb-3">
-          <div className="w-6 h-6 rounded bg-cyan-500/20 flex items-center justify-center">
-            <FileDown className="w-3 h-3 text-cyan-400" />
+          <div className={`w-6 h-6 rounded flex items-center justify-center ${
+            theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-50'
+          }`}>
+            <FileDown className={`w-3 h-3 ${
+              theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+            }`} />
           </div>
-          <span className="text-sm text-white font-medium">Q4 Investor Update</span>
+          <span className={`text-sm font-medium ${
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          }`}>Q4 Investor Update</span>
         </div>
         
-        <div className="space-y-2 text-xs text-gray-500">
+        <div className={`space-y-2 text-xs ${
+          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+        }`}>
           <div className="flex items-center gap-2">
-            <div className="w-1 h-1 rounded-full bg-gray-600" />
+            <div className={`w-1 h-1 rounded-full ${
+              theme === 'dark' ? 'bg-gray-600' : 'bg-slate-400'
+            }`} />
             <span>Executive Summary</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-1 h-1 rounded-full bg-gray-600" />
+            <div className={`w-1 h-1 rounded-full ${
+              theme === 'dark' ? 'bg-gray-600' : 'bg-slate-400'
+            }`} />
             <span>Financial Highlights</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-1 h-1 rounded-full bg-gray-600" />
+            <div className={`w-1 h-1 rounded-full ${
+              theme === 'dark' ? 'bg-gray-600' : 'bg-slate-400'
+            }`} />
             <span>Key Metrics & Growth</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-1 h-1 rounded-full bg-gray-600" />
+            <div className={`w-1 h-1 rounded-full ${
+              theme === 'dark' ? 'bg-gray-600' : 'bg-slate-400'
+            }`} />
             <span>Next Quarter Outlook</span>
           </div>
         </div>
@@ -309,7 +406,11 @@ function ReportVisual() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-sm hover:bg-cyan-500/30 transition-colors"
+          className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors ${
+            theme === 'dark' 
+              ? 'bg-cyan-500/20 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/30' 
+              : 'bg-cyan-50 border-cyan-200 text-cyan-700 hover:bg-cyan-100'
+          }`}
         >
           <FileDown className="w-4 h-4" />
           Download PDF
@@ -318,7 +419,11 @@ function ReportVisual() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#1a1a1a] border border-[#262626] text-gray-400 text-sm hover:border-white/20 transition-colors"
+          className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors ${
+            theme === 'dark' 
+              ? 'bg-[#1a1a1a] border-[#262626] text-gray-400 hover:border-white/20' 
+              : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+          }`}
         >
           Share Link
         </motion.button>
@@ -336,12 +441,15 @@ const visuals = {
 
 export default function Process() {
   const [activeStep, setActiveStep] = useState(1);
+  const { theme } = useTheme();
   const currentStep = steps[activeStep - 1];
   const Visual = visuals[currentStep.visual];
   const StepIcon = currentStep.icon;
 
   return (
-    <section id="process" className="py-24 bg-[#0a0a0a]">
+    <section id="process" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="HOW IT WORKS"
@@ -363,8 +471,12 @@ export default function Process() {
                   className={`
                     flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300
                     ${activeStep === step.id 
-                      ? 'bg-white text-black' 
-                      : 'bg-[#1a1a1a] text-gray-400 border border-[#262626] hover:border-white/20'
+                      ? theme === 'dark' 
+                        ? 'bg-white text-black' 
+                        : 'bg-slate-900 text-white'
+                      : theme === 'dark'
+                        ? 'bg-[#1a1a1a] text-gray-400 border border-[#262626] hover:border-white/20'
+                        : 'bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-300'
                     }
                   `}
                 >
@@ -403,21 +515,35 @@ export default function Process() {
               >
                 {/* Step number and icon */}
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="text-5xl font-bold text-gray-800">
+                  <div className={`text-5xl font-bold ${
+                    theme === 'dark' ? 'text-gray-800' : 'text-slate-300'
+                  }`}>
                     {currentStep.number}
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                    <StepIcon className="w-6 h-6 text-cyan-400" />
+                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center ${
+                    theme === 'dark' 
+                      ? 'bg-cyan-500/10 border-cyan-500/20' 
+                      : 'bg-cyan-50 border-cyan-200'
+                  }`}>
+                    <StepIcon className={`w-6 h-6 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-white mb-1">
+                <h3 className={`text-2xl font-semibold mb-1 ${
+                  theme === 'dark' ? 'text-white' : 'text-slate-900'
+                }`}>
                   {currentStep.title}
                 </h3>
-                <p className="text-cyan-400 text-sm mb-4">
+                <p className={`text-sm mb-4 ${
+                  theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                }`}>
                   {currentStep.subtitle}
                 </p>
-                <p className="text-gray-400 leading-relaxed mb-6">
+                <p className={`leading-relaxed mb-6 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                }`}>
                   {currentStep.description}
                 </p>
 
@@ -425,8 +551,12 @@ export default function Process() {
                 {currentStep.features && (
                   <ul className="space-y-2 mb-6">
                     {currentStep.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-gray-500">
-                        <Check className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                      <li key={i} className={`flex items-center gap-2 text-sm ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                      }`}>
+                        <Check className={`w-4 h-4 flex-shrink-0 ${
+                          theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                        }`} />
                         {feature}
                       </li>
                     ))}
@@ -436,10 +566,12 @@ export default function Process() {
                 {currentStep.examples && (
                   <ul className="space-y-2 mb-6">
                     {currentStep.examples.map((example, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
-                        <span className="text-cyan-400">"</span>
+                      <li key={i} className={`flex items-start gap-2 text-sm ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                      }`}>
+                        <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
                         {example}
-                        <span className="text-cyan-400">"</span>
+                        <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
                       </li>
                     ))}
                   </ul>
@@ -454,15 +586,23 @@ export default function Process() {
                       </div>
                       <div>
                         <span className="text-xs text-green-400 font-medium uppercase tracking-wide">Result</span>
-                        <p className="text-sm text-gray-300 mt-1">{currentStep.result}</p>
+                        <p className={`text-sm mt-1 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                        }`}>{currentStep.result}</p>
                       </div>
                     </div>
                   </div>
                 )}
 
                 {/* Deliverable badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1a1a1a] border border-[#262626] text-xs text-gray-400">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs ${
+                  theme === 'dark' 
+                    ? 'bg-[#1a1a1a] border-[#262626] text-gray-400' 
+                    : 'bg-slate-100 border-slate-200 text-slate-600'
+                }`}>
+                  <div className={`w-1.5 h-1.5 rounded-full ${
+                    theme === 'dark' ? 'bg-cyan-400' : 'bg-cyan-600'
+                  }`} />
                   {currentStep.deliverable}
                 </div>
               </motion.div>

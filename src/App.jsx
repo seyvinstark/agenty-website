@@ -1,3 +1,4 @@
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { Header, Footer } from './components/layout';
 import {
   Hero,
@@ -17,9 +18,13 @@ import {
   CTA,
 } from './components/sections';
 
-function App() {
+function AppContent() {
+  const { theme } = useTheme();
+  
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <Header />
       <main>
         <Hero />
@@ -40,6 +45,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionBadge } from './Badge';
+import { useTheme } from '../../context/ThemeContext';
 
 export default function SectionHeader({
   badge,
@@ -9,6 +10,8 @@ export default function SectionHeader({
   description,
   className = '',
 }) {
+  const { theme } = useTheme();
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -19,17 +22,22 @@ export default function SectionHeader({
     >
       {badge && <SectionBadge icon={badgeIcon}>{badge}</SectionBadge>}
       
-      <h2 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+      <h2 className={`text-4xl md:text-5xl font-semibold mb-4 ${
+        theme === 'dark' ? 'text-white' : 'text-slate-900'
+      }`}>
         {title}{' '}
         {titleAccent && (
-          <span className="font-serif italic text-gray-400">{titleAccent}</span>
+          <span className={`font-serif italic ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+          }`}>{titleAccent}</span>
         )}
       </h2>
       
       {description && (
-        <p className="text-gray-400 text-lg">{description}</p>
+        <p className={`text-lg ${
+          theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+        }`}>{description}</p>
       )}
     </motion.div>
   );
 }
-

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Layers, Check, Clock } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 // Integration icons as SVG components
 const icons = {
@@ -76,6 +77,7 @@ const comingSoonIntegrations = [
 ];
 
 function IntegrationCard({ integration, index }) {
+  const { theme } = useTheme();
   const isLive = integration.status === 'live';
   
   return (
@@ -87,8 +89,12 @@ function IntegrationCard({ integration, index }) {
       className={`
         relative p-6 rounded-2xl border transition-all duration-300
         ${isLive 
-          ? 'bg-[#0f0f0f] border-[#262626] hover:border-cyan-500/30' 
-          : 'bg-[#0a0a0a] border-[#1a1a1a] opacity-60'
+          ? theme === 'dark'
+            ? 'bg-[#0f0f0f] border-[#262626] hover:border-cyan-500/30' 
+            : 'bg-slate-50 border-slate-200 hover:border-cyan-300'
+          : theme === 'dark'
+            ? 'bg-[#0a0a0a] border-[#1a1a1a] opacity-60'
+            : 'bg-slate-100 border-slate-200 opacity-60'
         }
       `}
     >
@@ -97,7 +103,9 @@ function IntegrationCard({ integration, index }) {
         absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full text-xs
         ${isLive 
           ? 'bg-green-500/10 text-green-400' 
-          : 'bg-gray-500/10 text-gray-500'
+          : theme === 'dark'
+            ? 'bg-gray-500/10 text-gray-500'
+            : 'bg-slate-200 text-slate-500'
         }
       `}>
         {isLive ? <Check className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
@@ -107,23 +115,40 @@ function IntegrationCard({ integration, index }) {
       {/* Icon */}
       <div className={`
         w-16 h-16 rounded-xl flex items-center justify-center mb-4
-        ${isLive ? 'bg-[#1a1a1a] text-white' : 'bg-[#0f0f0f] text-gray-600'}
+        ${isLive 
+          ? theme === 'dark'
+            ? 'bg-[#1a1a1a] text-white' 
+            : 'bg-white text-slate-900'
+          : theme === 'dark'
+            ? 'bg-[#0f0f0f] text-gray-600'
+            : 'bg-slate-200 text-slate-400'
+        }
       `}>
         {icons[integration.key]}
       </div>
 
       {/* Info */}
-      <h3 className={`font-semibold mb-1 ${isLive ? 'text-white' : 'text-gray-500'}`}>
+      <h3 className={`font-semibold mb-1 ${
+        isLive 
+          ? theme === 'dark' ? 'text-white' : 'text-slate-900'
+          : theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+      }`}>
         {integration.name}
       </h3>
-      <p className="text-sm text-gray-500">{integration.category}</p>
+      <p className={`text-sm ${
+        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+      }`}>{integration.category}</p>
     </motion.div>
   );
 }
 
 export default function Integrations() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="integrations" className="py-24 bg-[#0a0a0a]">
+    <section id="integrations" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="INTEGRATIONS"
@@ -135,7 +160,9 @@ export default function Integrations() {
 
         {/* Current Integrations */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+          <h3 className={`text-lg font-semibold mb-6 flex items-center gap-2 ${
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          }`}>
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             Available Now
           </h3>
@@ -148,7 +175,9 @@ export default function Integrations() {
 
         {/* Coming Soon */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-400 mb-6 flex items-center gap-2">
+          <h3 className={`text-lg font-semibold mb-6 flex items-center gap-2 ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}>
             <Clock className="w-4 h-4" />
             Coming Soon
           </h3>
@@ -168,12 +197,18 @@ export default function Integrations() {
           className="mt-12 text-center"
         >
           <Card padding="p-8" className="max-w-2xl mx-auto">
-            <p className="text-gray-400 mb-4">
+            <p className={`mb-4 ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+            }`}>
               Don't see your tool? We're adding new integrations every week based on user requests.
             </p>
             <a 
               href="#demo" 
-              className="inline-flex items-center gap-2 text-cyan-400 font-medium hover:text-cyan-300 transition-colors"
+              className={`inline-flex items-center gap-2 font-medium transition-colors ${
+                theme === 'dark' 
+                  ? 'text-cyan-400 hover:text-cyan-300' 
+                  : 'text-cyan-600 hover:text-cyan-700'
+              }`}
             >
               Request an integration →
             </a>

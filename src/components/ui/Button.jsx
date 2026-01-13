@@ -1,18 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-
-const variants = {
-  primary: 'bg-white text-black hover:bg-gray-100',
-  secondary: 'bg-transparent border border-white/20 text-white hover:bg-white/5',
-  ghost: 'bg-transparent text-white hover:bg-white/5',
-  accent: 'bg-cyan-500 text-black hover:bg-cyan-400',
-};
-
-const sizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
-};
+import { useTheme } from '../../context/ThemeContext';
 
 export default function Button({
   children,
@@ -22,6 +10,29 @@ export default function Button({
   className = '',
   ...props
 }) {
+  const { theme } = useTheme();
+  
+  const variants = {
+    primary: theme === 'dark' 
+      ? 'bg-white text-black hover:bg-gray-100' 
+      : 'bg-slate-900 text-white hover:bg-slate-800',
+    secondary: theme === 'dark'
+      ? 'bg-transparent border border-white/20 text-white hover:bg-white/5'
+      : 'bg-transparent border border-slate-300 text-slate-900 hover:bg-slate-50',
+    ghost: theme === 'dark'
+      ? 'bg-transparent text-white hover:bg-white/5'
+      : 'bg-transparent text-slate-900 hover:bg-slate-100',
+    accent: theme === 'dark'
+      ? 'bg-cyan-500 text-black hover:bg-cyan-400'
+      : 'bg-cyan-600 text-white hover:bg-cyan-500',
+  };
+
+  const sizes = {
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg',
+  };
+
   return (
     <motion.button
       whileHover={{ scale: 1.02 }}
@@ -41,4 +52,3 @@ export default function Button({
     </motion.button>
   );
 }
-

@@ -4,8 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Variables for the design system */
-:root {
+/* CSS Variables for the design system - Dark Theme (Default) */
+:root,
+[data-theme="dark"] {
   --color-bg-primary: #0a0a0a;
   --color-bg-secondary: #111111;
   --color-bg-card: #1a1a1a;
@@ -20,9 +21,47 @@
   
   --color-accent: #22d3ee;
   --color-accent-dark: #06b6d4;
+  --color-accent-bg: rgba(34, 211, 238, 0.1);
+  --color-accent-border: rgba(34, 211, 238, 0.3);
+  
+  --color-success: #22c55e;
+  --color-success-bg: rgba(34, 197, 94, 0.1);
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.1);
+  
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --shadow-color: rgba(0, 0, 0, 0.3);
   
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-card: #f1f5f9;
+  --color-bg-card-hover: #e2e8f0;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #1e293b;
+  --color-text-muted: #64748b;
+  --color-text-subtle: #94a3b8;
+  
+  --color-accent: #0891b2;
+  --color-accent-dark: #0e7490;
+  --color-accent-bg: rgba(8, 145, 178, 0.1);
+  --color-accent-border: rgba(8, 145, 178, 0.3);
+  
+  --color-success: #16a34a;
+  --color-success-bg: rgba(22, 163, 74, 0.1);
+  --color-error: #dc2626;
+  --color-error-bg: rgba(220, 38, 38, 0.1);
+  
+  --color-overlay: rgba(255, 255, 255, 0.8);
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Base styles */
@@ -43,6 +82,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -72,6 +112,35 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Theme-aware background classes */
+.theme-bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.theme-bg-card {
+  background-color: var(--color-bg-card);
+}
+
+.theme-text-primary {
+  color: var(--color-text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--color-text-muted);
+}
+
+.theme-border {
+  border-color: var(--color-border);
+}
+
 /* Glass effect */
 .glass {
   background: rgba(26, 26, 26, 0.8);
@@ -80,9 +149,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -93,6 +167,10 @@ body {
   box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
 }
 
+[data-theme="light"] .accent-glow {
+  box-shadow: 0 0 40px rgba(8, 145, 178, 0.15);
+}
+
 /* Card hover effect */
 .card-hover {
   transition: all 0.3s ease;
@@ -100,7 +178,7 @@ body {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--color-accent-border);
 }
 
 /* Section container */
@@ -120,4 +198,14 @@ body {
   .section-container {
     padding: 0 64px;
   }
+}
+
+/* Theme transition for all elements */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Disable transition for animations to prevent conflicts */
+[class*="animate-"], [class*="transition-"] {
+  transition-property: transform, opacity !important;
 }

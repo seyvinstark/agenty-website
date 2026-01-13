@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Check, Clock, CreditCard, Database } from 'lucide-react';
 import Button from '../ui/Button';
+import { useTheme } from '../../context/ThemeContext';
 
 const trustPoints = [
   { icon: Clock, text: '15-minute personalized demo' },
@@ -10,8 +11,12 @@ const trustPoints = [
 ];
 
 export default function CTA() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="cta" className="py-24 bg-[#0a0a0a]">
+    <section id="cta" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -21,18 +26,26 @@ export default function CTA() {
           className="max-w-3xl mx-auto text-center"
         >
           {/* Pre-title */}
-          <p className="text-gray-500 italic mb-4">
-            — <span className="text-gray-400">See it in action</span> —
+          <p className={`italic mb-4 ${
+            theme === 'dark' ? 'text-gray-500' : 'text-slate-400'
+          }`}>
+            — <span className={theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}>See it in action</span> —
           </p>
 
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+          <h2 className={`text-4xl md:text-5xl font-semibold mb-4 leading-tight ${
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          }`}>
             See Seyvin Analyze{' '}
-            <span className="font-serif italic text-gray-400">Your Data</span>
+            <span className={`font-serif italic ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+            }`}>Your Data</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+          <p className={`text-lg mb-8 max-w-xl mx-auto ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}>
             In 15 minutes, we'll connect to your QuickBooks (or any data source) and show you 
             how Seyvin generates dashboards and reports from your actual business data.
           </p>
@@ -46,9 +59,13 @@ export default function CTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex items-center gap-2 text-sm text-gray-400"
+                className={`flex items-center gap-2 text-sm ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                }`}
               >
-                <point.icon className="w-4 h-4 text-cyan-400" />
+                <point.icon className={`w-4 h-4 ${
+                  theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                }`} />
                 {point.text}
               </motion.div>
             ))}
@@ -76,7 +93,9 @@ export default function CTA() {
 
           {/* Glow effect under button */}
           <div className="relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 bg-cyan-500/10 blur-3xl" />
+            <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 blur-3xl ${
+              theme === 'dark' ? 'bg-cyan-500/10' : 'bg-cyan-400/20'
+            }`} />
           </div>
 
           {/* Urgency */}
@@ -85,7 +104,9 @@ export default function CTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-gray-600 text-sm"
+            className={`text-sm ${
+              theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+            }`}
           >
             Limited beta spots available — apply early to secure founding member rates
           </motion.p>

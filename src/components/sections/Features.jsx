@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 // Tier 1: Primary features (larger cards)
 const primaryFeatures = [
@@ -68,8 +69,12 @@ const secondaryFeatures = [
 ];
 
 export default function Features() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="features" className="py-24 bg-[#0a0a0a]">
+    <section id="features" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="FEATURES"
@@ -95,24 +100,44 @@ export default function Features() {
                 <Card padding="p-8" className="h-full">
                   {/* Icon pair */}
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="p-3 rounded-xl bg-[#0f0f0f] border border-[#262626]">
-                      <Icon1 className="w-5 h-5 text-cyan-400" />
+                    <div className={`p-3 rounded-xl border ${
+                      theme === 'dark' 
+                        ? 'bg-[#0f0f0f] border-[#262626]' 
+                        : 'bg-slate-50 border-slate-200'
+                    }`}>
+                      <Icon1 className={`w-5 h-5 ${
+                        theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                      }`} />
                     </div>
-                    <div className="p-3 rounded-xl bg-[#0f0f0f] border border-[#262626]">
-                      <Icon2 className="w-5 h-5 text-gray-400" />
+                    <div className={`p-3 rounded-xl border ${
+                      theme === 'dark' 
+                        ? 'bg-[#0f0f0f] border-[#262626]' 
+                        : 'bg-slate-50 border-slate-200'
+                    }`}>
+                      <Icon2 className={`w-5 h-5 ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+                      }`} />
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className={`text-lg font-semibold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                  <p className={`text-sm leading-relaxed mb-4 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
                     {feature.description}
                   </p>
                   
                   {/* Proof point */}
-                  <div className="mt-auto pt-4 border-t border-[#262626]">
-                    <span className="text-cyan-400 text-sm font-medium">
+                  <div className={`mt-auto pt-4 border-t ${
+                    theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'
+                  }`}>
+                    <span className={`text-sm font-medium ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`}>
                       ✓ {feature.proof}
                     </span>
                   </div>
@@ -138,18 +163,34 @@ export default function Features() {
                 <Card padding="p-6" className="h-full">
                   {/* Icon pair */}
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="p-2 rounded-lg bg-[#0f0f0f] border border-[#262626]">
-                      <Icon1 className="w-4 h-4 text-gray-400" />
+                    <div className={`p-2 rounded-lg border ${
+                      theme === 'dark' 
+                        ? 'bg-[#0f0f0f] border-[#262626]' 
+                        : 'bg-slate-50 border-slate-200'
+                    }`}>
+                      <Icon1 className={`w-4 h-4 ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+                      }`} />
                     </div>
-                    <div className="p-2 rounded-lg bg-[#0f0f0f] border border-[#262626]">
-                      <Icon2 className="w-4 h-4 text-gray-400" />
+                    <div className={`p-2 rounded-lg border ${
+                      theme === 'dark' 
+                        ? 'bg-[#0f0f0f] border-[#262626]' 
+                        : 'bg-slate-50 border-slate-200'
+                    }`}>
+                      <Icon2 className={`w-4 h-4 ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+                      }`} />
                     </div>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-1">
+                  <h3 className={`text-base font-semibold mb-1 ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>
                     {feature.title}
                   </h3>
-                  <p className="text-gray-500 text-xs leading-relaxed">
+                  <p className={`text-xs leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                  }`}>
                     {feature.description}
                   </p>
                 </Card>

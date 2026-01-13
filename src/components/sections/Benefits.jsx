@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const benefits = [
   {
@@ -22,6 +23,7 @@ const benefits = [
 ];
 
 function GaugeIllustration() {
+  const { theme } = useTheme();
   return (
     <div className="relative w-full h-40 flex items-center justify-center">
       <svg viewBox="0 0 200 100" className="w-48 h-24">
@@ -29,7 +31,7 @@ function GaugeIllustration() {
         <path
           d="M 20 100 A 80 80 0 0 1 180 100"
           fill="none"
-          stroke="#262626"
+          stroke={theme === 'dark' ? '#262626' : '#e2e8f0'}
           strokeWidth="8"
           strokeLinecap="round"
         />
@@ -37,7 +39,7 @@ function GaugeIllustration() {
         <motion.path
           d="M 20 100 A 80 80 0 0 1 180 100"
           fill="none"
-          stroke="#3b3b3b"
+          stroke={theme === 'dark' ? '#3b3b3b' : '#cbd5e1'}
           strokeWidth="8"
           strokeLinecap="round"
           initial={{ pathLength: 0 }}
@@ -51,7 +53,7 @@ function GaugeIllustration() {
           y1="100"
           x2="100"
           y2="30"
-          stroke="#ffffff"
+          stroke={theme === 'dark' ? '#ffffff' : '#0f172a'}
           strokeWidth="3"
           strokeLinecap="round"
           initial={{ rotate: -90 }}
@@ -61,20 +63,25 @@ function GaugeIllustration() {
           style={{ transformOrigin: '100px 100px' }}
         />
         {/* Center dot */}
-        <circle cx="100" cy="100" r="6" fill="#22d3ee" />
+        <circle cx="100" cy="100" r="6" fill={theme === 'dark' ? '#22d3ee' : '#0891b2'} />
       </svg>
     </div>
   );
 }
 
 function ChartIllustration() {
+  const { theme } = useTheme();
   const bars = [60, 80, 45, 90, 70];
   return (
     <div className="relative w-full h-40 flex items-end justify-center gap-2 px-8">
       {bars.map((height, i) => (
         <motion.div
           key={i}
-          className="w-8 bg-gradient-to-t from-[#262626] to-[#3b3b3b] rounded-t"
+          className={`w-8 rounded-t ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-t from-[#262626] to-[#3b3b3b]' 
+              : 'bg-gradient-to-t from-slate-200 to-slate-300'
+          }`}
           initial={{ height: 0 }}
           whileInView={{ height: `${height}%` }}
           viewport={{ once: true }}
@@ -86,17 +93,22 @@ function ChartIllustration() {
 }
 
 function ConnectIllustration() {
+  const { theme } = useTheme();
   return (
     <div className="relative w-full h-40 flex items-center justify-center">
       <div className="flex items-center gap-4">
         <motion.div
-          className="w-12 h-12 rounded-xl bg-[#262626] flex items-center justify-center"
+          className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
+          }`}
           initial={{ x: -20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-6 h-6 rounded bg-[#3b3b3b]" />
+          <div className={`w-6 h-6 rounded ${
+            theme === 'dark' ? 'bg-[#3b3b3b]' : 'bg-slate-300'
+          }`} />
         </motion.div>
         <motion.div
           className="flex gap-1"
@@ -106,17 +118,23 @@ function ConnectIllustration() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="w-2 h-2 rounded-full bg-cyan-500" />
+            <div key={i} className={`w-2 h-2 rounded-full ${
+              theme === 'dark' ? 'bg-cyan-500' : 'bg-cyan-600'
+            }`} />
           ))}
         </motion.div>
         <motion.div
-          className="w-12 h-12 rounded-xl bg-[#262626] flex items-center justify-center"
+          className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
+          }`}
           initial={{ x: 20, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-6 h-6 rounded bg-[#3b3b3b]" />
+          <div className={`w-6 h-6 rounded ${
+            theme === 'dark' ? 'bg-[#3b3b3b]' : 'bg-slate-300'
+          }`} />
         </motion.div>
       </div>
     </div>
@@ -130,8 +148,12 @@ const illustrations = {
 };
 
 export default function Benefits() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="benefits" className="py-24 bg-[#0a0a0a]">
+    <section id="benefits" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="BENEFITS"
@@ -154,10 +176,14 @@ export default function Benefits() {
               >
                 <Card className="h-full" padding="p-8">
                   <Illustration />
-                  <h3 className="text-xl font-semibold text-white text-center mt-6 mb-2">
+                  <h3 className={`text-xl font-semibold text-center mt-6 mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-400 text-center text-sm">
+                  <p className={`text-center text-sm ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
                     {benefit.description}
                   </p>
                 </Card>
@@ -169,4 +195,3 @@ export default function Benefits() {
     </section>
   );
 }
-

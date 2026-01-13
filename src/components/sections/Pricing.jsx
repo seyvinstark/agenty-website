@@ -3,6 +3,7 @@ import { Tag, Check, X, Sparkles, ArrowRight } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useTheme } from '../../context/ThemeContext';
 
 const costComparison = {
   traditionalBI: {
@@ -41,8 +42,12 @@ const betaBenefits = [
 ];
 
 export default function Pricing() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="pricing" className="py-24 bg-[#0a0a0a]">
+    <section id="pricing" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="PRICING"
@@ -65,16 +70,24 @@ export default function Pricing() {
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{costComparison.traditionalBI.icon}</span>
                 <div>
-                  <h3 className="font-semibold text-white">{costComparison.traditionalBI.title}</h3>
-                  <p className="text-xs text-gray-500">What others charge</p>
+                  <h3 className={`font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>{costComparison.traditionalBI.title}</h3>
+                  <p className={`text-xs ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                  }`}>What others charge</p>
                 </div>
               </div>
               <div className="space-y-3">
                 {costComparison.traditionalBI.costs.map((cost, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-[#0a0a0a]">
+                  <div key={i} className={`flex items-center justify-between p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
+                  }`}>
                     <div className="flex items-center gap-2">
                       <X className="w-4 h-4 text-red-400" />
-                      <span className="text-gray-400 text-sm">{cost.item}</span>
+                      <span className={`text-sm ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                      }`}>{cost.item}</span>
                     </div>
                     <span className="text-red-400 font-medium text-sm">{cost.price}</span>
                   </div>
@@ -94,16 +107,24 @@ export default function Pricing() {
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{costComparison.inHouse.icon}</span>
                 <div>
-                  <h3 className="font-semibold text-white">{costComparison.inHouse.title}</h3>
-                  <p className="text-xs text-gray-500">Building it yourself</p>
+                  <h3 className={`font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>{costComparison.inHouse.title}</h3>
+                  <p className={`text-xs ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                  }`}>Building it yourself</p>
                 </div>
               </div>
               <div className="space-y-3">
                 {costComparison.inHouse.costs.map((cost, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-[#0a0a0a]">
+                  <div key={i} className={`flex items-center justify-between p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
+                  }`}>
                     <div className="flex items-center gap-2">
                       <X className="w-4 h-4 text-orange-400" />
-                      <span className="text-gray-400 text-sm">{cost.item}</span>
+                      <span className={`text-sm ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                      }`}>{cost.item}</span>
                     </div>
                     <span className="text-orange-400 font-medium text-sm">{cost.price}</span>
                   </div>
@@ -121,21 +142,39 @@ export default function Pricing() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12"
         >
-          <Card padding="p-8" className="border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-transparent">
+          <Card padding="p-8" className={`border-cyan-500/30 ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-br from-cyan-500/5 to-transparent' 
+              : 'bg-gradient-to-br from-cyan-50 to-white'
+          }`}>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-cyan-400" />
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-100'
+              }`}>
+                <Sparkles className={`w-6 h-6 ${
+                  theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                }`} />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">Seyvin Delivers</h3>
-                <p className="text-sm text-gray-400">At a fraction of the cost</p>
+                <h3 className={`text-xl font-semibold ${
+                  theme === 'dark' ? 'text-white' : 'text-slate-900'
+                }`}>Seyvin Delivers</h3>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                }`}>At a fraction of the cost</p>
               </div>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
               {seyvinDelivers.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 p-3 rounded-lg bg-[#0a0a0a]">
-                  <Check className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span className="text-gray-300 text-sm">{item}</span>
+                <div key={i} className={`flex items-center gap-2 p-3 rounded-lg ${
+                  theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
+                }`}>
+                  <Check className={`w-4 h-4 flex-shrink-0 ${
+                    theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                  }`} />
+                  <span className={`text-sm ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                  }`}>{item}</span>
                 </div>
               ))}
             </div>
@@ -150,16 +189,26 @@ export default function Pricing() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Card padding="p-8 md:p-12" className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium mb-6 ${
+              theme === 'dark' 
+                ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400' 
+                : 'bg-cyan-50 border-cyan-200 text-cyan-700'
+            }`}>
+              <span className={`w-2 h-2 rounded-full animate-pulse ${
+                theme === 'dark' ? 'bg-cyan-400' : 'bg-cyan-600'
+              }`} />
               Limited Beta Access
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+            <h3 className={`text-2xl md:text-3xl font-semibold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>
               Join the Founding Members
             </h3>
 
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <p className={`mb-8 max-w-xl mx-auto ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+            }`}>
               Pricing will be finalized based on beta participant feedback. Join now to lock in 
               preferential founding member rates before public launch.
             </p>
@@ -169,7 +218,9 @@ export default function Pricing() {
               {betaBenefits.map((benefit, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <span className="text-lg">{benefit.icon}</span>
-                  <span className="text-gray-300 text-sm">{benefit.text}</span>
+                  <span className={`text-sm ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                  }`}>{benefit.text}</span>
                 </div>
               ))}
             </div>
@@ -188,7 +239,9 @@ export default function Pricing() {
               </a>
             </div>
 
-            <p className="text-gray-600 text-sm mt-6">
+            <p className={`text-sm mt-6 ${
+              theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+            }`}>
               No credit card required • 15-minute personalized demo
             </p>
           </Card>

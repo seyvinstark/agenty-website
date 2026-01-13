@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const sectors = {
   private: {
@@ -187,6 +188,7 @@ const sectors = {
 };
 
 function PersonaCard({ persona, isActive, onClick }) {
+  const { theme } = useTheme();
   const Icon = persona.icon;
   const colorClasses = {
     cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
@@ -207,30 +209,44 @@ function PersonaCard({ persona, isActive, onClick }) {
         w-full text-left p-5 rounded-2xl transition-all duration-300 border
         ${isActive 
           ? `${colors.bg} ${colors.border}` 
-          : 'bg-[#0f0f0f] border-[#262626] hover:border-[#3a3a3a]'
+          : theme === 'dark'
+            ? 'bg-[#0f0f0f] border-[#262626] hover:border-[#3a3a3a]'
+            : 'bg-slate-50 border-slate-200 hover:border-slate-300'
         }
       `}
     >
       <div className="flex items-center gap-4">
         <div className={`
           w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0
-          ${isActive ? colors.bg : 'bg-[#1a1a1a]'}
+          ${isActive ? colors.bg : theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-slate-100'}
         `}>
-          <Icon className={`w-5 h-5 ${isActive ? colors.text : 'text-gray-500'}`} />
+          <Icon className={`w-5 h-5 ${isActive ? colors.text : theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`} />
         </div>
         <div className="flex-1 min-w-0">
-          <h4 className={`font-semibold text-sm truncate ${isActive ? 'text-white' : 'text-gray-300'}`}>
+          <h4 className={`font-semibold text-sm truncate ${
+            isActive 
+              ? 'text-white' 
+              : theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+          }`}>
             {persona.role}
           </h4>
-          <p className="text-xs text-gray-500 truncate">{persona.company}</p>
+          <p className={`text-xs truncate ${
+            theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+          }`}>{persona.company}</p>
         </div>
-        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? `${colors.text} translate-x-1` : 'text-gray-600'}`} />
+        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${
+          isActive 
+            ? `${colors.text} translate-x-1` 
+            : theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+        }`} />
       </div>
     </motion.button>
   );
 }
 
 function PersonaDetail({ persona }) {
+  const { theme } = useTheme();
+  
   const colorClasses = {
     cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400', ring: 'ring-cyan-500/20' },
     emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-400', ring: 'ring-emerald-500/20' },
@@ -257,9 +273,13 @@ function PersonaDetail({ persona }) {
               <span className="text-xl font-bold text-white">{persona.name[0]}</span>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-white">{persona.name}</h3>
-              <p className="text-gray-400">{persona.title}</p>
-              <p className="text-sm text-gray-500">{persona.company}</p>
+              <h3 className={`text-xl font-semibold ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              }`}>{persona.name}</h3>
+              <p className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>{persona.title}</p>
+              <p className={`text-sm ${
+                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+              }`}>{persona.company}</p>
             </div>
           </div>
           
@@ -276,12 +296,16 @@ function PersonaDetail({ persona }) {
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {/* Pain Points */}
           <div>
-            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+            <h4 className={`text-xs font-medium uppercase tracking-wider mb-3 ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+            }`}>
               Before Seyvin
             </h4>
             <ul className="space-y-2">
               {persona.frustrations.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                <li key={i} className={`flex items-start gap-2 text-sm ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                }`}>
                   <span className="text-red-400 mt-0.5 flex-shrink-0">✕</span>
                   {item}
                 </li>
@@ -291,12 +315,16 @@ function PersonaDetail({ persona }) {
 
           {/* Solutions */}
           <div>
-            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+            <h4 className={`text-xs font-medium uppercase tracking-wider mb-3 ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+            }`}>
               With Seyvin
             </h4>
             <ul className="space-y-2">
               {persona.howHelps.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                <li key={i} className={`flex items-start gap-2 text-sm ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                }`}>
                   <span className={`${colors.text} flex-shrink-0`}>✓</span>
                   {item}
                 </li>
@@ -306,8 +334,14 @@ function PersonaDetail({ persona }) {
         </div>
 
         {/* Sample Query */}
-        <div className="mb-6 p-4 rounded-xl bg-[#0a0a0a] border border-[#262626]">
-          <p className="text-xs text-gray-500 mb-2">Sample query:</p>
+        <div className={`mb-6 p-4 rounded-xl border ${
+          theme === 'dark' 
+            ? 'bg-[#0a0a0a] border-[#262626]' 
+            : 'bg-slate-50 border-slate-200'
+        }`}>
+          <p className={`text-xs mb-2 ${
+            theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+          }`}>Sample query:</p>
           <p className={`text-sm ${colors.text} font-mono`}>
             "{persona.sampleQuery}"
           </p>
@@ -317,25 +351,39 @@ function PersonaDetail({ persona }) {
         <div className={`p-5 rounded-xl ${colors.bg} border ${colors.border}`}>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Result</p>
-              <p className="text-white font-medium">{persona.outcome.metric}</p>
+              <p className={`text-sm mb-1 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+              }`}>Result</p>
+              <p className={theme === 'dark' ? 'text-white' : 'text-slate-900'}>{persona.outcome.metric}</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-sm text-gray-500 line-through">{persona.outcome.before}</p>
-                <p className="text-xs text-gray-600">before</p>
+                <p className={`text-sm line-through ${
+                  theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                }`}>{persona.outcome.before}</p>
+                <p className={`text-xs ${
+                  theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+                }`}>before</p>
               </div>
-              <ArrowRight className="w-5 h-5 text-gray-600" />
+              <ArrowRight className={`w-5 h-5 ${
+                theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+              }`} />
               <div className="text-right">
                 <p className={`text-2xl font-bold ${colors.text}`}>{persona.outcome.after}</p>
-                <p className="text-xs text-gray-500">now</p>
+                <p className={`text-xs ${
+                  theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                }`}>now</p>
               </div>
             </div>
           </div>
-          <div className="mt-4 pt-4 border-t border-[#262626]">
+          <div className={`mt-4 pt-4 border-t ${
+            theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'
+          }`}>
             <div className="flex items-center gap-2">
               <TrendingUp className={`w-4 h-4 ${colors.text}`} />
-              <span className="text-sm text-gray-400">
+              <span className={`text-sm ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>
                 <span className={`font-semibold ${colors.text}`}>{persona.outcome.improvement}</span> time saved
               </span>
             </div>
@@ -349,6 +397,7 @@ function PersonaDetail({ persona }) {
 export default function Clients() {
   const [activeSector, setActiveSector] = useState('private');
   const [activePersona, setActivePersona] = useState(sectors.private.personas[0]);
+  const { theme } = useTheme();
 
   const handleSectorChange = (sector) => {
     setActiveSector(sector);
@@ -358,7 +407,9 @@ export default function Clients() {
   const currentSector = sectors[activeSector];
 
   return (
-    <section id="clients" className="py-24 bg-[#0a0a0a]">
+    <section id="clients" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="USE CASES"
@@ -370,7 +421,11 @@ export default function Clients() {
 
         {/* Sector Toggle */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex rounded-full bg-[#1a1a1a] border border-[#262626] p-1.5">
+          <div className={`inline-flex rounded-full p-1.5 border ${
+            theme === 'dark' 
+              ? 'bg-[#1a1a1a] border-[#262626]' 
+              : 'bg-slate-100 border-slate-200'
+          }`}>
             {Object.entries(sectors).map(([key, sector]) => {
               const Icon = sector.icon;
               return (
@@ -380,8 +435,12 @@ export default function Clients() {
                   className={`
                     flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200
                     ${activeSector === key 
-                      ? 'bg-white text-black' 
-                      : 'text-gray-400 hover:text-white'
+                      ? theme === 'dark'
+                        ? 'bg-white text-black' 
+                        : 'bg-slate-900 text-white'
+                      : theme === 'dark'
+                        ? 'text-gray-400 hover:text-white'
+                        : 'text-slate-600 hover:text-slate-900'
                     }
                   `}
                 >
@@ -396,7 +455,9 @@ export default function Clients() {
         <div className="grid lg:grid-cols-[360px,1fr] gap-6">
           {/* Persona Selector */}
           <div className="space-y-2">
-            <p className="text-sm text-gray-500 mb-4 px-2">Select your role:</p>
+            <p className={`text-sm mb-4 px-2 ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+            }`}>Select your role:</p>
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSector}
@@ -418,13 +479,23 @@ export default function Clients() {
             </AnimatePresence>
             
             {/* CTA */}
-            <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-[#262626]">
-              <p className="text-gray-400 text-sm mb-3">
+            <div className={`mt-6 p-5 rounded-2xl border ${
+              theme === 'dark' 
+                ? 'bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border-[#262626]' 
+                : 'bg-gradient-to-br from-slate-50 to-white border-slate-200'
+            }`}>
+              <p className={`text-sm mb-3 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>
                 See yourself in one of these roles?
               </p>
               <a 
                 href="#demo" 
-                className="inline-flex items-center gap-2 text-cyan-400 text-sm font-medium hover:text-cyan-300 transition-colors"
+                className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
+                  theme === 'dark' 
+                    ? 'text-cyan-400 hover:text-cyan-300' 
+                    : 'text-cyan-600 hover:text-cyan-700'
+                }`}
               >
                 Book a personalized demo
                 <ArrowRight className="w-4 h-4" />

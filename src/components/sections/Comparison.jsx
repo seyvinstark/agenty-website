@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { GitCompare, Check, X, Minus } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const capabilities = [
   { name: 'Data Integration', seyvin: true, thoughtspot: false, databricks: false, zapier: true, tableau: false },
@@ -74,23 +75,41 @@ const differentiators = [
 ];
 
 function FeatureIcon({ supported, highlight }) {
+  const { theme } = useTheme();
+  
   if (supported) {
     return (
-      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${highlight ? 'bg-cyan-500/20' : 'bg-green-500/20'}`}>
-        <Check className={`w-3.5 h-3.5 ${highlight ? 'text-cyan-400' : 'text-green-400'}`} />
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+        highlight 
+          ? theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-100' 
+          : 'bg-green-500/20'
+      }`}>
+        <Check className={`w-3.5 h-3.5 ${
+          highlight 
+            ? theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600' 
+            : 'text-green-400'
+        }`} />
       </div>
     );
   }
   return (
-    <div className="w-6 h-6 rounded-full bg-[#1a1a1a] flex items-center justify-center">
-      <Minus className="w-3.5 h-3.5 text-gray-600" />
+    <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+      theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-slate-100'
+    }`}>
+      <Minus className={`w-3.5 h-3.5 ${
+        theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+      }`} />
     </div>
   );
 }
 
 export default function Comparison() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="comparison" className="py-24 bg-[#0a0a0a]">
+    <section id="comparison" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="COMPARISON"
@@ -112,29 +131,53 @@ export default function Comparison() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[700px]">
                 <thead>
-                  <tr className="border-b border-[#262626]">
-                    <th className="text-left p-4 text-gray-400 font-medium text-sm">Capability</th>
+                  <tr className={`border-b ${
+                    theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'
+                  }`}>
+                    <th className={`text-left p-4 font-medium text-sm ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                    }`}>Capability</th>
                     {competitors.map((comp) => (
                       <th 
                         key={comp.key} 
-                        className={`p-4 text-center ${comp.highlight ? 'bg-cyan-500/5' : ''}`}
+                        className={`p-4 text-center ${
+                          comp.highlight 
+                            ? theme === 'dark' ? 'bg-cyan-500/5' : 'bg-cyan-50' 
+                            : ''
+                        }`}
                       >
-                        <div className={`font-semibold ${comp.highlight ? 'text-cyan-400' : 'text-white'}`}>
+                        <div className={`font-semibold ${
+                          comp.highlight 
+                            ? theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600' 
+                            : theme === 'dark' ? 'text-white' : 'text-slate-900'
+                        }`}>
                           {comp.name}
                         </div>
-                        <div className="text-xs text-gray-500 mt-1">{comp.pricing}</div>
+                        <div className={`text-xs mt-1 ${
+                          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                        }`}>{comp.pricing}</div>
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {capabilities.map((cap, i) => (
-                    <tr key={cap.name} className={`border-b border-[#1a1a1a] ${i % 2 === 0 ? 'bg-[#0a0a0a]' : ''}`}>
-                      <td className="p-4 text-gray-300 text-sm">{cap.name}</td>
+                    <tr key={cap.name} className={`border-b ${
+                      theme === 'dark' 
+                        ? i % 2 === 0 ? 'bg-[#0a0a0a] border-[#1a1a1a]' : 'border-[#1a1a1a]'
+                        : i % 2 === 0 ? 'bg-slate-50 border-slate-100' : 'border-slate-100'
+                    }`}>
+                      <td className={`p-4 text-sm ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                      }`}>{cap.name}</td>
                       {competitors.map((comp) => (
                         <td 
                           key={comp.key} 
-                          className={`p-4 text-center ${comp.highlight ? 'bg-cyan-500/5' : ''}`}
+                          className={`p-4 text-center ${
+                            comp.highlight 
+                              ? theme === 'dark' ? 'bg-cyan-500/5' : 'bg-cyan-50' 
+                              : ''
+                          }`}
                         >
                           <div className="flex justify-center">
                             <FeatureIcon supported={cap[comp.key]} highlight={comp.highlight} />
@@ -161,16 +204,24 @@ export default function Comparison() {
             >
               <Card padding="p-6" className="h-full">
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-white">{diff.title}</h3>
-                  <p className="text-sm text-cyan-400">{diff.subtitle}</p>
+                  <h3 className={`text-lg font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>{diff.title}</h3>
+                  <p className={`text-sm ${
+                    theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                  }`}>{diff.subtitle}</p>
                 </div>
 
                 {/* Their Limitations */}
                 <div className="mb-4">
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Their limitations</p>
+                  <p className={`text-xs uppercase tracking-wider mb-2 ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                  }`}>Their limitations</p>
                   <ul className="space-y-2">
                     {diff.theirLimitations.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
+                      <li key={i} className={`flex items-start gap-2 text-sm ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                      }`}>
                         <X className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
                         {item}
                       </li>
@@ -180,11 +231,17 @@ export default function Comparison() {
 
                 {/* Our Advantages */}
                 <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Seyvin advantage</p>
+                  <p className={`text-xs uppercase tracking-wider mb-2 ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                  }`}>Seyvin advantage</p>
                   <ul className="space-y-2">
                     {diff.ourAdvantages.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                      <li key={i} className={`flex items-start gap-2 text-sm ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                      }`}>
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                          theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                        }`} />
                         {item}
                       </li>
                     ))}

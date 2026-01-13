@@ -4,6 +4,7 @@ import SectionHeader from '../ui/SectionHeader';
 import Accordion from '../ui/Accordion';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useTheme } from '../../context/ThemeContext';
 
 const faqItems = [
   {
@@ -41,8 +42,12 @@ const faqItems = [
 ];
 
 export default function FAQ() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="faq" className="py-24 bg-[#0a0a0a]">
+    <section id="faq" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="FAQ"
@@ -65,8 +70,12 @@ export default function FAQ() {
               <Card padding="p-6" className="h-auto">
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-white">Still Have Questions?</h3>
-                    <p className="text-gray-400 text-sm mt-2">
+                    <h3 className={`text-xl font-semibold ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>Still Have Questions?</h3>
+                    <p className={`text-sm mt-2 ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                    }`}>
                       Book a demo and we'll walk you through everything—with your actual data.
                     </p>
                   </div>
@@ -87,28 +96,54 @@ export default function FAQ() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Card padding="p-6" className="border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-transparent">
+              <Card padding="p-6" className={`border-cyan-500/20 ${
+                theme === 'dark' 
+                  ? 'bg-gradient-to-br from-cyan-500/5 to-transparent' 
+                  : 'bg-gradient-to-br from-cyan-50 to-white'
+              }`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-cyan-400" />
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                    theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-100'
+                  }`}>
+                    <Shield className={`w-5 h-5 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                   </div>
-                  <h3 className="font-semibold text-white">Security First</h3>
+                  <h3 className={`font-semibold ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>Security First</h3>
                 </div>
                 <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2 text-gray-400">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                  <li className={`flex items-center gap-2 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    <Lock className={`w-3.5 h-3.5 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                     Enterprise-grade encryption
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                  <li className={`flex items-center gap-2 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    <Lock className={`w-3.5 h-3.5 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                     SOC 2 Type II (in progress)
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                  <li className={`flex items-center gap-2 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    <Lock className={`w-3.5 h-3.5 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                     GDPR-ready data handling
                   </li>
-                  <li className="flex items-center gap-2 text-gray-400">
-                    <Lock className="w-3.5 h-3.5 text-cyan-400" />
+                  <li className={`flex items-center gap-2 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    <Lock className={`w-3.5 h-3.5 ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`} />
                     You own your data—always
                   </li>
                 </ul>

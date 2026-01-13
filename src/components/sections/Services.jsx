@@ -15,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const services = [
   {
@@ -56,15 +57,21 @@ const services = [
 ];
 
 function ToggleBadge({ activeTab, onTabChange }) {
+  const { theme } = useTheme();
+  
   return (
     <div className="flex justify-center mb-6">
-      <div className="inline-flex items-center rounded-full bg-[#1a1a1a]/50 border border-[#262626] p-1">
+      <div className={`inline-flex items-center rounded-full p-1 ${
+        theme === 'dark' 
+          ? 'bg-[#1a1a1a]/50 border border-[#262626]' 
+          : 'bg-slate-100 border border-slate-200'
+      }`}>
         <button
           onClick={() => onTabChange('platform')}
           className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-200 ${
             activeTab === 'platform'
-              ? 'bg-[#262626] text-white'
-              : 'text-gray-500 hover:text-gray-300'
+              ? theme === 'dark' ? 'bg-[#262626] text-white' : 'bg-white text-slate-900 shadow-sm'
+              : theme === 'dark' ? 'text-gray-500 hover:text-gray-300' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -74,8 +81,8 @@ function ToggleBadge({ activeTab, onTabChange }) {
           onClick={() => onTabChange('services')}
           className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all duration-200 ${
             activeTab === 'services'
-              ? 'bg-[#262626] text-white'
-              : 'text-gray-500 hover:text-gray-300'
+              ? theme === 'dark' ? 'bg-[#262626] text-white' : 'bg-white text-slate-900 shadow-sm'
+              : theme === 'dark' ? 'text-gray-500 hover:text-gray-300' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
           <Box className="w-4 h-4" />
@@ -87,6 +94,8 @@ function ToggleBadge({ activeTab, onTabChange }) {
 }
 
 function TaskList({ tasks }) {
+  const { theme } = useTheme();
+  
   return (
     <div className="space-y-3">
       {tasks.map((task, i) => (
@@ -95,16 +104,20 @@ function TaskList({ tasks }) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: i * 0.05, duration: 0.2 }}
-          className="flex items-center justify-between p-4 rounded-xl bg-[#0f0f0f] border border-[#262626]"
+          className={`flex items-center justify-between p-4 rounded-xl border ${
+            theme === 'dark' 
+              ? 'bg-[#0f0f0f] border-[#262626]' 
+              : 'bg-slate-50 border-slate-200'
+          }`}
         >
           <div className="flex items-center gap-3">
-            <task.icon className="w-5 h-5 text-gray-400" />
-            <span className="text-white">{task.label}</span>
+            <task.icon className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`} />
+            <span className={theme === 'dark' ? 'text-white' : 'text-slate-900'}>{task.label}</span>
           </div>
           {task.status === 'done' ? (
-            <Check className="w-5 h-5 text-gray-400" />
+            <Check className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`} />
           ) : (
-            <RotateCw className="w-5 h-5 text-gray-500" />
+            <RotateCw className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`} />
           )}
         </motion.div>
       ))}
@@ -113,18 +126,32 @@ function TaskList({ tasks }) {
 }
 
 function SearchVisual({ items }) {
+  const { theme } = useTheme();
+  
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 p-3 rounded-xl bg-[#0f0f0f] border border-[#262626]">
-        <Search className="w-5 h-5 text-gray-500" />
-        <span className="text-gray-500">Research anything...</span>
+      <div className={`flex items-center gap-2 p-3 rounded-xl border ${
+        theme === 'dark' 
+          ? 'bg-[#0f0f0f] border-[#262626]' 
+          : 'bg-slate-50 border-slate-200'
+      }`}>
+        <Search className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`} />
+        <span className={theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}>Research anything...</span>
       </div>
       <div className="flex flex-wrap gap-2">
-        <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm border border-cyan-500/20">
+        <span className={`px-3 py-1 rounded-full text-sm border ${
+          theme === 'dark' 
+            ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' 
+            : 'bg-cyan-50 text-cyan-700 border-cyan-200'
+        }`}>
           Research
         </span>
         {items.map((item, i) => (
-          <span key={i} className="px-3 py-1 rounded-full bg-[#1a1a1a] text-gray-400 text-sm border border-[#262626]">
+          <span key={i} className={`px-3 py-1 rounded-full text-sm border ${
+            theme === 'dark' 
+              ? 'bg-[#1a1a1a] text-gray-400 border-[#262626]' 
+              : 'bg-slate-100 text-slate-600 border-slate-200'
+          }`}>
             {item}
           </span>
         ))}
@@ -134,6 +161,8 @@ function SearchVisual({ items }) {
 }
 
 function CodeVisual() {
+  const { theme } = useTheme();
+  
   const codeLines = [
     'class AutomationAgent:',
     '  def __init__(self, activation_limit):',
@@ -147,8 +176,14 @@ function CodeVisual() {
   ];
 
   return (
-    <div className="bg-[#0f0f0f] rounded-xl border border-[#262626] p-4 font-mono text-sm">
-      <div className="flex items-center gap-2 mb-3 text-gray-500 text-xs">
+    <div className={`rounded-xl border p-4 font-mono text-sm ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
+      <div className={`flex items-center gap-2 mb-3 text-xs ${
+        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+      }`}>
         <Code className="w-4 h-4" />
         <span>Code</span>
       </div>
@@ -160,8 +195,10 @@ function CodeVisual() {
           transition={{ delay: i * 0.03, duration: 0.2 }}
           className="flex"
         >
-          <span className="w-6 text-gray-600 text-right mr-4">{i + 1}</span>
-          <span className="text-gray-300">{line}</span>
+          <span className={`w-6 text-right mr-4 ${
+            theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+          }`}>{i + 1}</span>
+          <span className={theme === 'dark' ? 'text-gray-300' : 'text-slate-700'}>{line}</span>
         </motion.div>
       ))}
     </div>
@@ -169,6 +206,8 @@ function CodeVisual() {
 }
 
 function ServicesContent() {
+  const { theme } = useTheme();
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -185,10 +224,14 @@ function ServicesContent() {
       >
         <Card padding="p-8" className="h-full">
           <TaskList tasks={services[0].tasks} />
-          <h3 className="text-xl font-semibold text-cyan-400 mt-6 mb-2">
+          <h3 className={`text-xl font-semibold mt-6 mb-2 ${
+            theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+          }`}>
             {services[0].title}
           </h3>
-          <p className="text-gray-400 text-sm">{services[0].description}</p>
+          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
+            {services[0].description}
+          </p>
         </Card>
       </motion.div>
 
@@ -200,10 +243,14 @@ function ServicesContent() {
       >
         <Card padding="p-8" className="h-full">
           <SearchVisual items={services[2].searchItems} />
-          <h3 className="text-xl font-semibold text-cyan-400 mt-6 mb-2">
+          <h3 className={`text-xl font-semibold mt-6 mb-2 ${
+            theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+          }`}>
             {services[2].title}
           </h3>
-          <p className="text-gray-400 text-sm">{services[2].description}</p>
+          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
+            {services[2].description}
+          </p>
         </Card>
       </motion.div>
 
@@ -218,10 +265,14 @@ function ServicesContent() {
           <div className="grid lg:grid-cols-2 gap-8">
             <CodeVisual />
             <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold text-white mb-3">
+              <h3 className={`text-2xl font-semibold mb-3 ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              }`}>
                 {services[3].title}
               </h3>
-              <p className="text-gray-400">{services[3].description}</p>
+              <p className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>
+                {services[3].description}
+              </p>
             </div>
           </div>
         </Card>
@@ -236,14 +287,20 @@ function ServicesContent() {
       >
         <Card padding="p-8">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#262626] flex items-center justify-center">
-              <Lightbulb className="w-6 h-6 text-cyan-400" />
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+              theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
+            }`}>
+              <Lightbulb className={`w-6 h-6 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-white mb-1">
+              <h3 className={`text-xl font-semibold mb-1 ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              }`}>
                 {services[4].title}
               </h3>
-              <p className="text-gray-400 text-sm">{services[4].description}</p>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
+                {services[4].description}
+              </p>
             </div>
           </div>
         </Card>
@@ -253,6 +310,8 @@ function ServicesContent() {
 }
 
 function PlatformContent() {
+  const { theme } = useTheme();
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -268,11 +327,17 @@ function PlatformContent() {
         transition={{ duration: 0.3, delay: 0.05 }}
       >
         <Card padding="p-8" className="h-full min-h-[300px] flex flex-col items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl bg-[#262626] flex items-center justify-center mb-4">
-            <Sparkles className="w-8 h-8 text-cyan-400" />
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
+            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
+          }`}>
+            <Sparkles className={`w-8 h-8 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
           </div>
-          <h3 className="text-xl font-semibold text-white mb-2">Platform Feature 1</h3>
-          <p className="text-gray-400 text-sm text-center">Placeholder for platform content. Coming soon.</p>
+          <h3 className={`text-xl font-semibold mb-2 ${
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          }`}>Platform Feature 1</h3>
+          <p className={`text-sm text-center ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}>Placeholder for platform content. Coming soon.</p>
         </Card>
       </motion.div>
 
@@ -283,11 +348,17 @@ function PlatformContent() {
         transition={{ duration: 0.3, delay: 0.1 }}
       >
         <Card padding="p-8" className="h-full min-h-[300px] flex flex-col items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl bg-[#262626] flex items-center justify-center mb-4">
-            <Layers className="w-8 h-8 text-cyan-400" />
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
+            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
+          }`}>
+            <Layers className={`w-8 h-8 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
           </div>
-          <h3 className="text-xl font-semibold text-white mb-2">Platform Feature 2</h3>
-          <p className="text-gray-400 text-sm text-center">Placeholder for platform content. Coming soon.</p>
+          <h3 className={`text-xl font-semibold mb-2 ${
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          }`}>Platform Feature 2</h3>
+          <p className={`text-sm text-center ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}>Placeholder for platform content. Coming soon.</p>
         </Card>
       </motion.div>
 
@@ -300,11 +371,19 @@ function PlatformContent() {
       >
         <Card padding="p-8">
           <div className="flex flex-col items-center justify-center py-8">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mb-6">
-              <Layers className="w-10 h-10 text-cyan-400" />
+            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 ${
+              theme === 'dark' 
+                ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-500/5' 
+                : 'bg-gradient-to-br from-cyan-100 to-cyan-50'
+            }`}>
+              <Layers className={`w-10 h-10 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
             </div>
-            <h3 className="text-2xl font-semibold text-white mb-3">Our Platform</h3>
-            <p className="text-gray-400 text-center max-w-xl">
+            <h3 className={`text-2xl font-semibold mb-3 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>Our Platform</h3>
+            <p className={`text-center max-w-xl ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+            }`}>
               Discover how our AI-powered platform can transform your business operations. 
               Full platform details coming soon.
             </p>
@@ -317,9 +396,12 @@ function PlatformContent() {
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState('services');
+  const { theme } = useTheme();
 
   return (
-    <section id="services" className="py-24 bg-[#0a0a0a]">
+    <section id="services" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
+    }`}>
       <div className="section-container">
         {/* Custom header with toggle */}
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -330,11 +412,15 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4"
+            className={`text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}
           >
             {activeTab === 'services' ? 'Smarter Services,' : 'Powerful Platform,'}
             <br />
-            <span className="font-serif italic text-gray-400">
+            <span className={`font-serif italic ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+            }`}>
               {activeTab === 'services' ? 'Built with AI' : 'Built for You'}
             </span>
           </motion.h2>
@@ -344,7 +430,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-gray-400 text-lg"
+            className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}
           >
             {activeTab === 'services' 
               ? 'Everything you need to automate operations, boost productivity'

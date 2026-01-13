@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Star, Quote, TrendingUp } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const testimonials = [
   {
@@ -40,8 +41,12 @@ const stats = [
 ];
 
 export default function Reviews() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="reviews" className="py-24 bg-[#0a0a0a]">
+    <section id="reviews" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="TESTIMONIALS"
@@ -62,8 +67,12 @@ export default function Reviews() {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">{stat.value}</div>
-              <div className="text-xs text-gray-500">{stat.label}</div>
+              <div className={`text-3xl md:text-4xl font-bold mb-1 ${
+                theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+              }`}>{stat.value}</div>
+              <div className={`text-xs ${
+                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+              }`}>{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -80,19 +89,33 @@ export default function Reviews() {
             >
               <Card padding="p-6" className="h-full flex flex-col">
                 {/* Quote Icon */}
-                <Quote className="w-8 h-8 text-cyan-500/30 mb-4" />
+                <Quote className={`w-8 h-8 mb-4 ${
+                  theme === 'dark' ? 'text-cyan-500/30' : 'text-cyan-500/40'
+                }`} />
 
                 {/* Quote */}
-                <p className="text-gray-300 leading-relaxed mb-6 flex-1">
+                <p className={`leading-relaxed mb-6 flex-1 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+                }`}>
                   "{testimonial.quote}"
                 </p>
 
                 {/* Outcome Badge */}
-                <div className="flex items-center gap-2 mb-6 p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-                  <TrendingUp className="w-4 h-4 text-cyan-400" />
+                <div className={`flex items-center gap-2 mb-6 p-3 rounded-lg border ${
+                  theme === 'dark' 
+                    ? 'bg-cyan-500/10 border-cyan-500/20' 
+                    : 'bg-cyan-50 border-cyan-200'
+                }`}>
+                  <TrendingUp className={`w-4 h-4 ${
+                    theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                  }`} />
                   <div>
-                    <span className="text-cyan-400 font-semibold">{testimonial.outcome}</span>
-                    <span className="text-gray-500 text-sm ml-2">{testimonial.metric}</span>
+                    <span className={`font-semibold ${
+                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+                    }`}>{testimonial.outcome}</span>
+                    <span className={`text-sm ml-2 ${
+                      theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                    }`}>{testimonial.metric}</span>
                   </div>
                 </div>
 
@@ -104,9 +127,15 @@ export default function Reviews() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                    <p className="text-xs text-gray-600">{testimonial.company}</p>
+                    <h4 className={`font-semibold ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>{testimonial.name}</h4>
+                    <p className={`text-sm ${
+                      theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                    }`}>{testimonial.role}</p>
+                    <p className={`text-xs ${
+                      theme === 'dark' ? 'text-gray-600' : 'text-slate-400'
+                    }`}>{testimonial.company}</p>
                   </div>
                 </div>
               </Card>
@@ -122,11 +151,13 @@ export default function Reviews() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="text-gray-500 text-sm">
+          <p className={`text-sm ${
+            theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+          }`}>
             Trusted by 20+ beta customers across{' '}
-            <span className="text-gray-400">e-commerce</span>,{' '}
-            <span className="text-gray-400">SaaS</span>, and{' '}
-            <span className="text-gray-400">professional services</span>
+            <span className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>e-commerce</span>,{' '}
+            <span className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>SaaS</span>, and{' '}
+            <span className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>professional services</span>
           </p>
         </motion.div>
       </div>

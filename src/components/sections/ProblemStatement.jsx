@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const problems = [
   {
@@ -82,6 +83,8 @@ const problems = [
 ];
 
 function PainPointList({ painPoints }) {
+  const { theme } = useTheme();
+  
   return (
     <div className="space-y-3">
       {painPoints.map((point, i) => (
@@ -91,11 +94,17 @@ function PainPointList({ painPoints }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1 }}
-          className="flex items-center justify-between p-4 rounded-xl bg-[#0f0f0f] border border-[#262626]"
+          className={`flex items-center justify-between p-4 rounded-xl border ${
+            theme === 'dark' 
+              ? 'bg-[#0f0f0f] border-[#262626]' 
+              : 'bg-slate-50 border-slate-200'
+          }`}
         >
           <div className="flex items-center gap-3">
             <AlertCircle className="w-5 h-5 text-red-400/70" />
-            <span className="text-white text-sm">{point.label}</span>
+            <span className={`text-sm ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>{point.label}</span>
           </div>
           <X className="w-4 h-4 text-red-400/50" />
         </motion.div>
@@ -105,20 +114,34 @@ function PainPointList({ painPoints }) {
 }
 
 function QuoteVisual({ quote, icon: Icon }) {
+  const { theme } = useTheme();
+  
   return (
-    <div className="bg-[#0f0f0f] rounded-xl border border-[#262626] p-6">
-      <div className="flex items-center gap-2 mb-4 text-gray-500 text-xs">
+    <div className={`rounded-xl border p-6 ${
+      theme === 'dark' 
+        ? 'bg-[#0f0f0f] border-[#262626]' 
+        : 'bg-slate-50 border-slate-200'
+    }`}>
+      <div className={`flex items-center gap-2 mb-4 text-xs ${
+        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+      }`}>
         <Icon className="w-4 h-4" />
         <span>Common Frustration</span>
       </div>
-      <p className="text-gray-300 italic text-lg leading-relaxed">{quote}</p>
+      <p className={`italic text-lg leading-relaxed ${
+        theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
+      }`}>{quote}</p>
     </div>
   );
 }
 
 export default function ProblemStatement() {
+  const { theme } = useTheme();
+  
   return (
-    <section id="problem-statement" className="py-24 bg-[#0a0a0a]">
+    <section id="problem-statement" className={`py-24 ${
+      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+    }`}>
       <div className="section-container">
         <SectionHeader
           badge="THE CHALLENGE"
@@ -138,10 +161,14 @@ export default function ProblemStatement() {
           >
             <Card padding="p-8" className="h-full">
               <PainPointList painPoints={problems[0].painPoints} />
-              <h3 className="text-xl font-semibold text-cyan-400 mt-6 mb-2">
+              <h3 className={`text-xl font-semibold mt-6 mb-2 ${
+                theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+              }`}>
                 {problems[0].emoji} {problems[0].title}
               </h3>
-              <p className="text-gray-400 text-sm italic">{problems[0].quote}</p>
+              <p className={`text-sm italic ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>{problems[0].quote}</p>
             </Card>
           </motion.div>
 
@@ -154,10 +181,14 @@ export default function ProblemStatement() {
           >
             <Card padding="p-8" className="h-full">
               <PainPointList painPoints={problems[1].painPoints} />
-              <h3 className="text-xl font-semibold text-cyan-400 mt-6 mb-2">
+              <h3 className={`text-xl font-semibold mt-6 mb-2 ${
+                theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
+              }`}>
                 {problems[1].emoji} {problems[1].title}
               </h3>
-              <p className="text-gray-400 text-sm italic">{problems[1].quote}</p>
+              <p className={`text-sm italic ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>{problems[1].quote}</p>
             </Card>
           </motion.div>
 
@@ -173,15 +204,23 @@ export default function ProblemStatement() {
               <div className="grid lg:grid-cols-2 gap-8">
                 <QuoteVisual quote={problems[2].quote} icon={problems[2].icon} />
                 <div className="flex flex-col justify-center">
-                  <h3 className="text-2xl font-semibold text-white mb-3">
+                  <h3 className={`text-2xl font-semibold mb-3 ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
+                  }`}>
                     {problems[2].emoji} {problems[2].title}
                   </h3>
-                  <p className="text-gray-400 mb-4">
+                  <p className={`mb-4 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
                     5-10+ hours per week spent on manual report preparation. Days or weeks to get answers from IT. Decisions made on gut feeling, not data.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {['Manual reports', 'Delayed insights', 'IT bottlenecks'].map((tag, i) => (
-                      <span key={i} className="px-3 py-1 rounded-full bg-red-500/10 text-red-400 text-sm border border-red-500/20">
+                      <span key={i} className={`px-3 py-1 rounded-full text-sm border ${
+                        theme === 'dark' 
+                          ? 'bg-red-500/10 text-red-400 border-red-500/20' 
+                          : 'bg-red-50 text-red-700 border-red-200'
+                      }`}>
                         {tag}
                       </span>
                     ))}
@@ -202,25 +241,37 @@ export default function ProblemStatement() {
             <Card padding="p-8">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#262626] flex items-center justify-center flex-shrink-0">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
+                  }`}>
                     <DollarSign className="w-6 h-6 text-red-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-1">
+                    <h3 className={`text-xl font-semibold mb-1 ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>
                       {problems[3].emoji} {problems[3].title}
                     </h3>
-                    <p className="text-gray-400 text-sm">{problems[3].quote}</p>
+                    <p className={`text-sm ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                    }`}>{problems[3].quote}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#262626] flex items-center justify-center flex-shrink-0">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
+                  }`}>
                     <Bot className="w-6 h-6 text-red-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-1">
+                    <h3 className={`text-xl font-semibold mb-1 ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>
                       {problems[4].emoji} {problems[4].title}
                     </h3>
-                    <p className="text-gray-400 text-sm">{problems[4].quote}</p>
+                    <p className={`text-sm ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                    }`}>{problems[4].quote}</p>
                   </div>
                 </div>
               </div>
@@ -231,4 +282,3 @@ export default function ProblemStatement() {
     </section>
   );
 }
-
