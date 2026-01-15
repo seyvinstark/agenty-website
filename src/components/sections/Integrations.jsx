@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Layers, Check, Clock } from 'lucide-react';
+import { Layers, Check, Clock, Upload } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
 import { useTheme } from '../../context/ThemeContext';
@@ -21,10 +21,8 @@ const icons = {
       <path d="M7.71 3.5L1.15 15l3.43 5.5 6.56-11L7.71 3.5zm2.01 0l6.56 11h6.57l-6.56-11H9.72zm7.71 12L14 21h6.57l3.43-5.5h-6.57z"/>
     </svg>
   ),
-  excel: (
-    <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1.25 17.5l-2.25-3.5-2.25 3.5H6l3.5-5L6 9.5h2.25l2.25 3.5 2.25-3.5H15l-3.5 5 3.5 5h-2.25zM13 9V3.5L18.5 9H13z"/>
-    </svg>
+  offlineData: (
+    <Upload className="w-8 h-8" />
   ),
   shopify: (
     <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
@@ -63,14 +61,14 @@ const currentIntegrations = [
   { key: 'quickbooks', name: 'QuickBooks Online', category: 'Financial Data', status: 'live' },
   { key: 'notion', name: 'Notion', category: 'Documents & Wikis', status: 'live' },
   { key: 'googleDrive', name: 'Google Drive', category: 'Files & Spreadsheets', status: 'live' },
-  { key: 'excel', name: 'CSV / Excel', category: 'Any Data', status: 'live' },
+  { key: 'offlineData', name: 'Offline Data', category: 'PDF, DOCX, CSV, Excel', status: 'live' },
+  { key: 'hubspot', name: 'HubSpot', category: 'CRM & Marketing', status: 'live' },
 ];
 
 // Coming soon integrations
 const comingSoonIntegrations = [
   { key: 'shopify', name: 'Shopify', category: 'E-commerce', status: 'coming' },
   { key: 'googleAnalytics', name: 'Google Analytics', category: 'Web Analytics', status: 'coming' },
-  { key: 'hubspot', name: 'HubSpot', category: 'CRM & Marketing', status: 'coming' },
   { key: 'stripe', name: 'Stripe', category: 'Payments', status: 'coming' },
   { key: 'salesforce', name: 'Salesforce', category: 'CRM', status: 'coming' },
   { key: 'xero', name: 'Xero', category: 'Accounting', status: 'coming' },
