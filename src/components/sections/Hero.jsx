@@ -26,15 +26,15 @@ import { useTheme } from '../../context/ThemeContext';
 const keyBenefits = [
   {
     icon: Clock,
-    text: 'Cut reporting time dramatically — hours to minutes',
+    text: 'Break the manual prep loop — KPIs appear automatically',
   },
   {
     icon: Database,
-    text: 'No data team needed — no SQL, no dashboard building',
+    text: 'Ask in plain English — get the “what” and the “why”',
   },
   {
     icon: FileText,
-    text: 'Built for recurring exec, board & investor cadence',
+    text: 'Share dashboards and narrative updates with ops, finance, or leadership',
   },
 ];
 
@@ -270,7 +270,7 @@ function ReportSlide({ theme }) {
         <div className={`max-w-[85%] px-3 py-2 rounded-2xl rounded-tr-sm ${
           theme === 'dark' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-100 text-cyan-800'
         }`}>
-          <p className="text-xs">Write my financial performance report</p>
+          <p className="text-xs">Draft a monthly performance update</p>
         </div>
       </motion.div>
 
@@ -285,7 +285,7 @@ function ReportSlide({ theme }) {
       >
         <div className="flex items-center gap-2 mb-2">
           <Bot className={`w-4 h-4 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
-          <span className={`text-[10px] font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Generating Report...</span>
+          <span className={`text-[10px] font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Generating Update...</span>
           <Sparkles className={`w-3 h-3 ${theme === 'dark' ? 'text-amber-400' : 'text-amber-500'}`} />
         </div>
 
@@ -296,7 +296,7 @@ function ReportSlide({ theme }) {
           <div className="flex items-center gap-2 mb-2">
             <FileText className={`w-4 h-4 ${theme === 'dark' ? 'text-purple-400' : 'text-purple-600'}`} />
             <span className={`text-xs font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-              Financial Performance Report
+              Performance Update
             </span>
           </div>
           <p className={`text-[9px] leading-relaxed mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
@@ -365,7 +365,7 @@ const slideCallouts = [
   ],
   // Slide 3: Report
   [
-    { icon: FileText, label: 'Board Ready', position: '-top-3 -right-3', color: 'purple' },
+    { icon: FileText, label: 'Shareable', position: '-top-3 -right-3', color: 'purple' },
     { icon: Download, label: 'Multi-format', position: '-bottom-3 -left-3', color: 'cyan' },
     { icon: Sparkles, label: 'AI Generated', position: 'top-1/2 -right-3', color: 'amber' },
   ],
@@ -382,7 +382,7 @@ export default function Hero() {
   const { theme } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [DashboardSlide, ConversationSlide, ReportSlide];
-  const slideLabels = ['KPI Dashboard', 'Ask Questions', 'Generate Reports'];
+  const slideLabels = ['KPI Dashboard', 'Ask Questions', 'Write-ups'];
 
   // Auto-advance slides
   useEffect(() => {
@@ -442,13 +442,11 @@ export default function Hero() {
                   theme === 'dark' ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                Your AI Analytics Copilot —
+                Your AI Analytics Team —
                 <br />
                 <span className={`font-serif italic ${
                   theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
-                }`}>Dashboards & Reports</span>
-                <br />
-                from Your Data
+                }`}>built on top of your data</span>
               </motion.h1>
 
               {/* Subheadline */}
@@ -460,10 +458,19 @@ export default function Hero() {
                   theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
                 }`}
               >
-                Connect your sources once. Ask in plain English. Get insights.{' '}
-                <span className={`font-medium ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
-                }`}>Every number traceable back to source.</span>
+                Stop chasing spreadsheets. Start getting answers you can trust.
+              </motion.p>
+
+              {/* Body */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className={`text-base md:text-lg mb-8 max-w-xl ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                }`}
+              >
+                Connect sources or upload files. Seyvin’s AI agents collaborate to clean the data, generate KPIs, and answer questions with analysis + charts — every number linked back to its source.
               </motion.p>
 
               {/* Key Benefits */}
@@ -503,7 +510,7 @@ export default function Hero() {
                   variant="primary" 
                   size="lg" 
                   withArrow
-                  onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+                  onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 >
                   Book 15-min beta demo
                 </Button>
