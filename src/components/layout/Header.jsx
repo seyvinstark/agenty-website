@@ -66,7 +66,7 @@ export default function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden xl:flex items-center gap-6 2xl:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -82,10 +82,10 @@ export default function Header() {
             ))}
             
             {/* Secondary Links Divider */}
-            <div className={`h-4 w-px ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
+            <div className={`hidden 2xl:block h-4 w-px ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
             
             {/* Secondary Links */}
-            <div className="flex items-center gap-4">
+            <div className="hidden 2xl:flex items-center gap-4">
               {secondaryLinks.map((link, index) => (
                 <span key={link.label} className="flex items-center gap-4">
                   <a
@@ -107,11 +107,11 @@ export default function Header() {
           </div>
 
           {/* Right side: CTA + Theme Toggle */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-4">
             <Button 
               variant="glass" 
               size="sm"
-              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
             >
               Book 15-min beta demo
             </Button>
@@ -151,7 +151,7 @@ export default function Header() {
           </div>
 
           {/* Mobile: Theme Toggle + Menu Button */}
-          <div className="lg:hidden flex items-center gap-3">
+          <div className="xl:hidden flex items-center gap-3">
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -174,6 +174,8 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -188,7 +190,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`lg:hidden border-t ${
+            className={`xl:hidden border-t ${
               theme === 'dark' 
                 ? 'bg-[#0a0a0a] border-white/5' 
                 : 'bg-white border-slate-200'
@@ -238,7 +240,7 @@ export default function Header() {
                 className="w-full mt-4"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  window.open('https://cal.com/seyvin/15min', '_blank');
+                  document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
                 Book 15-min beta demo

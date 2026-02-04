@@ -456,7 +456,7 @@ export default function Process() {
           badgeIcon={Layers}
           title="From Data to Insights"
           titleAccent="in 4 Simple Steps"
-          description="No technical skills required. No waiting for IT. Just connect, customize, ask, and export."
+          description="Seen the platform previews? Here's the simple 4-step flow end-to-end. No technical skills required. No waiting for IT. Just connect, customize, ask, and export."
         />
 
         <Card padding="p-8 md:p-12">

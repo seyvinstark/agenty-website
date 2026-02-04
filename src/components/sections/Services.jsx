@@ -213,28 +213,28 @@ function CodeVisual() {
 
 // Onboarding steps for the task list visual
 const onboardingSteps = [
-  { icon: Users, label: 'Dedicated onboarding call', status: 'done' },
-  { icon: Database, label: 'Data source connection', status: 'done' },
-  { icon: Sparkles, label: 'First dashboard setup', status: 'pending' },
-  { icon: Check, label: 'Team training session', status: 'pending' },
+  { icon: Users, label: 'KPI mapping + definitions', status: 'done' },
+  { icon: Database, label: 'Connect any sources', status: 'done' },
+  { icon: Sparkles, label: 'First dashboard + insights', status: 'pending' },
+  { icon: Check, label: 'First shareable update', status: 'pending' },
 ];
 
 // Integration tags for the data setup visual
-const integrationTags = ['Google Sheets', 'Excel', 'SQL Database', 'QuickBooks', 'Salesforce'];
+const integrationTags = ['QuickBooks', 'Notion', 'Google Drive', 'CSV / Excel', 'PDF / DOCX'];
 
 // Roadmap features visual
 function RoadmapVisual() {
   const { theme } = useTheme();
   
-  const features = [
-    { name: 'Custom KPI templates', votes: 12, priority: 'high' },
-    { name: 'Slack integration', votes: 8, priority: 'medium' },
-    { name: 'Scheduled reports', votes: 15, priority: 'high' },
+  const templates = [
+    { name: 'Weekly ops review dashboard', status: 'ready', meta: 'Template pack' },
+    { name: 'Month-end close summary', status: 'beta', meta: 'Template pack' },
+    { name: 'Board / investor update', status: 'beta', meta: 'Template pack' },
   ];
 
   return (
     <div className="space-y-3">
-      {features.map((feature, i) => (
+      {templates.map((template, i) => (
         <motion.div
           key={i}
           initial={{ opacity: 0, x: -20 }}
@@ -248,18 +248,18 @@ function RoadmapVisual() {
         >
           <div className="flex items-center gap-3">
             <span className={`px-2 py-0.5 text-xs rounded-full ${
-              feature.priority === 'high'
+              template.status === 'ready'
                 ? theme === 'dark' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-cyan-100 text-cyan-700'
                 : theme === 'dark' ? 'bg-gray-500/20 text-gray-400' : 'bg-gray-100 text-gray-600'
             }`}>
-              {feature.priority}
+              {template.status}
             </span>
             <span className={theme === 'dark' ? 'text-white text-sm' : 'text-slate-900 text-sm'}>
-              {feature.name}
+              {template.name}
             </span>
           </div>
           <span className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>
-            {feature.votes} votes
+            {template.meta}
           </span>
         </motion.div>
       ))}
@@ -289,10 +289,10 @@ function BetaPartnerSupportContent() {
           <h3 className={`text-xl font-semibold mt-6 mb-2 ${
             theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
           }`}>
-            Hands-On Onboarding
+            KPI & Dashboard Setup
           </h3>
           <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-            We personally guide you through every step—no self-serve confusion, just direct support from our team.
+            Built for founders, investors, and department leaders: we map KPIs, align definitions, and ship your first dashboard so the numbers are consistent and repeatable.
           </p>
         </Card>
       </motion.div>
@@ -335,10 +335,10 @@ function BetaPartnerSupportContent() {
           <h3 className={`text-xl font-semibold mt-6 mb-2 ${
             theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
           }`}>
-            Data Setup Assistance
+            Data Connection + Validation
           </h3>
           <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-            We connect your data sources, configure integrations, and ensure everything flows correctly into the platform.
+            We connect sources, validate the “source of truth,” and make sure the same metric means the same thing everywhere.
           </p>
         </Card>
       </motion.div>
@@ -357,10 +357,10 @@ function BetaPartnerSupportContent() {
               <h3 className={`text-2xl font-semibold mb-3 ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>
-                Shape the Roadmap
+                Briefs & Update Templates
               </h3>
               <p className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>
-                Your feedback directly influences what we build next. Beta partners vote on features and help us prioritize what matters most to your business.
+                We set up reusable write-up templates with charts you can download or share — for founder visibility, team follow-ups, month-end, and investor updates.
               </p>
             </div>
           </div>
@@ -385,16 +385,16 @@ function BetaPartnerSupportContent() {
               <h3 className={`text-xl font-semibold mb-1 ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>
-                Personalized Experience
+                Enablement + Governance
               </h3>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-                We customize dashboards, reports, and workflows to match your unique business needs and terminology.
+                We help your team ask better questions, standardize definitions, and build a workflow leaders can trust — with traceable numbers.
               </p>
             </div>
             <Button
               variant="primary"
               size="lg"
-              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
               className="flex items-center gap-2 whitespace-nowrap"
             >
               Book 15-min beta demo
@@ -403,7 +403,186 @@ function BetaPartnerSupportContent() {
           </div>
         </Card>
       </motion.div>
+
+      {/* What happens in beta */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.25 }}
+        className="lg:col-span-2"
+      >
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          {['Connect any sources', 'First dashboard', 'First insights', 'First shareable updates'].map((item) => (
+            <span
+              key={item}
+              className={`px-3 py-1 rounded-full text-sm border ${
+                theme === 'dark'
+                  ? 'bg-[#0f0f0f] text-gray-400 border-[#262626]'
+                  : 'bg-white text-slate-600 border-slate-200'
+              }`}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </motion.div>
     </motion.div>
+  );
+}
+
+function PlatformPlaceholder({ variant }) {
+  const { theme } = useTheme();
+
+  const surface = theme === 'dark' ? 'bg-[#0f0f0f] border-[#262626]' : 'bg-white border-slate-200';
+  const muted = theme === 'dark' ? 'bg-white/10' : 'bg-slate-200';
+  const muted2 = theme === 'dark' ? 'bg-white/5' : 'bg-slate-100';
+
+  return (
+    <div className={`relative w-full aspect-[16/10] rounded-xl border overflow-hidden ${surface}`}>
+      {/* Window chrome */}
+      <div className={`flex items-center justify-between px-3 py-2 border-b ${
+        theme === 'dark' ? 'border-[#262626] bg-[#0a0a0a]' : 'border-slate-200 bg-slate-50'
+      }`}>
+        <div className="flex items-center gap-1.5">
+          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
+          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
+          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
+        </div>
+        <div className={`h-2.5 w-20 rounded ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`} />
+      </div>
+
+      {/* Content */}
+      <div className="p-3">
+        {variant === 'connect' && (
+          <div className="space-y-3">
+            <div className="flex gap-2">
+              <div className={`h-6 w-20 rounded ${muted}`} />
+              <div className={`h-6 w-16 rounded ${muted2}`} />
+              <div className={`h-6 w-14 rounded ${muted2}`} />
+            </div>
+            <div className="space-y-2">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className={`h-8 rounded-lg border ${theme === 'dark' ? 'border-[#262626] bg-[#1a1a1a]' : 'border-slate-200 bg-slate-50'} animate-pulse`} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {variant === 'dashboard' && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className={`h-4 w-24 rounded ${muted}`} />
+              <div className={`h-4 w-14 rounded ${theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-100'}`} />
+            </div>
+            <div className={`h-16 rounded-lg ${theme === 'dark' ? 'bg-cyan-500/10' : 'bg-cyan-50'} animate-pulse`} />
+            <div className="grid grid-cols-2 gap-2">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className={`p-2 rounded-lg border ${theme === 'dark' ? 'border-[#262626] bg-[#1a1a1a]' : 'border-slate-200 bg-slate-50'}`}>
+                  <div className={`h-2.5 w-16 rounded ${muted2} mb-2`} />
+                  <div className={`h-4 w-20 rounded ${muted}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {variant === 'ask' && (
+          <div className="space-y-3">
+            <div className="flex justify-end">
+              <div className={`h-8 w-3/4 rounded-2xl border ${
+                theme === 'dark' ? 'bg-cyan-500/15 border-cyan-500/20' : 'bg-cyan-50 border-cyan-200'
+              }`} />
+            </div>
+            <div className={`rounded-2xl border p-3 ${
+              theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'
+            }`}>
+              <div className={`h-2.5 w-32 rounded ${muted2} mb-3`} />
+              <div className="flex items-end gap-2 h-10 mb-2">
+                {[60, 80, 45, 90, 70, 85].map((h, i) => (
+                  <div
+                    key={i}
+                    className={`flex-1 rounded-t ${theme === 'dark' ? 'bg-cyan-500/35' : 'bg-cyan-500/60'} animate-pulse`}
+                    style={{ height: `${h}%` }}
+                  />
+                ))}
+              </div>
+              <div className={`h-2 w-24 rounded ${muted2}`} />
+            </div>
+          </div>
+        )}
+
+        {variant === 'report' && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className={`h-4 w-28 rounded ${muted}`} />
+              <div className={`h-4 w-16 rounded ${theme === 'dark' ? 'bg-green-500/20' : 'bg-green-100'}`} />
+            </div>
+            <div className={`rounded-lg border p-3 ${
+              theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'
+            }`}>
+              <div className={`h-3 w-40 rounded ${muted} mb-3`} />
+              <div className="space-y-2">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className={`h-2.5 rounded ${muted2} ${i === 0 ? 'w-5/6' : i === 1 ? 'w-4/6' : i === 2 ? 'w-3/6' : i === 3 ? 'w-5/6' : 'w-2/6'}`} />
+                ))}
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <div className={`h-9 flex-1 rounded-lg ${theme === 'dark' ? 'bg-cyan-500/15 border border-cyan-500/20' : 'bg-cyan-50 border border-cyan-200'} animate-pulse`} />
+              <div className={`h-9 flex-1 rounded-lg border ${theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'} animate-pulse`} />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Subtle glow */}
+      <div className={`pointer-events-none absolute inset-0 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent'
+          : 'bg-gradient-to-br from-cyan-100/60 via-transparent to-transparent'
+      }`} />
+    </div>
+  );
+}
+
+function PlatformPreviewCard({ title, description, imageSrc, imageAlt, variant }) {
+  const { theme } = useTheme();
+
+  return (
+    <Card padding="p-5" className="h-full flex flex-col">
+      {/* Preview frame */}
+      <div className="mb-4">
+        {imageSrc ? (
+          <div className={`w-full aspect-[16/10] rounded-xl border overflow-hidden ${
+            theme === 'dark' ? 'bg-[#0f0f0f] border-[#262626]' : 'bg-slate-50 border-slate-200'
+          }`}>
+            {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
+            <img
+              src={imageSrc}
+              alt={imageAlt || title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <PlatformPlaceholder variant={variant} />
+        )}
+      </div>
+
+      {/* Caption */}
+      <div className="mt-auto min-w-0">
+        <div className={`text-sm font-semibold ${
+          theme === 'dark' ? 'text-white' : 'text-slate-900'
+        }`}>
+          {title}
+        </div>
+        <div className={`text-xs mt-1 ${
+          theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+        }`}>
+          {description}
+        </div>
+      </div>
+    </Card>
   );
 }
 
@@ -416,75 +595,113 @@ function PlatformContent() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="grid lg:grid-cols-2 gap-6"
+      className="grid lg:grid-cols-5 gap-6"
     >
-      {/* Placeholder card 1 */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.05 }}
-      >
-        <Card padding="p-8" className="h-full min-h-[300px] flex flex-col items-center justify-center">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
-            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
-          }`}>
-            <Sparkles className={`w-8 h-8 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
-          </div>
-          <h3 className={`text-xl font-semibold mb-2 ${
-            theme === 'dark' ? 'text-white' : 'text-slate-900'
-          }`}>Platform Feature 1</h3>
-          <p className={`text-sm text-center ${
-            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-          }`}>Placeholder for platform content. Coming soon.</p>
-        </Card>
-      </motion.div>
-
-      {/* Placeholder card 2 */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-      >
-        <Card padding="p-8" className="h-full min-h-[300px] flex flex-col items-center justify-center">
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
-            theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
-          }`}>
-            <Layers className={`w-8 h-8 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
-          </div>
-          <h3 className={`text-xl font-semibold mb-2 ${
-            theme === 'dark' ? 'text-white' : 'text-slate-900'
-          }`}>Platform Feature 2</h3>
-          <p className={`text-sm text-center ${
-            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-          }`}>Placeholder for platform content. Coming soon.</p>
-        </Card>
-      </motion.div>
-
-      {/* Placeholder wide card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.15 }}
-        className="lg:col-span-2"
+        className="lg:col-span-2 min-w-0"
       >
         <Card padding="p-8">
-          <div className="flex flex-col items-center justify-center py-8">
-            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 ${
-              theme === 'dark' 
-                ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-500/5' 
-                : 'bg-gradient-to-br from-cyan-100 to-cyan-50'
+          <div className="min-w-0">
+            <div className={`text-xs uppercase tracking-wide mb-2 ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
             }`}>
-              <Layers className={`w-10 h-10 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
+              What it does
             </div>
-            <h3 className={`text-2xl font-semibold mb-3 ${
+            <h3 className={`text-2xl font-semibold mb-4 ${
               theme === 'dark' ? 'text-white' : 'text-slate-900'
-            }`}>Our Platform</h3>
-            <p className={`text-center max-w-xl ${
-              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
             }`}>
-              Discover how our AI-powered platform can transform your business operations. 
-              Full platform details coming soon.
-            </p>
+              Platform in Action
+            </h3>
+            <ul className="space-y-3 mb-7">
+              {[
+                'Upload files (PDF/CSV/DOCX/Excel/JSON) or connect QuickBooks, Notion, and Google Drive',
+                'Seyvin auto-ingests, cleans, and builds KPIs from your real sources',
+                'Ask questions → get analysis + charts, with driver explanations and traceable numbers',
+                'Generate dashboards and narrative updates you can download or share',
+              ].map((item) => (
+                <li
+                  key={item}
+                  className={`flex items-start gap-3 text-sm ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}
+                >
+                  <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                    theme === 'dark' ? 'bg-cyan-400/70' : 'bg-cyan-600'
+                  }`} />
+                  <span className="min-w-0">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col gap-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="w-full sm:w-auto flex items-center gap-2 sm:whitespace-nowrap"
+              >
+                Book 15-min beta demo
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="w-full sm:w-auto sm:whitespace-nowrap"
+              >
+                See the step-by-step ↓
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.08 }}
+        className="lg:col-span-3 min-w-0"
+      >
+        <Card padding="p-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="min-w-0">
+              <div className={`text-xs uppercase tracking-wide ${
+                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+              }`}>
+                Platform gallery
+              </div>
+              <div className={`text-sm mt-1 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>
+                Step-by-step previews (placeholders for now — swap screenshots later).
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <PlatformPreviewCard
+              title="Connect / Upload"
+              description="Bring in files and link sources."
+              variant="connect"
+            />
+            <PlatformPreviewCard
+              title="Auto KPI Dashboard"
+              description="KPIs and trends built automatically."
+              variant="dashboard"
+            />
+            <PlatformPreviewCard
+              title="Ask → Analysis + Chart"
+              description="Questions turn into visuals + drivers."
+              variant="ask"
+            />
+            <PlatformPreviewCard
+              title="Write-up → Export/Share"
+              description="Narratives with charts, ready to send."
+              variant="report"
+            />
           </div>
         </Card>
       </motion.div>
@@ -531,7 +748,7 @@ export default function Services() {
             className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}
           >
             {activeTab === 'services' 
-              ? 'Join our beta program and get hands-on support to unlock your data\'s potential'
+              ? 'Join our beta program and get hands-on support for founders, investors, and department leaders — from clean data to decision-ready updates.'
               : 'One platform to connect, analyze, and act on your data'
             }
           </motion.p>
