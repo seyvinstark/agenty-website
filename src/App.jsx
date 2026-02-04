@@ -30,7 +30,6 @@ function AppContent() {
         <Hero />
         <DataAnalysis />
         <ProblemStatement />
-    
         <Services />
         <Process />
         <Features />

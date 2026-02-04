@@ -149,7 +149,7 @@ export default function DataAnalysis() {
           </div>
 
           {/* CTA Footer */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -173,7 +173,7 @@ export default function DataAnalysis() {
               Book 15-min beta demo
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>

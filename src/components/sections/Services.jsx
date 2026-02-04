@@ -12,9 +12,15 @@ import {
   Code,
   Lightbulb,
   Layers,
-  Sparkles
+  Sparkles,
+  Handshake,
+  Database,
+  Map,
+  Palette,
+  ArrowRight
 } from 'lucide-react';
 import Card from '../ui/Card';
+import Button from '../ui/Button';
 import { useTheme } from '../../context/ThemeContext';
 
 const services = [
@@ -85,8 +91,8 @@ function ToggleBadge({ activeTab, onTabChange }) {
               : theme === 'dark' ? 'text-gray-500 hover:text-gray-300' : 'text-slate-500 hover:text-slate-700'
           }`}
         >
-          <Box className="w-4 h-4" />
-          Services
+          <Handshake className="w-4 h-4" />
+          Beta Partner Support
         </button>
       </div>
     </div>
@@ -205,7 +211,63 @@ function CodeVisual() {
   );
 }
 
-function ServicesContent() {
+// Onboarding steps for the task list visual
+const onboardingSteps = [
+  { icon: Users, label: 'Dedicated onboarding call', status: 'done' },
+  { icon: Database, label: 'Data source connection', status: 'done' },
+  { icon: Sparkles, label: 'First dashboard setup', status: 'pending' },
+  { icon: Check, label: 'Team training session', status: 'pending' },
+];
+
+// Integration tags for the data setup visual
+const integrationTags = ['Google Sheets', 'Excel', 'SQL Database', 'QuickBooks', 'Salesforce'];
+
+// Roadmap features visual
+function RoadmapVisual() {
+  const { theme } = useTheme();
+  
+  const features = [
+    { name: 'Custom KPI templates', votes: 12, priority: 'high' },
+    { name: 'Slack integration', votes: 8, priority: 'medium' },
+    { name: 'Scheduled reports', votes: 15, priority: 'high' },
+  ];
+
+  return (
+    <div className="space-y-3">
+      {features.map((feature, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.1, duration: 0.2 }}
+          className={`flex items-center justify-between p-3 rounded-xl border ${
+            theme === 'dark' 
+              ? 'bg-[#0f0f0f] border-[#262626]' 
+              : 'bg-slate-50 border-slate-200'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <span className={`px-2 py-0.5 text-xs rounded-full ${
+              feature.priority === 'high'
+                ? theme === 'dark' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-cyan-100 text-cyan-700'
+                : theme === 'dark' ? 'bg-gray-500/20 text-gray-400' : 'bg-gray-100 text-gray-600'
+            }`}>
+              {feature.priority}
+            </span>
+            <span className={theme === 'dark' ? 'text-white text-sm' : 'text-slate-900 text-sm'}>
+              {feature.name}
+            </span>
+          </div>
+          <span className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>
+            {feature.votes} votes
+          </span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function BetaPartnerSupportContent() {
   const { theme } = useTheme();
   
   return (
@@ -216,45 +278,72 @@ function ServicesContent() {
       transition={{ duration: 0.2 }}
       className="grid lg:grid-cols-2 gap-6"
     >
-      {/* Task automation card */}
+      {/* Onboarding card - Task list style */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.05 }}
       >
         <Card padding="p-8" className="h-full">
-          <TaskList tasks={services[0].tasks} />
+          <TaskList tasks={onboardingSteps} />
           <h3 className={`text-xl font-semibold mt-6 mb-2 ${
             theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
           }`}>
-            {services[0].title}
+            Hands-On Onboarding
           </h3>
           <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-            {services[0].description}
+            We personally guide you through every step—no self-serve confusion, just direct support from our team.
           </p>
         </Card>
       </motion.div>
 
-      {/* Search/Intelligence card */}
+      {/* Data Setup card - Search/tags style */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.1 }}
       >
         <Card padding="p-8" className="h-full">
-          <SearchVisual items={services[2].searchItems} />
+          <div className="space-y-3">
+            <div className={`flex items-center gap-2 p-3 rounded-xl border ${
+              theme === 'dark' 
+                ? 'bg-[#0f0f0f] border-[#262626]' 
+                : 'bg-slate-50 border-slate-200'
+            }`}>
+              <Database className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`} />
+              <span className={theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}>Connect your data...</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <span className={`px-3 py-1 rounded-full text-sm border ${
+                theme === 'dark' 
+                  ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' 
+                  : 'bg-cyan-50 text-cyan-700 border-cyan-200'
+              }`}>
+                We help setup
+              </span>
+              {integrationTags.map((tag, i) => (
+                <span key={i} className={`px-3 py-1 rounded-full text-sm border ${
+                  theme === 'dark' 
+                    ? 'bg-[#1a1a1a] text-gray-400 border-[#262626]' 
+                    : 'bg-slate-100 text-slate-600 border-slate-200'
+                }`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
           <h3 className={`text-xl font-semibold mt-6 mb-2 ${
             theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
           }`}>
-            {services[2].title}
+            Data Setup Assistance
           </h3>
           <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-            {services[2].description}
+            We connect your data sources, configure integrations, and ensure everything flows correctly into the platform.
           </p>
         </Card>
       </motion.div>
 
-      {/* Code/AI Agents card */}
+      {/* Roadmap Influence card - Wide card with visual */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -263,22 +352,22 @@ function ServicesContent() {
       >
         <Card padding="p-8">
           <div className="grid lg:grid-cols-2 gap-8">
-            <CodeVisual />
+            <RoadmapVisual />
             <div className="flex flex-col justify-center">
               <h3 className={`text-2xl font-semibold mb-3 ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>
-                {services[3].title}
+                Shape the Roadmap
               </h3>
               <p className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>
-                {services[3].description}
+                Your feedback directly influences what we build next. Beta partners vote on features and help us prioritize what matters most to your business.
               </p>
             </div>
           </div>
         </Card>
       </motion.div>
 
-      {/* Consulting card */}
+      {/* Customization card - Lightbulb/consulting style */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -286,22 +375,31 @@ function ServicesContent() {
         className="lg:col-span-2"
       >
         <Card padding="p-8">
-          <div className="flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
               theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-100'
             }`}>
-              <Lightbulb className={`w-6 h-6 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
+              <Palette className={`w-8 h-8 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
             </div>
-            <div>
+            <div className="flex-grow text-center md:text-left">
               <h3 className={`text-xl font-semibold mb-1 ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>
-                {services[4].title}
+                Personalized Experience
               </h3>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
-                {services[4].description}
+                We customize dashboards, reports, and workflows to match your unique business needs and terminology.
               </p>
             </div>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+              className="flex items-center gap-2 whitespace-nowrap"
+            >
+              Book 15-min beta demo
+              <ArrowRight className="w-4 h-4" />
+            </Button>
           </div>
         </Card>
       </motion.div>
@@ -416,12 +514,12 @@ export default function Services() {
               theme === 'dark' ? 'text-white' : 'text-slate-900'
             }`}
           >
-            {activeTab === 'services' ? 'Smarter Services,' : 'Powerful Platform,'}
+            {activeTab === 'services' ? 'White-Glove Support,' : 'Powerful Platform,'}
             <br />
             <span className={`font-serif italic ${
               theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
             }`}>
-              {activeTab === 'services' ? 'Built with AI' : 'Built for You'}
+              {activeTab === 'services' ? 'For Beta Partners' : 'Built for You'}
             </span>
           </motion.h2>
           
@@ -433,7 +531,7 @@ export default function Services() {
             className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}
           >
             {activeTab === 'services' 
-              ? 'Everything you need to automate operations, boost productivity'
+              ? 'Join our beta program and get hands-on support to unlock your data\'s potential'
               : 'One platform to connect, analyze, and act on your data'
             }
           </motion.p>
@@ -441,7 +539,7 @@ export default function Services() {
 
         <AnimatePresence mode="wait">
           {activeTab === 'services' ? (
-            <ServicesContent key="services" />
+            <BetaPartnerSupportContent key="services" />
           ) : (
             <PlatformContent key="platform" />
           )}

@@ -442,7 +442,7 @@ DESKTOP WIREFRAME (new messaging fixes, same overall section lineup)
 │                                                                                                  │
 │  WHEN "Platform" ACTIVE:                                                                           │
 │  ┌───────────────────────────────┐  ┌───────────────────────────────┐  ┌───────────────────────┐ │
-│  │ Connect sources               │  │ Ask + visualize               │  │ Generate board packs   │ │
+│  │ Connect sources               │  │ Ask + visualize               │  │ write document packs   │ │
 │  │ - 2–3 bullets                 │  │ - 2–3 bullets                 │  │ - 2–3 bullets          │ │
 │  └───────────────────────────────┘  └───────────────────────────────┘  └───────────────────────┘ │
 │  (No placeholders, no "coming soon" for core platform.)                                           │

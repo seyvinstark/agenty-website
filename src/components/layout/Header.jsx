@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#process' },
   { label: 'Use cases', href: '#clients' },
-  { label: 'Beta program', href: '#pricing' },
+  { label: 'Beta partner program', href: '#pricing' },
 ];
 
 const secondaryLinks = [
