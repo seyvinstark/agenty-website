@@ -37,8 +37,8 @@ function AppContent() {
         
         <Clients />
         <Integrations />
-        <Reviews />
-        <Pricing />
+        {/* <Reviews /> */}
+        {/* <Pricing /> */}
         <FAQ />
         <Comparison />
         <Team />
