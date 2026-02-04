@@ -6,19 +6,19 @@ import { useTheme } from '../../context/ThemeContext';
 
 const benefits = [
   {
-    title: 'Save 5-10 Hours Weekly',
-    description: 'Stop manual reporting. Our AI assistants analyze your data automatically.',
+    title: 'From Question → Analysis + Chart (in minutes)',
+    description: 'Ask in plain English. Seyvin analyzes the relevant data, generates the right visualization, and explains the key drivers — with traceable numbers you can verify.',
     illustration: 'gauge',
   },
   {
-    title: 'Board Prep: 8hrs → 15min',
-    description: 'Generate investor reports and executive summaries in one command.',
-    illustration: 'chart',
+    title: 'Always-Synced Data (No More Download/Reupload)',
+    description: 'Connect QuickBooks, Notion, and Drive — or upload PDFs/CSVs/Excel/JSON. Seyvin ingests and cleans automatically, reducing the "prep tax" that slows everything down.',
+    illustration: 'connect',
   },
   {
-    title: 'Zero Technical Skills',
-    description: 'No SQL, no dashboard design. Ask questions in plain English.',
-    illustration: 'connect',
+    title: 'Decision-Ready Dashboards + Reports',
+    description: 'Auto-create KPIs from your available sources and generate narrative reports with charts you can download or share — built for weekly ops reviews, month-end, and board updates.',
+    illustration: 'chart',
   },
 ];
 
@@ -160,7 +160,7 @@ export default function Benefits() {
           badgeIcon={Sparkles}
           title="Why Choose"
           titleAccent="Seyvin?"
-          description="Enterprise-grade analytics at a fraction of the cost—without the complexity"
+          description="Seyvin turns scattered operational data into decisions: automatic analysis → visualizations → dashboards → board-ready reports (with traceable numbers)."
         />
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -191,6 +191,19 @@ export default function Benefits() {
             );
           })}
         </div>
+
+        {/* Transition to next section */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className={`text-center text-base mt-10 ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}
+        >
+          Explore what the platform can do — and how we support beta partners every step of the way.
+        </motion.p>
       </div>
     </section>
   );

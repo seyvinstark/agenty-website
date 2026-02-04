@@ -7,37 +7,37 @@ import { useTheme } from '../../context/ThemeContext';
 
 const painPoints = [
   {
-    id: 'fragmented',
+    id: 'scavenger',
     icon: Database,
-    title: 'Fragmented Insights',
-    quote: '"10 sources, 10 different answers"',
+    title: 'The Data Scavenger Hunt',
     bullets: [
-      'Data reconciliation drains hours weekly',
-      'Critical insights buried in spreadsheets',
-      'KPIs don\'t align across teams',
+      'The "truth" lives in Drive folders, Notion pages, exports, and attachments',
+      'Too many versions: "final_v7" problems',
+      'Answers require hunting across tools before analysis even starts',
     ],
+    whatItCauses: 'Results: slow answers, duplicated work, and inconsistent decisions.',
   },
   {
-    id: 'technical',
+    id: 'spaghetti',
     icon: Code2,
-    title: 'Too Technical to Scale',
-    quote: '"We need answers, not another BI project"',
+    title: 'Spreadsheet Spaghetti',
     bullets: [
-      'BI tools require weeks of setup',
-      'Every question needs SQL or IT help',
-      'Self-service analytics stays a dream',
+      'Copy/paste between CSVs, tabs, and tools to make reports',
+      'Formulas break, pivots drift, definitions change silently',
+      'You re-check numbers instead of acting on them',
     ],
+    whatItCauses: 'Results: "numbers fights" and lost trust in reporting.',
   },
   {
-    id: 'trust',
+    id: 'ambush',
     icon: ShieldQuestion,
-    title: 'AI You Can\'t Verify',
-    quote: '"We can\'t present AI outputs to stakeholders"',
+    title: 'The Board/Leadership Ambush',
     bullets: [
-      'No traceability to source data',
-      'Hallucinations erode confidence',
-      'Not audit-ready for leadership',
+      'Leadership asks follow-ups: "by segment?", "by region?", "why changed?"',
+      'A simple question becomes a 2-day detour',
+      'You can show charts, but explaining drivers is the hard part',
     ],
+    whatItCauses: 'Results: decisions delayed or made with partial information.',
   },
 ];
 
@@ -87,14 +87,14 @@ function PainPointCard({ painPoint, index }) {
           ))}
         </ul>
         
-        {/* Quote */}
+        {/* What it causes */}
         <div className={`pt-4 border-t ${
           theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'
         }`}>
-          <p className={`text-sm italic ${
+          <p className={`text-sm ${
             theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
           }`}>
-            {painPoint.quote}
+            {painPoint.whatItCauses}
           </p>
         </div>
       </Card>
@@ -124,21 +124,16 @@ export default function DataAnalysis() {
             <p className={`text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto ${
               theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
             }`}>
-              You have data everywhere, but answers are{' '}
+              You don't have an "analytics problem" — you have a{' '}
               <span className={`font-medium ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
-              }`}>slow</span>,{' '}
-              <span className={`font-medium ${
-                theme === 'dark' ? 'text-white' : 'text-slate-900'
-              }`}>fragile</span>, or{' '}
-              <span className={`font-medium ${
-                theme === 'dark' ? 'text-white' : 'text-slate-900'
-              }`}>untrusted</span>.
+              }`}>data-wrangling problem</span>.{' '}
+              Most teams spend more time finding, cleaning, and reconciling data than answering questions.
             </p>
           </div>
 
           {/* Pain Point Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
             {painPoints.map((painPoint, index) => (
               <PainPointCard 
                 key={painPoint.id} 
@@ -147,6 +142,19 @@ export default function DataAnalysis() {
               />
             ))}
           </div>
+
+          {/* Transition line */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className={`text-center text-base max-w-3xl mx-auto ${
+              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+            }`}
+          >
+            If this feels familiar, the real bottleneck isn't effort — it's analysis trapped behind manual prep, scattered sources, and brittle workflows.
+          </motion.p>
 
           {/* CTA Footer */}
           {/* <motion.div

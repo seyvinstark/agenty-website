@@ -17,28 +17,29 @@ import { useTheme } from '../../context/ThemeContext';
 const problems = [
   {
     id: 'fragmentation',
-    title: 'Data Fragmentation',
+    title: 'Data Everywhere, No Single Source of Truth',
     emoji: '🧩',
     icon: Database,
-    quote: '"We have data everywhere but no insights — and no way to build agents that can use it all."',
+    quote: '"We have the data — we just can\'t trust one place to answer quickly."',
     painPoints: [
-      { label: 'Data scattered across 10-20+ SaaS apps', status: 'problem' },
-      { label: 'No unified view of business performance', status: 'problem' },
-      { label: 'Hours spent copying data between spreadsheets', status: 'problem' },
-      { label: 'Conflicting numbers from different sources', status: 'problem' },
+      { label: 'The "truth" is split across accounting, docs, spreadsheets, and exports', status: 'problem' },
+      { label: 'Teams re-download and re-upload the same files just to run analysis', status: 'problem' },
+      { label: 'Definitions drift ("revenue" means different things in different places)', status: 'problem' },
+      { label: 'Every follow-up question rebuilds the dataset from scratch', status: 'problem' },
     ],
+    bridgeSentence: 'You don\'t need another dashboard — you need a reliable way to consolidate and query real data.',
   },
   {
     id: 'technical',
-    title: 'Technical Expertise Required',
+    title: 'Analysis Requires Skills Your Team Doesn\'t Have',
     emoji: '🔧',
     icon: Wrench,
-    quote: '"We can\'t afford a data analyst, and our team doesn\'t know SQL."',
+    quote: '"We can\'t afford a data analyst — and nobody wants to learn SQL."',
     painPoints: [
-      { label: 'Traditional BI tools require weeks of setup', status: 'problem' },
-      { label: 'SQL queries needed for basic questions', status: 'problem' },
-      { label: 'Dashboard design requires specialized skills', status: 'problem' },
-      { label: 'Every question requires IT involvement', status: 'problem' },
+      { label: 'Getting from raw data → clean dataset → metrics is the real work', status: 'problem' },
+      { label: 'Tools assume you already have a modeled database (most teams don\'t)', status: 'problem' },
+      { label: 'Basic questions become a ticket queue for the "technical person"', status: 'problem' },
+      { label: 'Setup and maintenance becomes ongoing overhead', status: 'problem' },
     ],
   },
   {
@@ -46,12 +47,12 @@ const problems = [
     title: 'Slow Time-to-Insight',
     emoji: '⏰',
     icon: Clock,
-    quote: '"By the time we get the data, the decision has already been made."',
+    quote: '"Reporting cycles repeat weekly and monthly. By the time the report is ready, the business has moved on."',
     painPoints: [
-      { label: '5-10+ hours per week on manual reporting', status: 'problem' },
-      { label: 'Days or weeks to get answers from IT', status: 'problem' },
-      { label: 'Manual report generation every month', status: 'problem' },
-      { label: 'Decisions made on gut feeling, not data', status: 'problem' },
+      { label: 'Manual prep', status: 'problem' },
+      { label: 'Stale metrics', status: 'problem' },
+      { label: 'Follow-up delay', status: 'problem' },
+      { label: 'Numbers fights', status: 'problem' },
     ],
   },
   {
@@ -59,12 +60,12 @@ const problems = [
     title: 'Prohibitive Costs',
     emoji: '💰',
     icon: DollarSign,
-    quote: '"Enterprise analytics is priced for enterprises, not growing businesses."',
+    quote: '"The hidden tax of manual analytics work adds up fast."',
     painPoints: [
-      { label: 'Enterprise BI tools cost $50K-$300K+ per year', status: 'problem' },
-      { label: 'Need to hire data engineers ($120K+ salary)', status: 'problem' },
-      { label: 'Additional costs for integration tools', status: 'problem' },
-      { label: 'Hidden implementation and consulting fees', status: 'problem' },
+      { label: 'Recurring manual work is a hidden tax: exports, reconciliation, template upkeep', status: 'problem' },
+      { label: 'Hiring or contracting data help competes with core business priorities', status: 'problem' },
+      { label: 'Maintenance never ends: definitions, sources, and requirements change', status: 'problem' },
+      { label: 'Bad/inconsistent data leads to rework and wrong decisions', status: 'problem' },
     ],
   },
   {
@@ -72,12 +73,12 @@ const problems = [
     title: 'AI That Can\'t Be Trusted',
     emoji: '🤖',
     icon: Bot,
-    quote: '"ChatGPT is helpful, but I can\'t trust it for business decisions."',
+    quote: '"Generic AI sounds confident without being grounded in your data."',
     painPoints: [
-      { label: 'Generic AI chatbots hallucinate', status: 'problem' },
-      { label: 'No connection to your actual business data', status: 'problem' },
-      { label: 'Can\'t trace how answers were derived', status: 'problem' },
-      { label: 'No accountability for AI-generated insights', status: 'problem' },
+      { label: 'Generic AI can sound confident without being grounded in your data', status: 'problem' },
+      { label: 'No audit trail: you can\'t verify numbers or reproduce results', status: 'problem' },
+      { label: 'Not safe for leadership/board contexts without traceability', status: 'problem' },
+      { label: 'You end up spending time checking AI instead of acting', status: 'problem' },
     ],
   },
 ];
@@ -148,7 +149,7 @@ export default function ProblemStatement() {
           badgeIcon={AlertTriangle}
           title="The Problem We're"
           titleAccent="Solving"
-          description="Growing businesses face these data and analytics challenges every day"
+          description="Small and growing teams run into the same analytics bottlenecks every week — not because they lack effort, but because the workflow is broken."
         />
 
         <div className="grid lg:grid-cols-2 gap-6">
@@ -169,6 +170,9 @@ export default function ProblemStatement() {
               <p className={`text-sm italic ${
                 theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
               }`}>{problems[0].quote}</p>
+              <p className={`text-sm mt-3 ${
+                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+              }`}>{problems[0].bridgeSentence}</p>
             </Card>
           </motion.div>
 
@@ -212,10 +216,10 @@ export default function ProblemStatement() {
                   <p className={`mb-4 ${
                     theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
                   }`}>
-                    5-10+ hours per week spent on manual report preparation. Days or weeks to get answers from IT. Decisions made on gut feeling, not data.
+                    Reporting cycles repeat weekly and monthly. By the time the report is ready, the business has moved on — and follow-up questions restart the work.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {['Manual reports', 'Delayed insights', 'IT bottlenecks'].map((tag, i) => (
+                    {['Manual prep', 'Stale metrics', 'Follow-up delay', 'Numbers fights'].map((tag, i) => (
                       <span key={i} className={`px-3 py-1 rounded-full text-sm border ${
                         theme === 'dark' 
                           ? 'bg-red-500/10 text-red-400 border-red-500/20' 
@@ -278,6 +282,21 @@ export default function ProblemStatement() {
             </Card>
           </motion.div>
         </div>
+
+        {/* Transition to Benefits */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <p className={`text-base md:text-lg max-w-3xl mx-auto ${
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+          }`}>
+            Seyvin fixes the bottleneck by acting like an AI Data Analyst on top of your real sources: connect QuickBooks/Drive/Notion or upload files, we automatically ingest and clean the data, then you ask questions and get analysis with charts — plus dashboards and narrative reports you can download or share.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
