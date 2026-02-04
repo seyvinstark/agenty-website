@@ -6,8 +6,15 @@ import { useTheme } from '../../context/ThemeContext';
 
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#process' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'How it works', href: '#process' },
+  { label: 'Use cases', href: '#clients' },
+  { label: 'Beta program', href: '#pricing' },
+];
+
+const secondaryLinks = [
+  { label: 'Security', href: '#team' },
+  { label: 'Integrations', href: '#integrations' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
 export default function Header() {
@@ -64,7 +71,7 @@ export default function Header() {
               <a
                 key={link.label}
                 href={link.href}
-                className={`transition-colors duration-200 text-sm ${
+                className={`transition-colors duration-200 text-sm font-medium ${
                   theme === 'dark' 
                     ? 'text-gray-400 hover:text-white' 
                     : 'text-slate-600 hover:text-slate-900'
@@ -73,6 +80,30 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
+            
+            {/* Secondary Links Divider */}
+            <div className={`h-4 w-px ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
+            
+            {/* Secondary Links */}
+            <div className="flex items-center gap-4">
+              {secondaryLinks.map((link, index) => (
+                <span key={link.label} className="flex items-center gap-4">
+                  <a
+                    href={link.href}
+                    className={`transition-colors duration-200 text-xs ${
+                      theme === 'dark' 
+                        ? 'text-gray-500 hover:text-gray-300' 
+                        : 'text-slate-500 hover:text-slate-700'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                  {index < secondaryLinks.length - 1 && (
+                    <span className={`text-xs ${theme === 'dark' ? 'text-gray-700' : 'text-slate-300'}`}>•</span>
+                  )}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Right side: Theme Toggle + CTA */}
@@ -110,11 +141,13 @@ export default function Header() {
               </motion.div>
             </button>
 
-            <a href="#demo">
-              <Button variant="secondary" size="sm">
-                Book a demo
-              </Button>
-            </a>
+            <Button 
+              variant="primary" 
+              size="sm"
+              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+            >
+              Book 15-min beta demo
+            </Button>
           </div>
 
           {/* Mobile: Theme Toggle + Menu Button */}
@@ -162,25 +195,54 @@ export default function Header() {
             }`}
           >
             <div className="section-container py-6 space-y-4">
+              {/* Primary Links */}
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block transition-colors duration-200 py-2 ${
+                  className={`block transition-colors duration-200 py-2 font-medium ${
                     theme === 'dark' 
-                      ? 'text-gray-400 hover:text-white' 
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'text-gray-300 hover:text-white' 
+                      : 'text-slate-700 hover:text-slate-900'
                   }`}
                 >
                   {link.label}
                 </a>
               ))}
-              <a href="#demo" className="block mt-4">
-                <Button variant="secondary" size="sm" className="w-full">
-                  Book a demo
-                </Button>
-              </a>
+              
+              {/* Divider */}
+              <div className={`border-t my-4 ${theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'}`} />
+              
+              {/* Secondary Links */}
+              <div className="flex flex-wrap gap-4">
+                {secondaryLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-sm transition-colors duration-200 ${
+                      theme === 'dark' 
+                        ? 'text-gray-500 hover:text-gray-300' 
+                        : 'text-slate-500 hover:text-slate-700'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+              
+              <Button 
+                variant="primary" 
+                size="sm" 
+                className="w-full mt-4"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.open('https://cal.com/seyvin/15min', '_blank');
+                }}
+              >
+                Book 15-min beta demo
+              </Button>
             </div>
           </motion.div>
         )}
