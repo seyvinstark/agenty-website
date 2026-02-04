@@ -395,7 +395,7 @@ function PlatformContent() {
 }
 
 export default function Services() {
-  const [activeTab, setActiveTab] = useState('services');
+  const [activeTab, setActiveTab] = useState('platform');
   const { theme } = useTheme();
 
   return (

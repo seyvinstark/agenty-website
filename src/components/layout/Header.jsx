@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 const secondaryLinks = [
-  { label: 'Security', href: '#team' },
+  // { label: 'Security', href: '#team' },
   { label: 'Integrations', href: '#integrations' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -106,8 +106,16 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right side: Theme Toggle + CTA */}
+          {/* Right side: CTA + Theme Toggle */}
           <div className="hidden lg:flex items-center gap-4">
+            <Button 
+              variant="glass" 
+              size="sm"
+              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+            >
+              Book 15-min beta demo
+            </Button>
+
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -140,14 +148,6 @@ export default function Header() {
                 )}
               </motion.div>
             </button>
-
-            <Button 
-              variant="primary" 
-              size="sm"
-              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
-            >
-              Book 15-min beta demo
-            </Button>
           </div>
 
           {/* Mobile: Theme Toggle + Menu Button */}
@@ -233,7 +233,7 @@ export default function Header() {
               </div>
               
               <Button 
-                variant="primary" 
+                variant="glass" 
                 size="sm" 
                 className="w-full mt-4"
                 onClick={() => {

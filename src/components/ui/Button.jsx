@@ -25,6 +25,9 @@ export default function Button({
     accent: theme === 'dark'
       ? 'bg-cyan-500 text-black hover:bg-cyan-400'
       : 'bg-cyan-600 text-white hover:bg-cyan-500',
+    glass: theme === 'dark'
+      ? 'bg-white/15 text-white hover:bg-white/25 border border-white/20'
+      : 'bg-slate-900/10 text-slate-900 hover:bg-slate-900/20 border border-slate-300/50',
   };
 
   const sizes = {
