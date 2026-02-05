@@ -65,6 +65,21 @@ npm run build
 npm run preview
 ```
 
+## Deployment (GitHub Pages + Squarespace subdomain)
+
+This repo includes a GitHub Actions workflow that builds and deploys the site to GitHub Pages.
+The custom domain is set to `seyvin.theartemisai.com` via `public/CNAME`.
+
+1. In GitHub: Settings -> Pages -> Source = GitHub Actions.
+2. Set Custom domain to `seyvin.theartemisai.com` and save.
+3. In Squarespace: Domains -> theartemisai.com -> DNS Settings -> add a CNAME record:
+   - Host: `seyvin`
+   - Points to: `YOUR_GITHUB_USERNAME.github.io` (use the value shown in GitHub Pages)
+4. Wait for DNS propagation, then enable "Enforce HTTPS" in GitHub Pages.
+
+The workflow deploys on pushes to `ui-messaging-v2`. Update
+`.github/workflows/deploy-pages.yml` if you want a different branch.
+
 ## Project Structure
 
 ```
