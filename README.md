@@ -77,7 +77,8 @@ The custom domain is set to `seyvin.theartemisai.com` via `public/CNAME`.
    - Points to: `YOUR_GITHUB_USERNAME.github.io` (use the value shown in GitHub Pages)
 4. Wait for DNS propagation, then enable "Enforce HTTPS" in GitHub Pages.
 
-If your default branch is not `main`, update `.github/workflows/deploy-pages.yml`.
+The workflow deploys on pushes to `ui-messaging-v2`. Update
+`.github/workflows/deploy-pages.yml` if you want a different branch.
 
 ## Project Structure
 
