@@ -1,0 +1,16 @@
+---
+description: Use browser tab and snapshots so website improvements (content or design) are visually appealing
+globs: src/**/*
+alwaysApply: false
+---
+
+# Web dev — browser as context for better results
+
+When improving **any aspect** of the website (content, design, layout, or behavior), use the browser so solutions are **visually grounded and appealing**:
+
+1. **Use the browser MCP**: Work in the tab where the dev site runs (**http://localhost:5173**). Take a **snapshot** of the current page before changing anything, so you see the real layout, typography, and hierarchy. Use that view to shape your suggestions and code.
+2. **Aim for visually appealing solutions**: Propose changes that look good in context — spacing, contrast, alignment, and tone should fit the live page. After implementing, take another snapshot (or reload then snapshot) to verify the result and refine if needed.
+3. **One clear improvement per request**: Prefer one focused change per prompt (e.g. "make the hero CTA more prominent" or "tighten the Benefits copy") so each iteration stays easy to review and polish.
+4. **Respect project constraints**: Use `tailwind.config.js` for theme (colors, fonts). Use `docs/section-snapshots.md` and `docs/section-snapshots/` for section order and copy reference.
+
+**Flow**: Open or use tab at http://localhost:5173 → snapshot → improve (content or design) with the live view in mind → snapshot again to verify and ensure it's visually appealing.

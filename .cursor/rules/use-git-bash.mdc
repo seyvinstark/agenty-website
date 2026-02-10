@@ -1,0 +1,13 @@
+---
+description: Ensure agents always use Git Bash and run bash-compatible commands in this project
+globs: 
+alwaysApply: true
+---
+
+# Always use Git Bash
+
+When running **any** terminal command in this project:
+
+1. **Use Git Bash syntax**: All commands must be bash-compatible (e.g. `&&` to chain, `export` for env vars, `/` for paths). Never use PowerShell or cmd syntax.
+2. **Verify the shell**: If a command fails with a PowerShell-style error (e.g. `&&` is not a valid statement separator), re-run with `bash -l -c "..."` as a fallback.
+3. **nvm is available**: Git Bash loads nvm via startup scripts. Use `nvm use` if the correct Node version matters (see `.nvmrc`).
