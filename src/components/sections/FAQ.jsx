@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { HelpCircle, ArrowUpRight, Shield, Lock } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Accordion from '../ui/Accordion';
@@ -43,6 +44,7 @@ const faqItems = [
 
 export default function FAQ() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   return (
     <section id="faq" className={`py-24 ${
@@ -79,12 +81,10 @@ export default function FAQ() {
                       Book a demo and we'll walk you through everything—with your actual data.
                     </p>
                   </div>
-                  <a href="#demo">
-                    <Button variant="secondary" size="sm" className="w-full justify-center">
-                      Book a Demo
-                      <ArrowUpRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </a>
+                  <Button variant="secondary" size="sm" className="w-full justify-center" onClick={() => navigate('/book-demo')}>
+                    Book a Demo
+                    <ArrowUpRight className="w-4 h-4 ml-2" />
+                  </Button>
                 </div>
               </Card>
             </motion.div>

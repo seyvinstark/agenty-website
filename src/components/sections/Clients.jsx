@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, Quote, ArrowRight, TrendingUp, 
@@ -489,8 +490,8 @@ export default function Clients() {
               }`}>
                 See yourself in one of these roles?
               </p>
-              <a 
-                href="#demo" 
+              <Link 
+                to="/book-demo" 
                 className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
                   theme === 'dark' 
                     ? 'text-cyan-400 hover:text-cyan-300' 
@@ -499,7 +500,7 @@ export default function Clients() {
               >
                 Book a personalized demo
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </div>
 

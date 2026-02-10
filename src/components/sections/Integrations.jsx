@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Layers, Check, Clock, Upload } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
@@ -200,8 +201,8 @@ export default function Integrations() {
             }`}>
               Don't see your tool? We're adding new integrations every week based on user requests.
             </p>
-            <a 
-              href="#demo" 
+            <Link 
+              to="/book-demo" 
               className={`inline-flex items-center gap-2 font-medium transition-colors ${
                 theme === 'dark' 
                   ? 'text-cyan-400 hover:text-cyan-300' 
@@ -209,7 +210,7 @@ export default function Integrations() {
               }`}
             >
               Request an integration →
-            </a>
+            </Link>
           </Card>
         </motion.div>
       </div>

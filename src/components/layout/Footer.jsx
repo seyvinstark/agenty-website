@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Twitter, Linkedin, Mail } from 'lucide-react';
+import HashLink from '../HashLink';
 import { useTheme } from '../../context/ThemeContext';
 
 const footerLinks = [
@@ -33,7 +35,7 @@ export default function Footer() {
           {/* Logo and Links */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                 theme === 'dark' 
                   ? 'bg-[#1a1a1a] border border-[#262626]' 
@@ -50,7 +52,7 @@ export default function Footer() {
               <span className={`text-xl font-serif italic ${
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>Seyvin</span>
-            </a>
+            </Link>
 
             {/* Tagline */}
             <p className={`text-sm lg:border-l lg:pl-8 ${
@@ -84,9 +86,9 @@ export default function Footer() {
         {/* Nav Links Row */}
         <div className="flex flex-wrap gap-6 mb-8">
           {footerLinks.map((link) => (
-            <a
+            <HashLink
               key={link.label}
-              href={link.href}
+              to={link.href}
               className={`transition-colors duration-200 text-sm ${
                 theme === 'dark' 
                   ? 'text-gray-400 hover:text-white' 
@@ -94,7 +96,7 @@ export default function Footer() {
               }`}
             >
               {link.label}
-            </a>
+            </HashLink>
           ))}
         </div>
 

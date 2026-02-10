@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Box, 
@@ -269,6 +270,7 @@ function RoadmapVisual() {
 
 function BetaPartnerSupportContent() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   return (
     <motion.div
@@ -394,7 +396,7 @@ function BetaPartnerSupportContent() {
             <Button
               variant="primary"
               size="lg"
-              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              onClick={() => navigate('/book-demo')}
               className="flex items-center gap-2 whitespace-nowrap"
             >
               Book 15-min beta demo
@@ -588,6 +590,7 @@ function PlatformPreviewCard({ title, description, imageSrc, imageAlt, variant }
 
 function PlatformContent() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   return (
     <motion.div
@@ -640,7 +643,7 @@ function PlatformContent() {
               <Button
                 variant="primary"
                 size="lg"
-                onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                onClick={() => navigate('/book-demo')}
                 className="w-full sm:w-auto flex items-center gap-2 sm:whitespace-nowrap"
               >
                 Book 15-min beta demo

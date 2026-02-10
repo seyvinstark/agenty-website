@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Check, Clock, CreditCard, Database } from 'lucide-react';
 import Button from '../ui/Button';
 import { useTheme } from '../../context/ThemeContext';
@@ -12,6 +13,7 @@ const trustPoints = [
 
 export default function CTA() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   
   return (
     <section id="cta" className={`py-24 ${
@@ -79,16 +81,12 @@ export default function CTA() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
-            <a href="#demo">
-              <Button variant="primary" size="lg" withArrow>
-                Book a demo
-              </Button>
-            </a>
-            <a href="/beta">
-              <Button variant="secondary" size="lg">
-                Apply for closed beta
-              </Button>
-            </a>
+            <Button variant="primary" size="lg" withArrow onClick={() => navigate('/book-demo')}>
+              Book a demo
+            </Button>
+            <Button variant="secondary" size="lg" onClick={() => navigate('/book-demo')}>
+              Apply for closed beta
+            </Button>
           </motion.div>
 
           {/* Glow effect under button */}

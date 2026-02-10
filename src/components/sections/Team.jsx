@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Shield, Lock, Eye, Server, FileCheck, Key } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
@@ -104,8 +105,8 @@ export default function Team() {
             }`}>
               Questions about security? We're happy to discuss your specific requirements.
             </p>
-            <a 
-              href="#demo" 
+            <Link 
+              to="/book-demo" 
               className={`inline-flex items-center gap-2 text-sm font-medium mt-3 transition-colors ${
                 theme === 'dark' 
                   ? 'text-cyan-400 hover:text-cyan-300' 
@@ -113,7 +114,7 @@ export default function Team() {
               }`}
             >
               Book a security-focused demo →
-            </a>
+            </Link>
           </Card>
         </motion.div>
       </div>

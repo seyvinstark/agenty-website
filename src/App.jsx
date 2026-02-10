@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { Header, Footer } from './components/layout';
 import {
@@ -17,6 +18,31 @@ import {
   Team,
   CTA,
 } from './components/sections';
+import BookDemo from './pages/BookDemo';
+import ScrollToTop from './components/ScrollToTop';
+
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <DataAnalysis />
+      <ProblemStatement />
+      <Benefits />
+      <Services />
+      <Process />
+      <Features />
+      
+      <Clients />
+      <Integrations />
+      {/* <Reviews /> */}
+      {/* <Pricing /> */}
+      <FAQ />
+      <Comparison />
+      <Team />
+      <CTA />
+    </>
+  );
+}
 
 function AppContent() {
   const { theme } = useTheme();
@@ -26,23 +52,12 @@ function AppContent() {
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
     }`}>
       <Header />
+      <ScrollToTop />
       <main>
-        <Hero />
-        <DataAnalysis />
-        <ProblemStatement />
-        <Benefits />
-        <Services />
-        <Process />
-        <Features />
-        
-        <Clients />
-        <Integrations />
-        {/* <Reviews /> */}
-        {/* <Pricing /> */}
-        <FAQ />
-        <Comparison />
-        <Team />
-        <CTA />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book-demo" element={<BookDemo />} />
+        </Routes>
       </main>
       <Footer />
     </div>

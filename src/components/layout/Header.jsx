@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import Button from '../ui/Button';
+import HashLink from '../HashLink';
 import { useTheme } from '../../context/ThemeContext';
 
 const navLinks = [
@@ -20,6 +22,7 @@ const secondaryLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -46,7 +49,7 @@ export default function Header() {
       <div className="section-container">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
               theme === 'dark' 
                 ? 'bg-[#1a1a1a] border border-[#262626]' 
@@ -63,14 +66,14 @@ export default function Header() {
             <span className={`text-xl font-serif italic ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
               Seyvin
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6 2xl:gap-8">
             {navLinks.map((link) => (
-              <a
+              <HashLink
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 className={`transition-colors duration-200 text-sm font-medium ${
                   theme === 'dark' 
                     ? 'text-gray-400 hover:text-white' 
@@ -78,7 +81,7 @@ export default function Header() {
                 }`}
               >
                 {link.label}
-              </a>
+              </HashLink>
             ))}
             
             {/* Secondary Links Divider */}
@@ -88,8 +91,8 @@ export default function Header() {
             <div className="hidden 2xl:flex items-center gap-4">
               {secondaryLinks.map((link, index) => (
                 <span key={link.label} className="flex items-center gap-4">
-                  <a
-                    href={link.href}
+                  <HashLink
+                    to={link.href}
                     className={`transition-colors duration-200 text-xs ${
                       theme === 'dark' 
                         ? 'text-gray-500 hover:text-gray-300' 
@@ -97,7 +100,7 @@ export default function Header() {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </HashLink>
                   {index < secondaryLinks.length - 1 && (
                     <span className={`text-xs ${theme === 'dark' ? 'text-gray-700' : 'text-slate-300'}`}>•</span>
                   )}
@@ -111,7 +114,7 @@ export default function Header() {
             <Button 
               variant="glass" 
               size="sm"
-              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              onClick={() => navigate('/book-demo')}
             >
               Book 15-min beta demo
             </Button>
@@ -199,9 +202,9 @@ export default function Header() {
             <div className="section-container py-6 space-y-4">
               {/* Primary Links */}
               {navLinks.map((link) => (
-                <a
+                <HashLink
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block transition-colors duration-200 py-2 font-medium ${
                     theme === 'dark' 
@@ -210,7 +213,7 @@ export default function Header() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </HashLink>
               ))}
               
               {/* Divider */}
@@ -219,9 +222,9 @@ export default function Header() {
               {/* Secondary Links */}
               <div className="flex flex-wrap gap-4">
                 {secondaryLinks.map((link) => (
-                  <a
+                  <HashLink
                     key={link.label}
-                    href={link.href}
+                    to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`text-sm transition-colors duration-200 ${
                       theme === 'dark' 
@@ -230,7 +233,7 @@ export default function Header() {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </HashLink>
                 ))}
               </div>
               
@@ -240,7 +243,7 @@ export default function Header() {
                 className="w-full mt-4"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  navigate('/book-demo');
                 }}
               >
                 Book 15-min beta demo

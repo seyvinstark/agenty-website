@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
@@ -380,6 +381,7 @@ const colorClasses = {
 
 export default function Hero() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [DashboardSlide, ConversationSlide, ReportSlide];
   const slideLabels = ['KPI Dashboard', 'Ask Questions', 'Write-ups'];
@@ -510,7 +512,7 @@ export default function Hero() {
                   variant="primary" 
                   size="lg" 
                   withArrow
-                  onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                  onClick={() => navigate('/book-demo')}
                 >
                   Book 15-min beta demo
                 </Button>
