@@ -20,6 +20,7 @@ import {
 } from './components/sections';
 import BookDemo from './pages/BookDemo';
 import ScrollToTop from './components/ScrollToTop';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import { useClarityPageView } from './hooks/useClarityPageView';
 
 function HomePage() {
@@ -70,6 +71,7 @@ function App() {
   return (
     <ThemeProvider>
       <AppContent />
+      <CookieConsentBanner />
     </ThemeProvider>
   );
 }
