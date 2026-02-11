@@ -20,6 +20,7 @@ import {
 } from './components/sections';
 import BookDemo from './pages/BookDemo';
 import ScrollToTop from './components/ScrollToTop';
+import { useClarityPageView } from './hooks/useClarityPageView';
 
 function HomePage() {
   return (
@@ -46,7 +47,8 @@ function HomePage() {
 
 function AppContent() {
   const { theme } = useTheme();
-  
+  useClarityPageView();
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
