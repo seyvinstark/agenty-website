@@ -31,13 +31,13 @@ const painPoints = [
   {
     id: 'ambush',
     icon: ShieldQuestion,
-    title: 'The Board/Leadership Ambush',
+    title: 'One question turns into ten',
     bullets: [
-      'Leadership asks follow-ups: "by segment?", "by region?", "why changed?"',
-      'A simple question becomes a 2-day detour',
-      'You can show charts, but explaining drivers is the hard part',
+      'Someone asks to see it by region, by product line, or "why did this change?"',
+      'One simple question turns into days of digging through different files and tools.',
+      'Showing the chart is the easy part — explaining  the why behind the numbers is hard.',
     ],
-    whatItCauses: 'Results: decisions delayed or made with partial information.',
+    whatItCauses: 'Result: decisions get delayed, or people decide without the full picture.',
   },
 ];
 
@@ -124,11 +124,7 @@ export default function DataAnalysis() {
             <p className={`text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto ${
               theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
             }`}>
-              You don't have an "analytics problem" — you have a{' '}
-              <span className={`font-medium ${
-                theme === 'dark' ? 'text-white' : 'text-slate-900'
-              }`}>data-wrangling problem</span>.{' '}
-              Most teams spend more time finding, cleaning, and reconciling data than answering questions.
+              Most teams spend more time finding, cleaning, and reconciling data than answering questions and making decisions.
             </p>
           </div>
 

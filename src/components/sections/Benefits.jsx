@@ -12,7 +12,7 @@ const benefits = [
   },
   {
     title: 'Always-Synced Data (No More Download/Reupload)',
-    description: 'Connect QuickBooks, Notion, and Drive — or upload PDFs/CSVs/Excel/JSON. Seyvin ingests and cleans automatically, reducing the "prep tax" that slows everything down.',
+    description: 'Connect to multiple data sources or upload files in multiple data format —  Seyvin ingests and cleans them automatically, so you spend less time on prep and more on decision making.',
     illustration: 'connect',
   },
   {

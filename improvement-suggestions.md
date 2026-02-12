@@ -1,3 +1,10 @@
+meeting notes: 
+
+- 
+- platform:
+  - replace with how it works steps section
+  - partners need update 
+---
 # suggestion 1 draft
 ---
 

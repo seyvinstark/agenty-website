@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
-  Lock, 
-  Users, 
-  CreditCard, 
   Clock, 
   Database, 
   FileText,
@@ -521,31 +518,6 @@ export default function Hero() {
                     See how it works
                   </Button>
                 </a>
-              </motion.div>
-
-              {/* Trust Signals */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className={`flex flex-wrap items-center gap-4 text-sm ${
-                  theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-                }`}
-              >
-                <span className="flex items-center gap-1.5">
-                  <Lock className="w-4 h-4" />
-                  Secure OAuth
-                </span>
-                <div className={`w-px h-4 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
-                <span className="flex items-center gap-1.5">
-                  <Users className="w-4 h-4" />
-                  Limited beta spots
-                </span>
-                <div className={`w-px h-4 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
-                <span className="flex items-center gap-1.5">
-                  <CreditCard className="w-4 h-4" />
-                  No credit card
-                </span>
               </motion.div>
             </motion.div>
 

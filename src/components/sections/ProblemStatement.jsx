@@ -4,7 +4,6 @@ import {
   Database, 
   Wrench, 
   Clock, 
-  DollarSign, 
   Bot,
   Puzzle,
   X,
@@ -56,24 +55,12 @@ const problems = [
     ],
   },
   {
-    id: 'costs',
-    title: 'Prohibitive Costs',
-    emoji: '💰',
-    icon: DollarSign,
-    quote: '"The hidden tax of manual analytics work adds up fast."',
-    painPoints: [
-      { label: 'Recurring manual work is a hidden tax: exports, reconciliation, template upkeep', status: 'problem' },
-      { label: 'Hiring or contracting data help competes with core business priorities', status: 'problem' },
-      { label: 'Maintenance never ends: definitions, sources, and requirements change', status: 'problem' },
-      { label: 'Bad/inconsistent data leads to rework and wrong decisions', status: 'problem' },
-    ],
-  },
-  {
     id: 'trust',
-    title: 'AI That Can\'t Be Trusted',
+    title: 'Doesn\'t understand your business',
     emoji: '🤖',
     icon: Bot,
     quote: '"Generic AI sounds confident without being grounded in your data."',
+    commonFrustrationQuote: '"The answer sounded right — but it didn\'t really know how our organization works."',
     painPoints: [
       { label: 'Generic AI can sound confident without being grounded in your data', status: 'problem' },
       { label: 'No audit trail: you can\'t verify numbers or reproduce results', status: 'problem' },
@@ -234,7 +221,7 @@ export default function ProblemStatement() {
             </Card>
           </motion.div>
 
-          {/* AI Trust + Costs card */}
+          {/* AI / Trust card - same layout as Slow Time-to-Insight */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -243,40 +230,35 @@ export default function ProblemStatement() {
             className="lg:col-span-2"
           >
             <Card padding="p-8">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
+              <div className="grid lg:grid-cols-2 gap-8">
+                <div className="flex flex-col justify-center order-2 lg:order-1">
+                  <h3 className={`text-2xl font-semibold mb-3 ${
+                    theme === 'dark' ? 'text-white' : 'text-slate-900'
                   }`}>
-                    <DollarSign className="w-6 h-6 text-red-400" />
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-1 ${
-                      theme === 'dark' ? 'text-white' : 'text-slate-900'
-                    }`}>
-                      {problems[3].emoji} {problems[3].title}
-                    </h3>
-                    <p className={`text-sm ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-                    }`}>{problems[3].quote}</p>
+                    {problems[3].emoji} {problems[3].title}
+                  </h3>
+                  <p className={`mb-4 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    Generic AI can sound confident without being grounded in your data. You end up spending time checking answers instead of acting — and it's not safe for leadership or board contexts without traceability.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {['Can\'t verify numbers', 'No audit trail', 'hours spent editing results'].map((tag, i) => (
+                      <span key={i} className={`px-3 py-1 rounded-full text-sm border ${
+                        theme === 'dark'
+                          ? 'bg-red-500/10 text-red-400 border-red-500/20'
+                          : 'bg-red-50 text-red-700 border-red-200'
+                      }`}>
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-[#262626]' : 'bg-slate-200'
-                  }`}>
-                    <Bot className="w-6 h-6 text-red-400" />
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-1 ${
-                      theme === 'dark' ? 'text-white' : 'text-slate-900'
-                    }`}>
-                      {problems[4].emoji} {problems[4].title}
-                    </h3>
-                    <p className={`text-sm ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-                    }`}>{problems[4].quote}</p>
-                  </div>
+                <div className="order-1 lg:order-2">
+                  <QuoteVisual
+                    quote={problems[3].commonFrustrationQuote || problems[3].quote}
+                    icon={problems[3].icon}
+                  />
                 </div>
               </div>
             </Card>
