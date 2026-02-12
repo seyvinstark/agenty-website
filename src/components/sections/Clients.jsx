@@ -5,7 +5,7 @@ import {
   Users, Quote, ArrowRight, TrendingUp, 
   Building2, Briefcase, Calculator,
   Heart, GraduationCap, Landmark,
-  Building, Globe
+  Building, Globe, Megaphone
 } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
@@ -18,10 +18,10 @@ const sectors = {
     personas: [
       {
         id: 'operations',
-        role: 'Operations Leader / COO',
+        role: 'Operations',
         name: 'Sarah',
         title: 'Director of Operations',
-        company: '75-person e-commerce brand',
+        company: '',
         icon: Building2,
         accentColor: 'cyan',
         quote: "I spend half my week pulling reports instead of acting on them.",
@@ -48,7 +48,7 @@ const sectors = {
         role: 'Founder / CEO',
         name: 'Michael',
         title: 'Founder & CEO',
-        company: '25-person SaaS startup',
+        company: 'Startup',
         icon: Briefcase,
         accentColor: 'emerald',
         quote: "I know the data exists, I just can't get to it fast enough.",
@@ -72,10 +72,10 @@ const sectors = {
       },
       {
         id: 'finance',
-        role: 'Finance / Accounting Manager',
+        role: 'Finance',
         name: 'Jessica',
         title: 'Finance Manager',
-        company: '100-person professional services firm',
+        company: '',
         icon: Calculator,
         accentColor: 'violet',
         quote: "I export to Excel and spend days building the same reports every month.",
@@ -97,6 +97,28 @@ const sectors = {
         },
         sampleQuery: "Compare actual vs. budget by department for Q4",
       },
+      {
+        id: 'marketing',
+        role: 'Marketing',
+        name: 'Alex',
+        title: 'Head of Marketing',
+        company: '',
+        icon: Megaphone,
+        accentColor: 'orange',
+        quote: "I need one place to see performance across channels—we're stuck in spreadsheets.",
+        frustrations: [
+          'Campaign and channel data live in different tools',
+          'Manual reports for leadership take days',
+          'Attribution and ROI are hard to pull together',
+        ],
+        howHelps: [
+          'Unified view of campaigns, web, and CRM data',
+          'Auto-generated performance reports for stakeholders',
+          'Ask questions like "Which channel drove the most signups?" and get answers',
+        ],
+        outcome: { before: '6 hours', after: '15 min', metric: 'performance report', improvement: '96%' },
+        sampleQuery: "Compare campaign performance by channel for last quarter",
+      },
     ],
   },
   public: {
@@ -105,10 +127,10 @@ const sectors = {
     personas: [
       {
         id: 'nonprofit',
-        role: 'Non-Profit Executive Director',
+        role: 'Non Profit organisations',
         name: 'Amanda',
         title: 'Executive Director',
-        company: '40-person community health organization',
+        company: '',
         icon: Heart,
         accentColor: 'rose',
         quote: "Grant reporting takes our team away from the work that actually matters.",
@@ -132,10 +154,10 @@ const sectors = {
       },
       {
         id: 'academic',
-        role: 'Research Administrator',
+        role: 'Academia',
         name: 'Dr. Chen',
         title: 'Associate Dean of Research',
-        company: 'Mid-size university research office',
+        company: '',
         icon: GraduationCap,
         accentColor: 'amber',
         quote: "Faculty need data for grants, but our systems don't talk to each other.",
@@ -159,10 +181,10 @@ const sectors = {
       },
       {
         id: 'government',
-        role: 'Government Program Manager',
+        role: 'Government',
         name: 'Marcus',
         title: 'Program Director',
-        company: 'State economic development agency',
+        company: '',
         icon: Landmark,
         accentColor: 'blue',
         quote: "We have the data to show impact, but no way to analyze it quickly.",
@@ -198,6 +220,7 @@ function PersonaCard({ persona, isActive, onClick }) {
     rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-400' },
     amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
     blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+    orange: { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
   };
   const colors = colorClasses[persona.accentColor];
 
@@ -231,9 +254,11 @@ function PersonaCard({ persona, isActive, onClick }) {
           }`}>
             {persona.role}
           </h4>
-          <p className={`text-xs truncate ${
-            theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-          }`}>{persona.company}</p>
+          {persona.company && (
+            <p className={`text-xs truncate ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+            }`}>{persona.company}</p>
+          )}
         </div>
         <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${
           isActive 
@@ -255,6 +280,7 @@ function PersonaDetail({ persona }) {
     rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-400', ring: 'ring-rose-500/20' },
     amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400', ring: 'ring-amber-500/20' },
     blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400', ring: 'ring-blue-500/20' },
+    orange: { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400', ring: 'ring-orange-500/20' },
   };
   const colors = colorClasses[persona.accentColor];
 
@@ -278,9 +304,11 @@ function PersonaDetail({ persona }) {
                 theme === 'dark' ? 'text-white' : 'text-slate-900'
               }`}>{persona.name}</h3>
               <p className={theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}>{persona.title}</p>
-              <p className={`text-sm ${
-                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-              }`}>{persona.company}</p>
+              {persona.company && (
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
+                }`}>{persona.company}</p>
+              )}
             </div>
           </div>
           

@@ -48,7 +48,7 @@ export default function CTA() {
           <p className={`text-lg mb-8 max-w-xl mx-auto ${
             theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
           }`}>
-            In 15 minutes, we'll connect to your QuickBooks (or any data source) and show you 
+            In 15 minutes, we'll connect to your data source and show you 
             how Seyvin generates dashboards and reports from your actual business data.
           </p>
 

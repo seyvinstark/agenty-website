@@ -14,8 +14,8 @@ import {
   Reviews,
   Pricing,
   FAQ,
-  Comparison,
-  Team,
+  // Comparison,
+  // Team,
   CTA,
 } from './components/sections';
 import BookDemo from './pages/BookDemo';
@@ -39,8 +39,8 @@ function HomePage() {
       {/* <Reviews /> */}
       {/* <Pricing /> */}
       <FAQ />
-      <Comparison />
-      <Team />
+      {/* <Comparison /> */}
+      {/* <Team /> */}
       <CTA />
     </>
   );

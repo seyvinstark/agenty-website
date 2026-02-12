@@ -7,11 +7,9 @@ import {
   Bot,
   FileText,
   Clock,
-  MessageSquare,
   Link2,
   Palette,
-  Database,
-  Workflow
+  Database
 } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
@@ -27,8 +25,8 @@ const primaryFeatures = [
   },
   {
     icons: [Users, Bot],
-    title: 'Three AI Experts. One Conversation.',
-    description: 'Ask questions in plain English. Dolores routes to the right specialist. The Data Analyst generates queries. The Report Writer creates narratives. Every insight traceable.',
+    title: 'Your data team in one assistant',
+    description: 'Ask in plain English. Your AI analytics team routes to the right specialist—queries, narratives, and charts—so you get answers without switching tools. Every insight traceable to your data.',
     proof: 'Every answer backed by your actual data',
   },
   {
@@ -42,29 +40,14 @@ const primaryFeatures = [
 // Tier 2: Secondary features (smaller cards)
 const secondaryFeatures = [
   {
-    icons: [MessageSquare, Bot],
-    title: 'Natural Language Querying',
-    description: 'Ask in English, get instant answers. No SQL required.',
-  },
-  {
     icons: [Link2, Database],
-    title: 'Multi-Source Integration',
-    description: 'QuickBooks, Notion, Google Drive, CSV, and more.',
+    title: 'One Knowledge Base from All Your Sources',
+    description: 'Connect QuickBooks, Notion, Google Drive, CSV, and more. Seyvin turns them into one unified, searchable knowledge base—so you stop jumping between apps and files.',
   },
   {
     icons: [Palette, BarChart3],
     title: 'Conversational Chart Editing',
     description: 'Customize any visualization by describing what you want.',
-  },
-  {
-    icons: [Database, LayoutDashboard],
-    title: 'Centralized Knowledge Base',
-    description: 'Unified, searchable data across your entire business.',
-  },
-  {
-    icons: [Workflow, Bot],
-    title: 'AI Agent Teams & Workflows',
-    description: 'Build custom workflows without code.',
   },
 ];
 
@@ -148,7 +131,7 @@ export default function Features() {
         </div>
 
         {/* Tier 2: Secondary Features - Smaller Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-4">
           {secondaryFeatures.map((feature, index) => {
             const Icon1 = feature.icons[0];
             const Icon2 = feature.icons[1];
