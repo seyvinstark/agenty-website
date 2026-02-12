@@ -93,7 +93,7 @@ function ToggleBadge({ activeTab, onTabChange }) {
           }`}
         >
           <Handshake className="w-4 h-4" />
-          Beta Partner Support
+          Services
         </button>
       </div>
     </div>
@@ -734,12 +734,12 @@ export default function Services() {
               theme === 'dark' ? 'text-white' : 'text-slate-900'
             }`}
           >
-            {activeTab === 'services' ? 'White-Glove Support,' : 'Powerful Platform,'}
+            {activeTab === 'services' ? 'Support Built Around You,' : 'Powerful Platform,'}
             <br />
             <span className={`font-serif italic ${
               theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
             }`}>
-              {activeTab === 'services' ? 'For Beta Partners' : 'Built for You'}
+              {activeTab === 'services' ? 'For Our Partners' : 'Built for You'}
             </span>
           </motion.h2>
           
@@ -751,7 +751,7 @@ export default function Services() {
             className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}
           >
             {activeTab === 'services' 
-              ? 'Join our beta program and get hands-on support for founders, investors, and department leaders — from clean data to decision-ready updates.'
+              ? 'We offer hands-on support for founders, investors, and department leaders: from clean data and KPI setup to decision-ready dashboards and updates. We can also build custom agents and tools for your use cases, integrated with your data providers.'
               : 'One platform to connect, analyze, and act on your data'
             }
           </motion.p>

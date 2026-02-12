@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#process' },
   { label: 'Use cases', href: '#clients' },
+  { label: 'Services', href: '#services' },
   { label: 'Beta partner program', href: '#pricing' },
 ];
 

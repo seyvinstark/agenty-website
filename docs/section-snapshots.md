@@ -254,7 +254,7 @@ This section contains two tabs. **Default render** is “Our Platform”.
 
 ### Toggle labels
 - “Our Platform”
-- “Beta Partner Support”
+- “Services”
 
 ### Header copy (changes per tab)
 - **Platform tab headline**
@@ -263,11 +263,11 @@ This section contains two tabs. **Default render** is “Our Platform”.
 - **Platform tab subheadline**
   - “One platform to connect, analyze, and act on your data”
 
-- **Beta Partner Support tab headline** (when switched)
-  - “White-Glove Support,”
-  - “For Beta Partners”
-- **Beta Partner Support tab subheadline** (when switched)
-  - “Join our beta program and get hands-on support for founders, investors, and department leaders — from clean data to decision-ready updates.”
+- **Services tab headline** (when switched)
+  - “Support Built Around You,”
+  - “For Our Partners”
+- **Services tab subheadline** (when switched)
+  - “We offer hands-on support for founders, investors, and department leaders: from clean data and KPI setup to decision-ready dashboards and updates. We can also build custom agents and tools for your use cases, integrated with your data providers.”
 
 ### Tab content: Our Platform (default)
 
@@ -292,7 +292,7 @@ This section contains two tabs. **Default render** is “Our Platform”.
   - “Ask → Analysis + Chart” — “Questions turn into visuals + drivers.”
   - “Write-up → Export/Share” — “Narratives with charts, ready to send.”
 
-### Tab content: Beta Partner Support (alternate view)
+### Tab content: Services (alternate view)
 
 #### Card: KPI & Dashboard Setup
 - Task list items:
