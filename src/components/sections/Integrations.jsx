@@ -187,7 +187,7 @@ export default function Integrations() {
           </div>
         </div>
 
-        {/* Request Integration */}
+        {/* Request Integration - whole card links to book-demo for contacting */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,23 +195,24 @@ export default function Integrations() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-12 text-center"
         >
-          <Card padding="p-8" className="max-w-2xl mx-auto">
-            <p className={`mb-4 ${
-              theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-            }`}>
-              Don't see your tool? We're adding new integrations every week based on user requests.
-            </p>
-            <Link 
-              to="/book-demo" 
-              className={`inline-flex items-center gap-2 font-medium transition-colors ${
-                theme === 'dark' 
-                  ? 'text-cyan-400 hover:text-cyan-300' 
-                  : 'text-cyan-600 hover:text-cyan-700'
-              }`}
-            >
-              Request an integration →
-            </Link>
-          </Card>
+          <Link to="/book-demo" className="block max-w-2xl mx-auto">
+            <Card padding="p-8" className="cursor-pointer hover:border-cyan-500/30 transition-colors">
+              <p className={`mb-4 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}>
+                Don't see your tool? We're adding new integrations every week based on user requests.
+              </p>
+              <span
+                className={`inline-flex items-center gap-2 font-medium transition-colors ${
+                  theme === 'dark'
+                    ? 'text-cyan-400 group-hover:text-cyan-300'
+                    : 'text-cyan-600 group-hover:text-cyan-700'
+                }`}
+              >
+                Request an integration →
+              </span>
+            </Card>
+          </Link>
         </motion.div>
       </div>
     </section>

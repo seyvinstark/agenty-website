@@ -8,10 +8,10 @@ import { useTheme } from '../../context/ThemeContext';
 
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How it works', href: '#process' },
+  { label: 'How it works', href: '#services' },
   { label: 'Use cases', href: '#clients' },
-  { label: 'Services', href: '#services' },
-  { label: 'Beta partner program', href: '#pricing' },
+  { label: 'Our platform', href: '#services' },
+  { label: 'Partnering with us', href: '#services-partners' },
 ];
 
 const secondaryLinks = [
@@ -102,7 +102,7 @@ export default function Header() {
               size="sm"
               onClick={() => navigate('/book-demo')}
             >
-              Book 15-min beta demo
+              Book a 15-min demo
             </Button>
           </div>
 
@@ -180,7 +180,7 @@ export default function Header() {
                   navigate('/book-demo');
                 }}
               >
-                Book 15-min beta demo
+                Book a 15-min demo
               </Button>
             </div>
           </motion.div>

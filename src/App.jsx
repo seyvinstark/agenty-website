@@ -8,7 +8,7 @@ import {
   Benefits,
   Services,
   Features,
-  Process,
+  // Process, // kept in codebase; uncomment to show section
   Clients,
   Integrations,
   Reviews,
@@ -31,7 +31,7 @@ function HomePage() {
       <ProblemStatement />
       <Benefits />
       <Services />
-      <Process />
+      {/* <Process /> - hidden; steps merged into Services "Our Platform" tab. Re-enable to show standalone section. */}
       <Features />
       
       <Clients />

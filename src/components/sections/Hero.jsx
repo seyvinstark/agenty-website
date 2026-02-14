@@ -511,9 +511,9 @@ export default function Hero() {
                   withArrow
                   onClick={() => navigate('/book-demo')}
                 >
-                  Book 15-min beta demo
+                  Book a 15-min demo
                 </Button>
-                <a href="#process">
+                <a href="#services">
                   <Button variant="secondary" size="lg">
                     See how it works
                   </Button>

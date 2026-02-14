@@ -439,13 +439,161 @@ const visuals = {
   report: ReportVisual,
 };
 
-export default function Process() {
-  const [activeStep, setActiveStep] = useState(1);
+/** Reusable step-by-step content: tabs + visual + step copy. Used by Process section and Services Platform tab. */
+export function ProcessStepsContent({
+  layout = 'full',
+  activeStep: controlledStep,
+  setActiveStep: setControlledStep,
+}) {
+  const [internalStep, setInternalStep] = useState(1);
   const { theme } = useTheme();
+  const isControlled = layout === 'stepsOnly' || layout === 'visualOnly';
+  const activeStep = isControlled ? controlledStep : internalStep;
+  const setActiveStep = isControlled ? setControlledStep : setInternalStep;
   const currentStep = steps[activeStep - 1];
   const Visual = visuals[currentStep.visual];
   const StepIcon = currentStep.icon;
 
+  const stepTabs = (
+    <div className="flex flex-wrap justify-center gap-3 mb-8 lg:mb-12">
+      {steps.map((step) => {
+        const Icon = step.icon;
+        return (
+          <button
+            key={step.id}
+            onClick={() => setActiveStep(step.id)}
+            className={`
+              flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300
+              ${activeStep === step.id
+                ? theme === 'dark'
+                  ? 'bg-white text-black'
+                  : 'bg-slate-900 text-white'
+                : theme === 'dark'
+                  ? 'bg-[#1a1a1a] text-gray-400 border border-[#262626] hover:border-white/20'
+                  : 'bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-300'
+              }
+            `}
+          >
+            <Icon className="w-4 h-4" />
+            <span className="hidden sm:inline">Step {step.id}</span>
+            <span className="sm:hidden">{step.id}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+
+  const visualBlock = (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={activeStep}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Visual />
+      </motion.div>
+    </AnimatePresence>
+  );
+
+  const stepContentBlock = (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={activeStep}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        className={layout === 'full' ? 'lg:pl-8' : ''}
+      >
+        <div className="flex items-center gap-4 mb-4">
+          <div className={`text-5xl font-bold ${theme === 'dark' ? 'text-gray-800' : 'text-slate-300'}`}>
+            {currentStep.number}
+          </div>
+          <div className={`w-12 h-12 rounded-xl border flex items-center justify-center ${
+            theme === 'dark' ? 'bg-cyan-500/10 border-cyan-500/20' : 'bg-cyan-50 border-cyan-200'
+          }`}>
+            <StepIcon className={`w-6 h-6 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
+          </div>
+        </div>
+        <h3 className={`text-2xl font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+          {currentStep.title}
+        </h3>
+        <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`}>
+          {currentStep.subtitle}
+        </p>
+        <p className={`leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
+          {currentStep.description}
+        </p>
+        {currentStep.features && (
+          <ul className="space-y-2 mb-6">
+            {currentStep.features.map((feature, i) => (
+              <li key={i} className={`flex items-center gap-2 text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
+                <Check className={`w-4 h-4 flex-shrink-0 ${theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}`} />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        )}
+        {currentStep.examples && (
+          <ul className="space-y-2 mb-6">
+            {currentStep.examples.map((example, i) => (
+              <li key={i} className={`flex items-start gap-2 text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
+                <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
+                {example}
+                <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {currentStep.result && (
+          <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 mb-4">
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-3.5 h-3.5 text-green-400" />
+              </div>
+              <div>
+                <span className="text-xs text-green-400 font-medium uppercase tracking-wide">Result</span>
+                <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-gray-300' : 'text-slate-700'}`}>{currentStep.result}</p>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs ${
+          theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626] text-gray-400' : 'bg-slate-100 border-slate-200 text-slate-600'
+        }`}>
+          <div className={`w-1.5 h-1.5 rounded-full ${theme === 'dark' ? 'bg-cyan-400' : 'bg-cyan-600'}`} />
+          {currentStep.deliverable}
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+
+  if (layout === 'visualOnly') {
+    return visualBlock;
+  }
+  if (layout === 'stepsOnly') {
+    return (
+      <>
+        {stepTabs}
+        {stepContentBlock}
+      </>
+    );
+  }
+  return (
+    <>
+      {stepTabs}
+      <div className="grid lg:grid-cols-2 gap-8 items-start">
+        {visualBlock}
+        {stepContentBlock}
+      </div>
+    </>
+  );
+}
+
+export default function Process() {
+  const { theme } = useTheme();
   return (
     <section id="process" className={`py-24 ${
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
@@ -458,156 +606,8 @@ export default function Process() {
           titleAccent="in 4 Simple Steps"
           description="Seen the platform previews? Here's the simple 4-step flow end-to-end. No technical skills required. No waiting for IT. Just connect, customize, ask, and export."
         />
-
         <Card padding="p-8 md:p-12">
-          {/* Step tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <button
-                  key={step.id}
-                  onClick={() => setActiveStep(step.id)}
-                  className={`
-                    flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300
-                    ${activeStep === step.id 
-                      ? theme === 'dark' 
-                        ? 'bg-white text-black' 
-                        : 'bg-slate-900 text-white'
-                      : theme === 'dark'
-                        ? 'bg-[#1a1a1a] text-gray-400 border border-[#262626] hover:border-white/20'
-                        : 'bg-slate-100 text-slate-600 border border-slate-200 hover:border-slate-300'
-                    }
-                  `}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">Step {step.id}</span>
-                  <span className="sm:hidden">{step.id}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Content */}
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Visual */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStep}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Visual />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Step content */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStep}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="lg:pl-8"
-              >
-                {/* Step number and icon */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`text-5xl font-bold ${
-                    theme === 'dark' ? 'text-gray-800' : 'text-slate-300'
-                  }`}>
-                    {currentStep.number}
-                  </div>
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center ${
-                    theme === 'dark' 
-                      ? 'bg-cyan-500/10 border-cyan-500/20' 
-                      : 'bg-cyan-50 border-cyan-200'
-                  }`}>
-                    <StepIcon className={`w-6 h-6 ${
-                      theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
-                    }`} />
-                  </div>
-                </div>
-
-                <h3 className={`text-2xl font-semibold mb-1 ${
-                  theme === 'dark' ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {currentStep.title}
-                </h3>
-                <p className={`text-sm mb-4 ${
-                  theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
-                }`}>
-                  {currentStep.subtitle}
-                </p>
-                <p className={`leading-relaxed mb-6 ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-                }`}>
-                  {currentStep.description}
-                </p>
-
-                {/* Step-specific content */}
-                {currentStep.features && (
-                  <ul className="space-y-2 mb-6">
-                    {currentStep.features.map((feature, i) => (
-                      <li key={i} className={`flex items-center gap-2 text-sm ${
-                        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-                      }`}>
-                        <Check className={`w-4 h-4 flex-shrink-0 ${
-                          theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'
-                        }`} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {currentStep.examples && (
-                  <ul className="space-y-2 mb-6">
-                    {currentStep.examples.map((example, i) => (
-                      <li key={i} className={`flex items-start gap-2 text-sm ${
-                        theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-                      }`}>
-                        <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
-                        {example}
-                        <span className={theme === 'dark' ? 'text-cyan-400' : 'text-cyan-600'}>"</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Result highlight */}
-                {currentStep.result && (
-                  <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 mb-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-3.5 h-3.5 text-green-400" />
-                      </div>
-                      <div>
-                        <span className="text-xs text-green-400 font-medium uppercase tracking-wide">Result</span>
-                        <p className={`text-sm mt-1 ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-slate-700'
-                        }`}>{currentStep.result}</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Deliverable badge */}
-                <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs ${
-                  theme === 'dark' 
-                    ? 'bg-[#1a1a1a] border-[#262626] text-gray-400' 
-                    : 'bg-slate-100 border-slate-200 text-slate-600'
-                }`}>
-                  <div className={`w-1.5 h-1.5 rounded-full ${
-                    theme === 'dark' ? 'bg-cyan-400' : 'bg-cyan-600'
-                  }`} />
-                  {currentStep.deliverable}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <ProcessStepsContent />
         </Card>
       </div>
     </section>

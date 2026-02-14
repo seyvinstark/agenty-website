@@ -5,10 +5,9 @@ import { useTheme } from '../../context/ThemeContext';
 
 const footerLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#process' },
+  { label: 'How It Works', href: '#services' },
   { label: 'Use Cases', href: '#clients' },
   { label: 'Services', href: '#services' },
-  { label: 'Pricing', href: '#pricing' },
   { label: 'FAQ', href: '#faq' },
 ];
 

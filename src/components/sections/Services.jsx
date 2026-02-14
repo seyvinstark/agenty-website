@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ProcessStepsContent } from './Process';
 import { 
   Box, 
   DollarSign, 
@@ -23,6 +24,9 @@ import {
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import { useTheme } from '../../context/ThemeContext';
+
+// Layout for "Our Platform" tab: 'sideCardRightSteps' (side card + steps on right) | 'stacked' | 'leftStepsRightVisual' | 'leftVisualRightSteps'
+const PLATFORM_LAYOUT = 'sideCardRightSteps';
 
 const services = [
   {
@@ -399,7 +403,7 @@ function BetaPartnerSupportContent() {
               onClick={() => navigate('/book-demo')}
               className="flex items-center gap-2 whitespace-nowrap"
             >
-              Book 15-min beta demo
+              Book a 15-min demo
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
@@ -432,295 +436,240 @@ function BetaPartnerSupportContent() {
   );
 }
 
-function PlatformPlaceholder({ variant }) {
-  const { theme } = useTheme();
-
-  const surface = theme === 'dark' ? 'bg-[#0f0f0f] border-[#262626]' : 'bg-white border-slate-200';
-  const muted = theme === 'dark' ? 'bg-white/10' : 'bg-slate-200';
-  const muted2 = theme === 'dark' ? 'bg-white/5' : 'bg-slate-100';
-
+function PlatformActionContent({ theme, navigate }) {
   return (
-    <div className={`relative w-full aspect-[16/10] rounded-xl border overflow-hidden ${surface}`}>
-      {/* Window chrome */}
-      <div className={`flex items-center justify-between px-3 py-2 border-b ${
-        theme === 'dark' ? 'border-[#262626] bg-[#0a0a0a]' : 'border-slate-200 bg-slate-50'
-      }`}>
-        <div className="flex items-center gap-1.5">
-          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
-          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
-          <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-300'}`} />
-        </div>
-        <div className={`h-2.5 w-20 rounded ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`} />
-      </div>
-
-      {/* Content */}
-      <div className="p-3">
-        {variant === 'connect' && (
-          <div className="space-y-3">
-            <div className="flex gap-2">
-              <div className={`h-6 w-20 rounded ${muted}`} />
-              <div className={`h-6 w-16 rounded ${muted2}`} />
-              <div className={`h-6 w-14 rounded ${muted2}`} />
-            </div>
-            <div className="space-y-2">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className={`h-8 rounded-lg border ${theme === 'dark' ? 'border-[#262626] bg-[#1a1a1a]' : 'border-slate-200 bg-slate-50'} animate-pulse`} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {variant === 'dashboard' && (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div className={`h-4 w-24 rounded ${muted}`} />
-              <div className={`h-4 w-14 rounded ${theme === 'dark' ? 'bg-cyan-500/20' : 'bg-cyan-100'}`} />
-            </div>
-            <div className={`h-16 rounded-lg ${theme === 'dark' ? 'bg-cyan-500/10' : 'bg-cyan-50'} animate-pulse`} />
-            <div className="grid grid-cols-2 gap-2">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className={`p-2 rounded-lg border ${theme === 'dark' ? 'border-[#262626] bg-[#1a1a1a]' : 'border-slate-200 bg-slate-50'}`}>
-                  <div className={`h-2.5 w-16 rounded ${muted2} mb-2`} />
-                  <div className={`h-4 w-20 rounded ${muted}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {variant === 'ask' && (
-          <div className="space-y-3">
-            <div className="flex justify-end">
-              <div className={`h-8 w-3/4 rounded-2xl border ${
-                theme === 'dark' ? 'bg-cyan-500/15 border-cyan-500/20' : 'bg-cyan-50 border-cyan-200'
-              }`} />
-            </div>
-            <div className={`rounded-2xl border p-3 ${
-              theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'
-            }`}>
-              <div className={`h-2.5 w-32 rounded ${muted2} mb-3`} />
-              <div className="flex items-end gap-2 h-10 mb-2">
-                {[60, 80, 45, 90, 70, 85].map((h, i) => (
-                  <div
-                    key={i}
-                    className={`flex-1 rounded-t ${theme === 'dark' ? 'bg-cyan-500/35' : 'bg-cyan-500/60'} animate-pulse`}
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-              <div className={`h-2 w-24 rounded ${muted2}`} />
-            </div>
-          </div>
-        )}
-
-        {variant === 'report' && (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div className={`h-4 w-28 rounded ${muted}`} />
-              <div className={`h-4 w-16 rounded ${theme === 'dark' ? 'bg-green-500/20' : 'bg-green-100'}`} />
-            </div>
-            <div className={`rounded-lg border p-3 ${
-              theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'
-            }`}>
-              <div className={`h-3 w-40 rounded ${muted} mb-3`} />
-              <div className="space-y-2">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className={`h-2.5 rounded ${muted2} ${i === 0 ? 'w-5/6' : i === 1 ? 'w-4/6' : i === 2 ? 'w-3/6' : i === 3 ? 'w-5/6' : 'w-2/6'}`} />
-                ))}
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <div className={`h-9 flex-1 rounded-lg ${theme === 'dark' ? 'bg-cyan-500/15 border border-cyan-500/20' : 'bg-cyan-50 border border-cyan-200'} animate-pulse`} />
-              <div className={`h-9 flex-1 rounded-lg border ${theme === 'dark' ? 'bg-[#1a1a1a] border-[#262626]' : 'bg-white border-slate-200'} animate-pulse`} />
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Subtle glow */}
-      <div className={`pointer-events-none absolute inset-0 ${
-        theme === 'dark'
-          ? 'bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent'
-          : 'bg-gradient-to-br from-cyan-100/60 via-transparent to-transparent'
-      }`} />
-    </div>
-  );
-}
-
-function PlatformPreviewCard({ title, description, imageSrc, imageAlt, variant }) {
-  const { theme } = useTheme();
-
-  return (
-    <Card padding="p-5" className="h-full flex flex-col">
-      {/* Preview frame */}
-      <div className="mb-4">
-        {imageSrc ? (
-          <div className={`w-full aspect-[16/10] rounded-xl border overflow-hidden ${
-            theme === 'dark' ? 'bg-[#0f0f0f] border-[#262626]' : 'bg-slate-50 border-slate-200'
-          }`}>
-            {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-            <img
-              src={imageSrc}
-              alt={imageAlt || title}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <PlatformPlaceholder variant={variant} />
-        )}
-      </div>
-
-      {/* Caption */}
-      <div className="mt-auto min-w-0">
-        <div className={`text-sm font-semibold ${
-          theme === 'dark' ? 'text-white' : 'text-slate-900'
-        }`}>
-          {title}
-        </div>
-        <div className={`text-xs mt-1 ${
+    <div className="min-w-0">
+        <div className={`text-xs uppercase tracking-wide mb-2 ${
           theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
         }`}>
-          {description}
+          What it does
         </div>
+        <h3 className={`text-2xl font-semibold mb-4 ${
+          theme === 'dark' ? 'text-white' : 'text-slate-900'
+        }`}>
+          Platform in Action
+        </h3>
+        <ul className="space-y-3 mb-7">
+          {[
+            'Upload your files or connect to your data sources (e.g. Google Drive, CRM, database)',
+            'Seyvin auto-ingests, cleans, and builds KPIs from your real sources',
+            'Ask questions → get analysis + charts, with explanation and traceable numbers',
+            'Generate dashboards and narrative updates you can download or share',
+          ].map((item) => (
+            <li
+              key={item}
+              className={`flex items-start gap-3 text-sm ${
+                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
+              }`}
+            >
+              <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                theme === 'dark' ? 'bg-cyan-400/70' : 'bg-cyan-600'
+              }`} />
+              <span className="min-w-0">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={() => navigate('/book-demo')}
+          className="w-full sm:w-auto flex items-center gap-2 sm:whitespace-nowrap"
+        >
+          Book a 15-min demo
+          <ArrowRight className="w-4 h-4" />
+        </Button>
       </div>
-    </Card>
   );
 }
 
 function PlatformContent() {
   const { theme } = useTheme();
   const navigate = useNavigate();
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="grid lg:grid-cols-5 gap-6"
-    >
+  const [platformStep, setPlatformStep] = useState(1);
+
+  // Side card (What it does) left, steps + visual right — no scroll to see steps
+  if (PLATFORM_LAYOUT === 'sideCardRightSteps') {
+    return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.05 }}
-        className="lg:col-span-2 min-w-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="grid lg:grid-cols-5 gap-6"
       >
-        <Card padding="p-8">
-          <div className="min-w-0">
-            <div className={`text-xs uppercase tracking-wide mb-2 ${
-              theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-            }`}>
-              What it does
-            </div>
-            <h3 className={`text-2xl font-semibold mb-4 ${
-              theme === 'dark' ? 'text-white' : 'text-slate-900'
-            }`}>
-              Platform in Action
-            </h3>
-            <ul className="space-y-3 mb-7">
-              {[
-                'Upload files (PDF/CSV/DOCX/Excel/JSON) or connect QuickBooks, Notion, and Google Drive',
-                'Seyvin auto-ingests, cleans, and builds KPIs from your real sources',
-                'Ask questions → get analysis + charts, with driver explanations and traceable numbers',
-                'Generate dashboards and narrative updates you can download or share',
-              ].map((item) => (
-                <li
-                  key={item}
-                  className={`flex items-start gap-3 text-sm ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-                  }`}
-                >
-                  <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-cyan-400/70' : 'bg-cyan-600'
-                  }`} />
-                  <span className="min-w-0">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-col gap-3">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => navigate('/book-demo')}
-                className="w-full sm:w-auto flex items-center gap-2 sm:whitespace-nowrap"
-              >
-                Book 15-min beta demo
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-              <Button
-                variant="secondary"
-                size="lg"
-                onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                className="w-full sm:w-auto sm:whitespace-nowrap"
-              >
-                See the step-by-step ↓
-              </Button>
-            </div>
-          </div>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="lg:col-span-2 min-w-0"
+        >
+          <Card padding="p-8">
+            <PlatformActionContent theme={theme} navigate={navigate} />
+          </Card>
+        </motion.div>
+        <motion.div
+          id="platform-steps"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.08 }}
+          className="lg:col-span-3 min-w-0 relative"
+        >
+          <span id="process" className="absolute top-0 left-0 pointer-events-none" aria-hidden="true" />
+          <Card padding="p-8 md:p-12">
+            <ProcessStepsContent />
+          </Card>
+        </motion.div>
       </motion.div>
+    );
+  }
 
+  if (PLATFORM_LAYOUT === 'stacked') {
+    return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.08 }}
-        className="lg:col-span-3 min-w-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="space-y-6"
       >
-        <Card padding="p-8">
-          <div className="flex items-center justify-between mb-4">
-            <div className="min-w-0">
-              <div className={`text-xs uppercase tracking-wide ${
-                theme === 'dark' ? 'text-gray-500' : 'text-slate-500'
-              }`}>
-                Platform gallery
-              </div>
-              <div className={`text-sm mt-1 ${
-                theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
-              }`}>
-                Step-by-step previews (placeholders for now — swap screenshots later).
-              </div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <PlatformPreviewCard
-              title="Connect / Upload"
-              description="Bring in files and link sources."
-              variant="connect"
-            />
-            <PlatformPreviewCard
-              title="Auto KPI Dashboard"
-              description="KPIs and trends built automatically."
-              variant="dashboard"
-            />
-            <PlatformPreviewCard
-              title="Ask → Analysis + Chart"
-              description="Questions turn into visuals + drivers."
-              variant="ask"
-            />
-            <PlatformPreviewCard
-              title="Write-up → Export/Share"
-              description="Narratives with charts, ready to send."
-              variant="report"
-            />
-          </div>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+        >
+          <Card padding="p-8">
+            <PlatformActionContent theme={theme} navigate={navigate} />
+          </Card>
+        </motion.div>
+        <motion.div
+          id="platform-steps"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.08 }}
+        >
+          <Card padding="p-8 md:p-12" className="relative">
+            <span id="process" className="absolute -top-24 left-0" aria-hidden="true" />
+            <ProcessStepsContent />
+          </Card>
+        </motion.div>
       </motion.div>
-    </motion.div>
-  );
+    );
+  }
+
+  if (PLATFORM_LAYOUT === 'leftStepsRightVisual') {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="grid lg:grid-cols-5 gap-6"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="lg:col-span-2 min-w-0"
+        >
+          <Card padding="p-8" className="h-full flex flex-col">
+            <PlatformActionContent theme={theme} navigate={navigate} />
+            <div className={`mt-6 pt-6 border-t flex-1 min-h-0 ${theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'}`}>
+              <ProcessStepsContent
+                layout="stepsOnly"
+                activeStep={platformStep}
+                setActiveStep={setPlatformStep}
+              />
+            </div>
+          </Card>
+        </motion.div>
+        <motion.div
+          id="platform-steps"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.08 }}
+          className="lg:col-span-3 min-w-0"
+        >
+          <Card padding="p-8">
+            <span id="process" className="sr-only" aria-hidden="true" />
+            <ProcessStepsContent
+              layout="visualOnly"
+              activeStep={platformStep}
+            />
+          </Card>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  if (PLATFORM_LAYOUT === 'leftVisualRightSteps') {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="grid lg:grid-cols-5 gap-6"
+      >
+        <motion.div
+          id="platform-steps"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="lg:col-span-3 min-w-0"
+        >
+          <Card padding="p-8">
+            <span id="process" className="sr-only" aria-hidden="true" />
+            <ProcessStepsContent
+              layout="visualOnly"
+              activeStep={platformStep}
+            />
+          </Card>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.08 }}
+          className="lg:col-span-2 min-w-0"
+        >
+          <Card padding="p-8" className="h-full flex flex-col">
+            <PlatformActionContent theme={theme} navigate={navigate} />
+            <div className={`mt-6 pt-6 border-t flex-1 min-h-0 ${theme === 'dark' ? 'border-[#262626]' : 'border-slate-200'}`}>
+              <ProcessStepsContent
+                layout="stepsOnly"
+                activeStep={platformStep}
+                setActiveStep={setPlatformStep}
+              />
+            </div>
+          </Card>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  return null;
 }
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState('platform');
   const { theme } = useTheme();
 
+  // Sync tab with URL hash: only #services-partners shows Services tab; everything else (including #services) shows Our Platform
+  useEffect(() => {
+    const syncTabFromHash = () => {
+      const hash = window.location.hash;
+      setActiveTab(hash === '#services-partners' ? 'services' : 'platform');
+    };
+    syncTabFromHash();
+    window.addEventListener('hashchange', syncTabFromHash);
+    return () => window.removeEventListener('hashchange', syncTabFromHash);
+  }, []);
+
   return (
-    <section id="services" className={`py-24 ${
+    <section id="services" className={`relative py-24 ${
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
     }`}>
       <div className="section-container">
+        <span id="services-partners" className="absolute -top-24" aria-hidden="true" />
         {/* Custom header with toggle */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <ToggleBadge activeTab={activeTab} onTabChange={setActiveTab} />

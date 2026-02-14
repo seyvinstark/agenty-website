@@ -174,7 +174,7 @@ export default function DataAnalysis() {
               size="sm"
               onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
             >
-              Book 15-min beta demo
+              Book a 15-min demo
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </motion.div> */}

@@ -17,9 +17,10 @@ export default function HashLink({ to, children, onClick, ...props }) {
     const id = hash.slice(1);
 
     if (location.pathname === '/') {
-      // Already on homepage — just scroll
+      // Already on homepage — set hash first (so e.g. Services tab can react), then scroll
       const el = document.getElementById(id);
       if (el) {
+        window.location.hash = id;
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
@@ -28,6 +29,7 @@ export default function HashLink({ to, children, onClick, ...props }) {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
+          window.location.hash = id;
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 100);
