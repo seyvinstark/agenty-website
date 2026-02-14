@@ -437,7 +437,7 @@ export default function Clients() {
 
   return (
     <section id="clients" className={`py-24 ${
-      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+      theme === 'dark' ? 'theme-bg-primary' : 'bg-white'
     }`}>
       <div className="section-container">
         <SectionHeader

@@ -666,7 +666,7 @@ export default function Services() {
 
   return (
     <section id="services" className={`relative py-24 ${
-      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-slate-50'
+      theme === 'dark' ? 'theme-bg-primary' : 'bg-slate-50'
     }`}>
       <div className="section-container">
         <span id="services-partners" className="absolute -top-24" aria-hidden="true" />

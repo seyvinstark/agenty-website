@@ -107,7 +107,7 @@ export default function DataAnalysis() {
   
   return (
     <section id="data-analysis" className={`py-24 ${
-      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+      theme === 'dark' ? 'theme-bg-secondary' : 'bg-white'
     }`}>
       <div className="section-container">
         <motion.div

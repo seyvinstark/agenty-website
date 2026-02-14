@@ -17,7 +17,7 @@ export default function CTA() {
   
   return (
     <section id="cta" className={`py-24 ${
-      theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-white'
+      theme === 'dark' ? 'theme-bg-secondary' : 'bg-white'
     }`}>
       <div className="section-container">
         <motion.div
