@@ -1,9 +1,5 @@
-meeting notes: 
-
-- 
-- platform:
-  - replace with how it works steps section
-  - partners need update 
+to-do:
+  - setup on new domain
 ---
 # suggestion 1 draft
 ---
