@@ -1,6 +1,380 @@
 to-do:
   - setup on new domain
 ---
+========================
+Perfect — let’s reset everything cleanly and do this in the correct order so **`seyvin.com` works 100% with GitHub Pages** and no DNS conflicts remain.
+
+We’ll cover:
+
+1. ✅ GitHub repository setup
+2. ✅ GitHub Pages settings
+3. ✅ `CNAME` file
+4. ✅ Squarespace DNS for `seyvin.com`
+5. ✅ Cleanup in `theartemisai.com` DNS
+6. ✅ Verification checklist
+7. ✅ Common failure causes
+
+---
+
+# ✅ PART 1 — GITHUB REPOSITORY SETUP
+
+Your repo:
+
+```
+https://github.com/seyvinstark/agenty-website
+```
+
+---
+
+## 1️⃣ Make sure Vite builds correctly for GitHub Pages
+
+In your `vite.config.js`:
+
+If you are using a **custom domain (seyvin.com)**, the base should be:
+
+```js
+export default defineConfig({
+  base: '/',
+})
+```
+
+❗ If you previously had:
+
+```js
+base: '/agenty-website/'
+```
+
+Remove it. Custom domains require `/`.
+
+---
+
+## 2️⃣ Deploy to GitHub Pages
+
+If you're deploying via GitHub Actions (recommended):
+
+Make sure:
+
+* The site builds successfully
+* The build output folder is `dist`
+* GitHub Pages source is set to:
+
+  * **GitHub Actions**
+
+OR if using branch deployment:
+
+* Build locally:
+
+  ```
+  npm run build
+  ```
+* Push `dist` to `gh-pages` branch (if using gh-pages package)
+
+---
+
+# ✅ PART 2 — GITHUB PAGES SETTINGS
+
+Go to:
+
+```
+Repo → Settings → Pages
+```
+
+### 1️⃣ Under “Custom domain”
+
+Enter:
+
+```
+seyvin.com
+```
+
+Click Save.
+
+GitHub will:
+
+* Automatically create a `CNAME` file in your repo (or expect one)
+* Try to validate DNS
+
+---
+
+### 2️⃣ Enable HTTPS
+
+After DNS works:
+
+* Check “Enforce HTTPS”
+
+⚠ This will only be available after DNS resolves correctly.
+
+---
+
+# ✅ PART 3 — ENSURE CNAME FILE EXISTS
+
+Inside your repo root, there must be a file:
+
+```
+CNAME
+```
+
+Content must be exactly:
+
+```
+seyvin.com
+```
+
+No spaces. No extra lines.
+
+If missing:
+
+Create file:
+
+```
+/public/CNAME
+```
+
+So it gets included in the build.
+
+Then redeploy.
+
+---
+
+# ✅ PART 4 — SQUARESPACE DNS FOR `seyvin.com`
+
+Go to:
+
+Squarespace → Domains → `seyvin.com` → DNS Settings
+
+---
+
+## ❌ DELETE EVERYTHING RELATED TO WEBSITE HOSTING
+
+Remove:
+
+All of these if present:
+
+```
+@  A  198.185.x.x
+@  A  198.49.x.x
+www  CNAME  ext-sq.squarespace.com
+@  HTTPS ...
+```
+
+Keep:
+
+* `_domainconnect` (harmless)
+* Google MX records (for email)
+* Google verification TXT
+
+---
+
+## ✅ ADD ONLY THESE RECORDS
+
+### A Records (Root domain)
+
+Add 4 A records:
+
+| Type | Host | Value           |
+| ---- | ---- | --------------- |
+| A    | @    | 185.199.108.153 |
+| A    | @    | 185.199.109.153 |
+| A    | @    | 185.199.110.153 |
+| A    | @    | 185.199.111.153 |
+
+TTL can stay default (4 hrs is fine).
+
+---
+
+### CNAME for www
+
+Add:
+
+| Type  | Host | Value                 |
+| ----- | ---- | --------------------- |
+| CNAME | www  | seyvinstark.github.io |
+
+⚠ Must match your GitHub username exactly.
+
+---
+
+# ✅ PART 5 — CLEANUP IN `theartemisai.com` DNS
+
+Now go to:
+
+Squarespace → Domains → `theartemisai.com` → DNS
+
+You previously had:
+
+```
+seyvin  CNAME  the-artemis-ai.github.io
+```
+
+You must:
+
+### ❌ DELETE:
+
+```
+seyvin  CNAME  the-artemis-ai.github.io
+```
+
+Also check for:
+
+```
+www.seyvin
+seyvin.com
+any A or CNAME referencing seyvin
+```
+
+There must be **no references to seyvin.com anywhere in that DNS zone**.
+
+That old record causes DNS conflict.
+
+---
+
+# ✅ PART 6 — DNS VERIFICATION
+
+After everything is cleaned:
+
+Wait 10–30 minutes.
+
+Then check:
+
+## 🔎 Check A record
+
+Go to:
+[https://dnschecker.org](https://dnschecker.org)
+
+Type: A
+Host: `seyvin.com`
+
+You must see:
+
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+If you see ANY 198.x.x.x Squarespace IPs → still wrong.
+
+---
+
+## 🔎 Check CNAME
+
+Type: CNAME
+Host: `www.seyvin.com`
+
+Must show:
+
+```
+seyvinstark.github.io
+```
+
+---
+
+# ✅ PART 7 — FINAL GITHUB VALIDATION
+
+After DNS resolves properly:
+
+Go back to:
+
+```
+Repo → Settings → Pages
+```
+
+The red error:
+
+```
+NotServedByPagesError
+```
+
+Should disappear.
+
+Then:
+
+Enable:
+
+```
+☑ Enforce HTTPS
+```
+
+---
+
+# 🚨 COMMON MISTAKES THAT BREAK THIS
+
+### 1️⃣ CNAME for root domain
+
+Never use:
+
+```
+seyvin.com  CNAME  something
+```
+
+Root must use A records.
+
+---
+
+### 2️⃣ Old DNS zone still active
+
+If domain was ever:
+
+* Connected to Squarespace hosting
+* Connected to another GitHub repo
+* Pointed via CNAME elsewhere
+
+Old records can persist.
+
+---
+
+### 3️⃣ Vite base misconfiguration
+
+If `base` ≠ `/` → assets break after domain switch.
+
+---
+
+# ✅ FINAL CHECKLIST
+
+### GitHub
+
+* [ ] Pages enabled
+* [ ] Custom domain set to `seyvin.com`
+* [ ] `CNAME` file exists
+* [ ] base: '/' in vite config
+* [ ] Deployment successful
+
+### Squarespace (seyvin.com)
+
+* [ ] 4 GitHub A records
+* [ ] www CNAME → seyvinstark.github.io
+* [ ] No 198.x Squarespace A records
+* [ ] No HTTPS record for root
+
+### Squarespace (theartemisai.com)
+
+* [ ] No seyvin CNAME
+* [ ] No references to seyvin
+
+---
+
+# 🧠 What Should Happen After
+
+1. DNS propagates
+2. GitHub verifies
+3. SSL certificate issued
+4. HTTPS becomes enforceable
+5. Site loads at:
+
+   * [https://seyvin.com](https://seyvin.com)
+   * [https://www.seyvin.com](https://www.seyvin.com)
+
+---
+
+If after following all steps you still see the error, paste:
+
+* Current full DNS records for `seyvin.com`
+* Current GitHub Pages settings screen message
+
+And we’ll diagnose precisely.
+
+========================
 # suggestion 1 draft
 ---
 
