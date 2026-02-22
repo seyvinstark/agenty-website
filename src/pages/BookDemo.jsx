@@ -32,6 +32,7 @@ const dataSourceOptions = [
 
 const companySizeOptions = [
   { value: '', label: 'Select company size' },
+  { value: 'solo', label: 'Solo-preneur' },
   { value: '1-10', label: '1–10 employees' },
   { value: '11-50', label: '11–50 employees' },
   { value: '51-200', label: '51–200 employees' },
@@ -322,7 +323,7 @@ export default function BookDemo() {
                       </div>
                       <div>
                         <label htmlFor="email" className={labelClass}>
-                          Work email <span className="text-red-400">*</span>
+                          Email <span className="text-red-400">*</span>
                         </label>
                         <input
                           id="email"
@@ -391,7 +392,7 @@ export default function BookDemo() {
                         className={`${inputBase} appearance-none cursor-pointer`}
                       >
                         {companySizeOptions.map((opt) => (
-                          <option key={opt.value} value={opt.value}>
+                          <option key={opt.value || 'company-size-placeholder'} value={opt.value}>
                             {opt.label}
                           </option>
                         ))}
