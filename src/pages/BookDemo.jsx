@@ -54,6 +54,8 @@ export default function BookDemo() {
   const [form, setForm] = useState(initialFormState);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const dark = theme === 'dark';
 
@@ -84,7 +86,7 @@ export default function BookDemo() {
     return newErrors;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
@@ -92,10 +94,47 @@ export default function BookDemo() {
       return;
     }
 
-    // TODO: Wire up to a real endpoint (Formspree, API, etc.)
-    // Example: fetch('/api/book-demo', { method: 'POST', body: JSON.stringify(form) })
-    console.log('Demo booking submitted:', form);
-    setSubmitted(true);
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError('Configuration error. Please try again later.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('access_key', accessKey);
+    formData.append('subject', 'Seyvin demo request');
+    formData.append('from_name', 'Seyvin Book Demo');
+    formData.append('botcheck', '');
+    formData.append('fullName', form.fullName);
+    formData.append('email', form.email);
+    formData.append('company', form.company);
+    formData.append('role', form.role);
+    formData.append('companySize', form.companySize);
+    formData.append('dataSources', form.dataSources.join(', '));
+    formData.append('message', form.message);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitted(true);
+        setSubmitError('');
+      } else {
+        setSubmitError(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const inputBase = `w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200 border ${
@@ -457,15 +496,26 @@ export default function BookDemo() {
                       />
                     </div>
 
+                    {submitError && (
+                      <p className={errorClass}>{submitError}</p>
+                    )}
+
                     {/* Submit */}
                     <Button
                       type="submit"
                       variant="primary"
                       size="lg"
                       className="w-full"
+                      disabled={isSubmitting}
                     >
-                      <Send className="w-4 h-4" />
-                      Request your demo
+                      {isSubmitting ? (
+                        'Sending…'
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Request your demo
+                        </>
+                      )}
                     </Button>
 
                     <p
