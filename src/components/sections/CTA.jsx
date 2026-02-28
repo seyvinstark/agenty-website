@@ -82,7 +82,7 @@ export default function CTA() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
             <Button variant="primary" size="lg" withArrow onClick={() => navigate('/book-demo')}>
-              Book a demo
+              Book a 15-min demo
             </Button>
             <Button variant="secondary" size="lg" onClick={() => navigate('/book-demo')}>
               Apply for closed beta

@@ -395,7 +395,7 @@ export default function Hero() {
   const currentCallouts = slideCallouts[currentSlide];
   
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden pt-20">
+    <section id="hero" className="relative min-h-[85vh] md:min-h-screen flex flex-col overflow-hidden pt-20">
       {/* Background gradient */}
       <div className={`absolute inset-0 ${
         theme === 'dark' 
@@ -423,7 +423,7 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-10 flex-1 flex items-center">
-        <div className="section-container pt-12 pb-16 md:pt-16">
+        <div className="section-container pt-16 pb-12 md:pt-12 md:pb-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Content */}
             <motion.div
@@ -441,7 +441,7 @@ export default function Hero() {
                   theme === 'dark' ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                Your AI Analytics Team —
+                Your AI Analytics Team — Dashboards & Reports from Your Data, Automatically.
                 <br />
                 <span className={`font-serif italic ${
                   theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
@@ -469,7 +469,7 @@ export default function Hero() {
                   theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
                 }`}
               >
-                Connect sources or upload files. Seyvin’s AI agents collaborate to clean the data, generate KPIs, and answer questions with analysis + charts — every number linked back to its source.
+                Connect QuickBooks, Drive, or upload files — get KPIs, answers, and board-ready reports with every number linked to its source.
               </motion.p>
 
               {/* Key Benefits */}

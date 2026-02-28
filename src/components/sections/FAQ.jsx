@@ -34,7 +34,7 @@ const faqItems = [
   },
   {
     question: 'What integrations do you support?',
-    answer: "Currently: QuickBooks Online, Notion, Google Drive, and CSV/Excel uploads. Coming soon: Shopify, Google Analytics, HubSpot, Stripe, Salesforce, Xero, and more. We're adding new integrations every week based on user requests.",
+    answer: "Currently: QuickBooks Online, Notion, Google Drive, HubSpot, and CSV/Excel uploads. Coming soon: Shopify, Google Analytics, Stripe, Salesforce, Xero, and more. We're adding new integrations every week based on user requests.",
   },
   {
     question: 'Can Seyvin generate reports for my board/investors?',

@@ -7,11 +7,10 @@ import HashLink from '../HashLink';
 import { useTheme } from '../../context/ThemeContext';
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#services' },
-  { label: 'Use cases', href: '#clients' },
-  { label: 'Our platform', href: '#services' },
   { label: 'Partnering with us', href: '#services-partners' },
+  { label: 'Features', href: '#features' },
+  { label: 'Use cases', href: '#clients' },
 ];
 
 const secondaryLinks = [
@@ -60,10 +59,10 @@ export default function Header() {
               <HashLink
                 key={link.label}
                 to={link.href}
-                className={`transition-colors duration-200 text-sm font-medium ${
+                className={`min-h-[44px] flex items-center py-3 transition-colors duration-200 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 rounded-md ${
                   theme === 'dark' 
-                    ? 'text-gray-400 hover:text-white' 
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'text-gray-400 hover:text-white focus-visible:ring-offset-[#0a0a0a]' 
+                    : 'text-slate-600 hover:text-slate-900 focus-visible:ring-offset-white'
                 }`}
               >
                 {link.label}
@@ -106,11 +105,11 @@ export default function Header() {
             </Button>
           </div>
 
-          {/* Mobile: Menu Button */}
+          {/* Mobile: Menu Button - 44px min touch target, focus visible */}
           <div className="xl:hidden flex items-center gap-3">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}
+              className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 ${theme === 'dark' ? 'text-white focus-visible:ring-offset-[#0a0a0a]' : 'text-slate-900 focus-visible:ring-offset-white'}`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
             >
@@ -140,10 +139,10 @@ export default function Header() {
                   key={link.label}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block transition-colors duration-200 py-2 font-medium ${
+                  className={`block min-h-[44px] flex items-center py-3 transition-colors duration-200 font-medium outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 rounded-md ${
                     theme === 'dark' 
-                      ? 'text-gray-300 hover:text-white' 
-                      : 'text-slate-700 hover:text-slate-900'
+                      ? 'text-gray-300 hover:text-white focus-visible:ring-offset-[#0a0a0a]' 
+                      : 'text-slate-700 hover:text-slate-900 focus-visible:ring-offset-white'
                   }`}
                 >
                   {link.label}

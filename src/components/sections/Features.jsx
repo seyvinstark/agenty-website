@@ -64,7 +64,7 @@ export default function Features() {
           badgeIcon={Box}
           title="Everything You Need."
           titleAccent="Nothing You Don't."
-          description="Now that you've seen the flow, here's everything the platform includes. Built for how you work—complete AI intelligence without the complexity"
+          description="Here's what the platform includes. Built for how you work—complete AI intelligence without the complexity"
         />
 
         {/* Tier 1: Primary Features - Large Cards */}

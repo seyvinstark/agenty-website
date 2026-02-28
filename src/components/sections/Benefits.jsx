@@ -12,7 +12,7 @@ const benefits = [
   },
   {
     title: 'Always-Synced Data (No More Download/Reupload)',
-    description: 'Connect to multiple data sources or upload files in multiple data format —  Seyvin ingests and cleans them automatically, so you spend less time on prep and more on decision making.',
+    description: 'Connect to multiple data sources or upload files in multiple data formats —  Seyvin ingests and cleans them automatically, so you spend less time on prep and more on decision making.',
     illustration: 'connect',
   },
   {

@@ -9,30 +9,32 @@ export default function HashLink({ to, children, onClick, ...props }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      window.location.hash = id;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   function handleClick(e) {
     e.preventDefault();
-    onClick?.(e);
-
     const hash = to.startsWith('#') ? to : `#${to}`;
     const id = hash.slice(1);
 
     if (location.pathname === '/') {
-      // Already on homepage — set hash first (so e.g. Services tab can react), then scroll
-      const el = document.getElementById(id);
-      if (el) {
-        window.location.hash = id;
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // If parent passed onClick (e.g. close mobile menu), run it first then defer scroll
+      // so the menu can close and layout can settle before we scroll (fixes mobile nav).
+      if (onClick) {
+        onClick(e);
+        setTimeout(() => scrollToId(id), 350);
+      } else {
+        scrollToId(id);
       }
     } else {
-      // Navigate to homepage, then scroll after render
+      onClick?.(e);
       navigate('/');
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          window.location.hash = id;
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
+      setTimeout(() => scrollToId(id), 100);
     }
   }
 

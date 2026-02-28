@@ -19,6 +19,8 @@ import {
   CTA,
 } from './components/sections';
 import BookDemo from './pages/BookDemo';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import ScrollToTop from './components/ScrollToTop';
 import CookieConsentBanner from './components/CookieConsentBanner';
 import { useClarityPageView } from './hooks/useClarityPageView';
@@ -60,6 +62,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/book-demo" element={<BookDemo />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </main>
       <Footer />

@@ -5,9 +5,8 @@ import { useTheme } from '../../context/ThemeContext';
 
 const footerLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#services' },
+  { label: 'How it works', href: '#services' },
   { label: 'Use Cases', href: '#clients' },
-  { label: 'Services', href: '#services' },
   { label: 'FAQ', href: '#faq' },
 ];
 
@@ -70,7 +69,8 @@ export default function Footer() {
               <a
                 key={social.label}
                 href={social.href}
-                aria-label={social.label}
+                aria-label={`${social.label} (coming soon)`}
+                rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
                   theme === 'dark' 
                     ? 'bg-[#1a1a1a] border border-[#262626] text-gray-400 hover:text-white hover:border-white/20' 
@@ -113,9 +113,9 @@ export default function Footer() {
           
           <div className="flex items-center gap-6">
             {legalLinks.map((link) => (
-              <a 
+              <Link 
                 key={link.label}
-                href={link.href} 
+                to={link.href} 
                 className={`transition-colors ${
                   theme === 'dark' 
                     ? 'text-gray-500 hover:text-white' 
@@ -123,7 +123,7 @@ export default function Footer() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 

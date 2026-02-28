@@ -448,6 +448,10 @@ export default function Clients() {
           description="See how organizations like yours use Seyvin to transform their operations"
         />
 
+        <p className={`text-center text-sm mb-6 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
+          See how different roles use Seyvin (illustrative examples).
+        </p>
+
         {/* Sector Toggle */}
         <div className="flex justify-center mb-10">
           <div className={`inline-flex rounded-full p-1.5 border ${

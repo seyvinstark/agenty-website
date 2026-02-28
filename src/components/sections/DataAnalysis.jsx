@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { AlertTriangle, Database, Code2, ShieldQuestion, ArrowRight } from 'lucide-react';
 import { SectionBadge } from '../ui/Badge';
 import Card from '../ui/Card';
@@ -104,7 +105,8 @@ function PainPointCard({ painPoint, index }) {
 
 export default function DataAnalysis() {
   const { theme } = useTheme();
-  
+  const navigate = useNavigate();
+
   return (
     <section id="data-analysis" className={`py-24 ${
       theme === 'dark' ? 'theme-bg-secondary' : 'bg-white'
@@ -153,7 +155,7 @@ export default function DataAnalysis() {
           </motion.p>
 
           {/* CTA Footer */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -172,12 +174,12 @@ export default function DataAnalysis() {
             <Button 
               variant="primary" 
               size="sm"
-              onClick={() => window.open('https://cal.com/seyvin/15min', '_blank')}
+              onClick={() => navigate('/book-demo')}
             >
               Book a 15-min demo
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-          </motion.div> */}
+          </motion.div>
         </motion.div>
       </div>
     </section>

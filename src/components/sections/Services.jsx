@@ -28,45 +28,6 @@ import { useTheme } from '../../context/ThemeContext';
 // Layout for "Our Platform" tab: 'sideCardRightSteps' (side card + steps on right) | 'stacked' | 'leftStepsRightVisual' | 'leftVisualRightSteps'
 const PLATFORM_LAYOUT = 'sideCardRightSteps';
 
-const services = [
-  {
-    id: 'automate',
-    title: 'Automate repetitive tasks',
-    description: 'We help you streamline internal operations by automating manual workflows',
-    tasks: [
-      { icon: DollarSign, label: 'Cost Management', status: 'pending' },
-      { icon: Clock, label: 'Payment reminder', status: 'done' },
-      { icon: Users, label: 'Employee Tracking', status: 'pending' },
-      { icon: Twitter, label: 'Social media post', status: 'done' },
-    ],
-  },
-  {
-    id: 'workflows',
-    title: 'Automated Workflows',
-    description: 'Boost efficiency across teams with smart automation. Build intelligent workflows that automate multi-step processes across tools and platforms',
-    visual: 'workflow',
-  },
-  {
-    id: 'intelligence',
-    title: 'Real-Time Intelligence',
-    description: 'Make smarter decisions with live data insights. Tap into real-time data',
-    visual: 'search',
-    searchItems: ['Software & App Industry', 'UX & UI Design Industry', 'High Converting Customer'],
-  },
-  {
-    id: 'agents',
-    title: 'Custom AI Agent development',
-    description: 'We develop custom AI agents that integrate seamlessly with your tools',
-    visual: 'code',
-  },
-  {
-    id: 'consulting',
-    title: 'AI Strategy Consulting',
-    description: 'Get expert guidance to implement AI solutions that drive business growth',
-    visual: 'lightbulb',
-  },
-];
-
 function ToggleBadge({ activeTab, onTabChange }) {
   const { theme } = useTheme();
   

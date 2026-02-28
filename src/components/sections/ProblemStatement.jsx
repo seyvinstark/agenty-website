@@ -276,7 +276,7 @@ export default function ProblemStatement() {
           <p className={`text-base md:text-lg max-w-3xl mx-auto ${
             theme === 'dark' ? 'text-gray-400' : 'text-slate-600'
           }`}>
-            Seyvin fixes the bottleneck by acting like an AI Data Analyst on top of your real sources: connect QuickBooks/Drive/Notion or upload files, we automatically ingest and clean the data, then you ask questions and get analysis with charts — plus dashboards and narrative reports you can download or share.
+            Seyvin acts like an AI Data Analyst on your real data. Connect QuickBooks, Drive, or Notion; we ingest and clean. Then ask questions and get analysis, dashboards, and reports — with every number traceable.
           </p>
         </motion.div>
       </div>
