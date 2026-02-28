@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, Check, BarChart3, MessageSquare, FileDown, Database } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
@@ -439,6 +439,8 @@ const visuals = {
   report: ReportVisual,
 };
 
+const SLIDESHOW_INTERVAL_MS = 5000;
+
 /** Reusable step-by-step content: tabs + visual + step copy. Used by Process section and Services Platform tab. */
 export function ProcessStepsContent({
   layout = 'full',
@@ -446,6 +448,7 @@ export function ProcessStepsContent({
   setActiveStep: setControlledStep,
 }) {
   const [internalStep, setInternalStep] = useState(1);
+  const [slideshowPaused, setSlideshowPaused] = useState(false);
   const { theme } = useTheme();
   const isControlled = layout === 'stepsOnly' || layout === 'visualOnly';
   const activeStep = isControlled ? controlledStep : internalStep;
@@ -454,6 +457,20 @@ export function ProcessStepsContent({
   const Visual = visuals[currentStep.visual];
   const StepIcon = currentStep.icon;
 
+  // Auto-advance steps like a slideshow; stop when user clicks a step (uncontrolled only)
+  useEffect(() => {
+    if (isControlled || slideshowPaused) return;
+    const timer = setInterval(() => {
+      setInternalStep((prev) => (prev >= steps.length ? 1 : prev + 1));
+    }, SLIDESHOW_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [isControlled, slideshowPaused]);
+
+  const handleStepClick = (stepId) => {
+    setActiveStep(stepId);
+    if (!isControlled) setSlideshowPaused(true);
+  };
+
   const stepTabs = (
     <div className="flex flex-wrap justify-center gap-3 mb-8 lg:mb-12">
       {steps.map((step) => {
@@ -461,7 +478,7 @@ export function ProcessStepsContent({
         return (
           <button
             key={step.id}
-            onClick={() => setActiveStep(step.id)}
+            onClick={() => handleStepClick(step.id)}
             className={`
               flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300
               ${activeStep === step.id
